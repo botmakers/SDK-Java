@@ -34,7 +34,6 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -42,7 +41,6 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -74,14 +72,12 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JTextField tfOperationId;
     private javax.swing.JTextField tfOperationIdS;
     private javax.swing.JTextField tfOperationsEndpoiint;
-    private javax.swing.JTextField tfOperationsWSDL;
     private javax.swing.JTextField tfRequestKeyAA;
     private javax.swing.JTextField tfSecurity;
     private javax.swing.JTextField tfSecurityAA;
     private javax.swing.JTextField tfSession;
     private javax.swing.JTextField tfURLError;
     private javax.swing.JTextField tfURLOk;
-    private javax.swing.JTextField tfUser;
     private javax.swing.JTextArea tpAnswerAA;
     private javax.swing.JTextArea tpAnswerStatus;
     private javax.swing.JTextArea tpResponse;
@@ -100,18 +96,14 @@ public class SampleUI extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         tfAuthorizeWSDL = new javax.swing.JTextField();
-        tfOperationsWSDL = new javax.swing.JTextField();
         tfAuthorizeEndpoint = new javax.swing.JTextField();
         tfOperationsEndpoiint = new javax.swing.JTextField();
         tfAuthorization = new javax.swing.JTextField();
-        tfUser = new javax.swing.JTextField();
         jBConfigure = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -165,29 +157,21 @@ public class SampleUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel19.setText("User");
-
         jLabel22.setText("Authorization");
 
-        jLabel26.setText("OperationsEndpoiint");
+        jLabel26.setText("Endpoint");
 
         jLabel27.setText("AuthorizeEndpoint");
-
-        jLabel3.setText("OperationsWSDL");
 
         jLabel9.setText("AuthorizeWSDL");
 
         tfAuthorizeWSDL.setText("file:D:/WorkspaceJuno/TodoPago-sdk/res/Authorize.wsdl");
-        
-        tfOperationsWSDL.setText("file:D:/WorkspaceJuno/TodoPago-sdk/res/Operations.wsdl");
 
-        tfAuthorizeEndpoint.setText("https://50.19.97.101:8243/services/Authorize");
+        tfAuthorizeEndpoint.setText("https://developers.todopago.com.ar/services/t/1.1/Authorize");
 
-        tfOperationsEndpoiint.setText("https://50.19.97.101:8243/services/Operations");
+        tfOperationsEndpoiint.setText("https://developers.todopago.com.ar/t/1.1/");
 
         tfAuthorization.setText("PRISMA 912EC803B2CE49E4A541068D495AB570");
-
-        tfUser.setText("Test");
 
         jBConfigure.setText("Configure");
         jBConfigure.addActionListener(new java.awt.event.ActionListener() {
@@ -197,74 +181,58 @@ public class SampleUI extends javax.swing.JFrame {
         });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfOperationsEndpoiint, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfAuthorization, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfOperationsWSDL, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfAuthorizeEndpoint, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfAuthorizeWSDL, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jBConfigure, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(577, Short.MAX_VALUE))
+        	jPanel4Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel4Layout.createSequentialGroup()
+        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel4Layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(jPanel4Layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(jPanel4Layout.createSequentialGroup()
+        							.addComponent(jLabel26, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(tfOperationsEndpoiint, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(jPanel4Layout.createSequentialGroup()
+        							.addComponent(jLabel22, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(tfAuthorization, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(jPanel4Layout.createSequentialGroup()
+        							.addComponent(jLabel27, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(tfAuthorizeEndpoint, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(jPanel4Layout.createSequentialGroup()
+        							.addComponent(jLabel9, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(tfAuthorizeWSDL, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))))
+        				.addGroup(jPanel4Layout.createSequentialGroup()
+        					.addGap(175)
+        					.addComponent(jBConfigure, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(tfAuthorizeWSDL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfOperationsWSDL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(tfAuthorizeEndpoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(tfOperationsEndpoiint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(tfAuthorization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(jBConfigure)
-                .addContainerGap(311, Short.MAX_VALUE))
+        	jPanel4Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel4Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel9)
+        				.addComponent(tfAuthorizeWSDL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(52)
+        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel27)
+        				.addComponent(tfAuthorizeEndpoint, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel26)
+        				.addComponent(tfOperationsEndpoiint, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(32)
+        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel22)
+        				.addComponent(tfAuthorization, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(76)
+        			.addComponent(jBConfigure)
+        			.addContainerGap(254, Short.MAX_VALUE))
         );
+        jPanel4.setLayout(jPanel4Layout);
 
         jTabbedPane1.addTab("Config", jPanel4);
 
@@ -648,7 +616,7 @@ public class SampleUI extends javax.swing.JFrame {
         parameters.put("EMAILCLIENTE", tfEMAILCLIENTE.getText());
 
         if(tpc !=null){
-            Map<String, Object> a = tpc.sendAuthorizeRequest(parameters);
+            Map<String, Object> a = tpc.sendAuthorizeRequest(parameters, getFraudControlParameters());
             tpResponse.setText(printMap(a, ""));
         }else{
             tpResponse.setText("Run Config");
@@ -660,15 +628,13 @@ public class SampleUI extends javax.swing.JFrame {
     private void jBConfigureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfigureActionPerformed
         Map<String, String> wsdls = new HashMap<String, String>();
         wsdls.put(ElementNames.AuthorizeWSDL, tfAuthorizeWSDL.getText());
-        wsdls.put(ElementNames.OperationsWSDL, tfOperationsWSDL.getText());
         
         Map<String, String> endpoints = new HashMap<String, String>();
         endpoints.put(ElementNames.AuthorizeWSDL, tfAuthorizeEndpoint.getText());
-        endpoints.put(ElementNames.OperationsWSDL, tfOperationsEndpoiint.getText());
+        endpoints.put(ElementNames.Endpoint, tfOperationsEndpoiint.getText());
         
         Map<String, List<String>> auth = new HashMap<String, List<String>>();
         auth.put("Authorization", Collections.singletonList(tfAuthorization.getText()));
-        auth.put("Username", Collections.singletonList(tfUser.getText()));
         try {
             tpc = new TodoPagoConector(wsdls, endpoints, auth, true);
         } catch (MalformedURLException ex) {
@@ -735,6 +701,72 @@ public class SampleUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+  //Parametros para el control de fraude
+  	private static Map<String, String> getFraudControlParameters() {
+  		//Example
+  		Map<String, String> parameters = new HashMap<String, String>();     
+  		parameters.put("CSBTCITY", "Villa General Belgrano"); //MANDATORIO.
+  		parameters.put("CSSTCITY", "Villa General Belgrano"); //MANDATORIO.
+  		
+  		parameters.put("CSBTCOUNTRY", "AR");//MANDATORIO. Código ISO.
+  		parameters.put("CSSTCOUNTRY", "AR");//MANDATORIO. Código ISO.
+  		
+  		parameters.put("CSBTEMAIL", "todopago@hotmail.com"); //MANDATORIO.
+  		parameters.put("CSSTEMAIL", "todopago@hotmail.com"); //MANDATORIO.
+  		
+  		parameters.put("CSBTFIRSTNAME", "Juan");//MANDATORIO.      
+  		parameters.put("CSSTFIRSTNAME", "Juan");//MANDATORIO.      
+  		
+  		parameters.put("CSBTLASTNAME", "Perez");//MANDATORIO.
+  		parameters.put("CSSTLASTNAME", "Perez");//MANDATORIO.
+  		
+  		parameters.put("CSBTPHONENUMBER", "541160913988");//MANDATORIO.     
+  		parameters.put("CSSTPHONENUMBER", "541160913988");//MANDATORIO.     
+  		
+  		parameters.put("CSBTPOSTALCODE", " C1010AAP");//MANDATORIO.
+  		parameters.put("CSSTPOSTALCODE", " C1010AAP");//MANDATORIO.
+  		
+  		parameters.put("CSBTSTATE", "B");//MANDATORIO
+  		parameters.put("CSSTSTATE", "B");//MANDATORIO
+  		
+  		parameters.put("CSBTSTREET1", "Cerrito 740");//MANDATORIO.
+  		parameters.put("CSSTSTREET1", "Cerrito 740");//MANDATORIO.
+  		
+  		parameters.put("CSBTCUSTOMERID", "453458"); //MANDATORIO.
+  		parameters.put("CSBTIPADDRESS", "192.0.0.4"); //MANDATORIO.       
+  		parameters.put("CSPTCURRENCY", "ARS");//MANDATORIO.      
+  		parameters.put("CSPTGRANDTOTALAMOUNT", "125.38");//MANDATORIO.
+  		parameters.put("CSMDD7", "");//NO MANDATORIO.        
+  		parameters.put("CSMDD8", "Y"); //NO MANDATORIO.       
+  		parameters.put("CSMDD9", "");//NO MANDATORIO.       
+  		parameters.put("CSMDD10", "");//NO MANDATORIO.      
+  		parameters.put("CSMDD11", "");//NO MANDATORIO.
+  		parameters.put("STCITY", "rosario");//MANDATORIO.       
+  		parameters.put("STCOUNTRY", "");//MANDATORIO.      
+  		parameters.put("STEMAIL", "jose@gmail.com");//MANDATORIO.        
+  		parameters.put("STFIRSTNAME", "Jose");//MANDATORIO.        
+  		parameters.put("STLASTNAME", "Perez");//MANDATORIO.      
+  		parameters.put("STPHONENUMBER", "541155893737");//MANDATORIO.        
+  		parameters.put("STPOSTALCODE", "1414");//MANDATORIO.        
+  		parameters.put("STSTATE", "D");//MANDATORIO     
+  		parameters.put("STSTREET1", "San Martín 123");//MANDATORIO.       
+  		parameters.put("CSMDD12", "");//NO MADATORIO.     
+  		parameters.put("CSMDD13", "");//NO MANDATORIO.     
+  		parameters.put("CSMDD14", "");//NO MANDATORIO.      
+  		parameters.put("CSMDD15", "");//NO MANDATORIO.        
+  		parameters.put("CSMDD16", "");//NO MANDATORIO.
+  		parameters.put("CSITPRODUCTCODE", "electronic_good");//CONDICIONAL
+  		parameters.put("CSITPRODUCTDESCRIPTION", "NOTEBOOK L845 SP4304LA DF TOSHIBA");//CONDICIONAL.     
+  		parameters.put("CSITPRODUCTNAME", "NOTEBOOK L845 SP4304LA DF TOSHIBA");//CONDICIONAL.  
+  		parameters.put("CSITPRODUCTSKU", "LEVJNSL36GN");//CONDICIONAL.      
+  		parameters.put("CSITTOTALAMOUNT", "1254.40");//CONDICIONAL.      
+  		parameters.put("CSITQUANTITY", "1");//CONDICIONAL.       
+  		parameters.put("CSITUNITPRICE", "1254.40");
+  		return parameters;
+  	}
+
 
 
 }

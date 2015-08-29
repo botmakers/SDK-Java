@@ -71,9 +71,9 @@ public class TodoPagoConectorAuthorize{
 	 * @param parameters
 	 * @return
 	 */
-	public Map<String, Object> getpaymentValues(Map<String, String> parameters) {
+	public Map<String, Object> getpaymentValues(Map<String, String> parameters, Map<String, String> fraudControl) {
 		// parseo de los valores enviados por el e-commerce/custompage
-		SendAuthorizeRequest sendAuthorizeRequest = this.parseToSendAuthorizeRequest(parameters);
+		SendAuthorizeRequest sendAuthorizeRequest = this.parseToSendAuthorizeRequest(parameters, fraudControl);
 		SendAuthorizeRequestResponse sendAuthorizeRequestResponse = service.sendAuthorizeRequest(sendAuthorizeRequest);
 		// devuelve el formato de array el resultado de de la operación
 		// Authorize
@@ -119,13 +119,13 @@ public class TodoPagoConectorAuthorize{
 		return result;
 	}
 
-	private SendAuthorizeRequest parseToSendAuthorizeRequest(Map<String, String> parameters) {
+	private SendAuthorizeRequest parseToSendAuthorizeRequest(Map<String, String> parameters, Map<String, String> fraudControl) {
 		SendAuthorizeRequest o = factory.createSendAuthorizeRequest();
 		if (parameters != null) {
 			o.setEncodingMethod(factory.createSendAuthorizeRequestEncodingMethod(parameters
 					.get(ElementNames.EncodingMethod)));
 			o.setMerchant(parameters.get(ElementNames.Merchant));
-			o.setPayload(factory.createSendAuthorizeRequestPayload(createPayload(parameters)));
+			o.setPayload(factory.createSendAuthorizeRequestPayload(createPayload(parameters, fraudControl)));
 			o.setSecurity(parameters.get(ElementNames.Security));
 			o.setSession(factory.createSendAuthorizeRequestSession(parameters.get(ElementNames.Session)));
 			o.setURLERROR(factory.createSendAuthorizeRequestURLERROR(parameters.get(ElementNames.UrlError)));
@@ -135,8 +135,9 @@ public class TodoPagoConectorAuthorize{
 		return o;
 	}
 
-	private String createPayload(Map<String, String> parameters) {
+	private String createPayload(Map<String, String> parameters, Map<String, String> fraudControl) {
 		StringBuilder payload = new StringBuilder("<Request>");
+		
 		for (Map.Entry<String, String> entry : parameters.entrySet()) {
 			payload.append("<");
 			payload.append(entry.getKey().toUpperCase());
@@ -146,6 +147,16 @@ public class TodoPagoConectorAuthorize{
 			payload.append(entry.getKey().toUpperCase());
 			payload.append(">");
 		}
+		for (Map.Entry<String, String> entry : fraudControl.entrySet()) {
+			payload.append("<");
+			payload.append(entry.getKey().toUpperCase());
+			payload.append(">");
+			payload.append(entry.getValue());
+			payload.append("</");
+			payload.append(entry.getKey().toUpperCase());
+			payload.append(">");
+		}
+		
 		payload.append("</Request>");
 		String result = payload.toString();
 		logger.log(Level.INFO, "Armando payload: {0}", result);

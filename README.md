@@ -193,15 +193,15 @@ parameters.put(CSMDD9", "");//Customer password Hash: criptograma asociado al pa
 parameters.put(CSMDD10", "");//Histórica de compras del comprador (Num transacciones). NO MANDATORIO.		
 parameters.put(CSMDD11", "");//Customer Cell Phone. NO MANDATORIO.		
 
-parameters.put("STCITY", "rosario");//Ciudad de enví­o de la orden. MANDATORIO.		
-parameters.put("STCOUNTRY", "");//País de envío de la orden. MANDATORIO.		
-parameters.put("STEMAIL", "jose@gmail.com");//Mail del destinatario, MANDATORIO.		
-parameters.put("STFIRSTNAME", "Jose");//Nombre del destinatario. MANDATORIO.		
-parameters.put("STLASTNAME", "Perez");//Apellido del destinatario. MANDATORIO.		
-parameters.put("STPHONENUMBER", "541155893737");//Número de teléfono del destinatario. MANDATORIO.		
-parameters.put("STPOSTALCODE", "1414");//Código postal del domicilio de envío. MANDATORIO.		
-parameters.put("STSTATE", "D");//Provincia de envío. MANDATORIO. Son de 1 caracter		
-parameters.put("STSTREET1", "San Martín 123");//Domicilio de envío. MANDATORIO.		
+parameters.put("CSSTCITY", "rosario");//Ciudad de enví­o de la orden. MANDATORIO.		
+parameters.put("CSSTCOUNTRY", "");//País de envío de la orden. MANDATORIO.		
+parameters.put("CSSTEMAIL", "jose@gmail.com");//Mail del destinatario, MANDATORIO.		
+parameters.put("CSSTFIRSTNAME", "Jose");//Nombre del destinatario. MANDATORIO.		
+parameters.put("CSSTLASTNAME", "Perez");//Apellido del destinatario. MANDATORIO.		
+parameters.put("CSSTPHONENUMBER", "541155893737");//Número de teléfono del destinatario. MANDATORIO.		
+parameters.put("CSSTPOSTALCODE", "1414");//Código postal del domicilio de envío. MANDATORIO.		
+parameters.put("CSSTSTATE", "D");//Provincia de envío. MANDATORIO. Son de 1 caracter		
+parameters.put("CSSTSTREET1", "San Martín 123");//Domicilio de envío. MANDATORIO.		
 parameters.put("CSMDD12", "");//Shipping DeadLine (Num Dias). NO MADATORIO.		
 parameters.put("CSMDD13", "");//Método de Despacho. NO MANDATORIO.		
 parameters.put("CSMDD14", "");//Customer requires Tax Bill ? (Y/N). NO MANDATORIO.		

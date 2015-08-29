@@ -15,17 +15,18 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import ar.com.todopago.api.rest.RestConnector;
 import ar.com.todopago.utils.TodoPagoConectorAuthorize;
-import ar.com.todopago.utils.TodoPagoConectorOperations;
-import ar.com.todopago.utils.TodoPagoConectorPaymentMethods;
 
 public class TodoPagoConector {
+	
+	final String versionTodoPago = "1.0.0";
 
 	Map<String, String>wsdl;
 	Map<String, String>endpoint;
 	TodoPagoConectorAuthorize authorize;
-	TodoPagoConectorOperations operations;
-	TodoPagoConectorPaymentMethods paymentMethods;
+	
+	RestConnector restConector;
 	
 	public TodoPagoConector(Map<String, String> wsdl, Map<String, String> endpoint, Map<String, List<String>>auth) throws MalformedURLException {
 		this(wsdl, endpoint, auth, false);
@@ -40,14 +41,14 @@ public class TodoPagoConector {
 		this.wsdl = wsdl;
 		this.endpoint = endpoint;
 		authorize = new TodoPagoConectorAuthorize(wsdl.get(ElementNames.AuthorizeWSDL), endpoint.get(ElementNames.AuthorizeWSDL), auth);
-		operations = new TodoPagoConectorOperations(wsdl.get(ElementNames.OperationsWSDL), endpoint.get(ElementNames.OperationsWSDL), auth);
-		//paymentMethods = new TodoPagoConectorPaymentMethods(wsdl.get(ElementNames.PaymentMethodsWSDL.getValue()), endpoint.get(ElementNames.PaymentMethodsWSDL.getValue()), auth);
+		
+		restConector = new RestConnector(endpoint.get(ElementNames.Endpoint), auth);
+		
 	}
 	
-	public Map<String, Object> sendAuthorizeRequest (Map<String, String> parameters){
+	public Map<String, Object> sendAuthorizeRequest (Map<String, String> parameters, Map<String, String> fraudControl){
 		Map<String, Object> result = new HashMap<String, Object>();
-		//llama a SendAuthorizeRequest en php
-		result = authorize.getpaymentValues(parameters);
+		result = authorize.getpaymentValues(parameters, fraudControl);
 		return result;
 	}
 	
@@ -60,13 +61,14 @@ public class TodoPagoConector {
 	
 	public Map<String, Object> getAllPaymentMethods (Map<String, String> parameters){
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = paymentMethods.getAllValues(parameters);
+		result = restConector.getPaymentMethods(parameters);
 		return result;
 	}
 	
 	public Map<String, Object> getStatus (Map<String, String> parameters){
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = operations.getOperationsValues(parameters);
+		result = restConector.getByOperationId(parameters);
+		
 		return result;
 	}
 	

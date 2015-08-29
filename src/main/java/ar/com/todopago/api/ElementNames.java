@@ -6,7 +6,7 @@ public final class ElementNames {
 	public static final String AuthorizeWSDL = "AuthorizeWSDL";
 	public static final String OperationsWSDL = "OperationsWSDL";
 	public static final String PaymentMethodsWSDL = "PaymentMethodsWSDL";
-	
+	public static final String Endpoint = "Endpoint";
 	
 	//Operations 
 	public static final String 	OperationID = "OperationID";
@@ -24,7 +24,7 @@ public final class ElementNames {
 	public static final String ResultCode = "ResultCode";
 	public static final String ResultMessage = "ResultMessage";
 	public static final String Type = "Type";
-	public static final String Ammount = "Ammount";
+	public static final String Amount = "Amount";
 	public static final String DateTime = "DateTime";
 	public static final String TicketNumber = "TicketNumber";
 	public static final String ErrorMessage = "ErrorMessage";
@@ -75,6 +75,12 @@ public final class ElementNames {
     public static final String UrlError = "URL_ERROR"; 
     public static final String UrlOK = "URL_OK";
     public static final String PublicRequestKey = "PublicRequestKey";
+    
+
+	//Headder
+	public static final String Authorization = "Authorization";
+	
+	
  
     
 }
