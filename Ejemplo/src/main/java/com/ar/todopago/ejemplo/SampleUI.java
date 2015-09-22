@@ -15,6 +15,13 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class SampleUI extends javax.swing.JFrame {
 
@@ -40,7 +47,6 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -61,7 +67,6 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JTextField tfAmmount;
     private javax.swing.JTextField tfAnswerKeyAA;
     private javax.swing.JTextField tfAuthorization;
-    private javax.swing.JTextField tfAuthorizeEndpoint;
     private javax.swing.JTextField tfAuthorizeWSDL;
     private javax.swing.JTextField tfCurrencyCode;
     private javax.swing.JTextField tfEMAILCLIENTE;
@@ -81,8 +86,88 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JTextArea tpAnswerAA;
     private javax.swing.JTextArea tpAnswerStatus;
     private javax.swing.JTextArea tpResponse;
+    private JTextField CSBTCITY;
+    private JTextField CSBTEMAIL;
+    private JTextField CSBTFIRSTNAME;
+    private JTextField CSBTPOSTALCODE;
+    private JTextField CSBTSTREET1;
+    private JLabel lblCsbtipaddress;
+    private JLabel lblCsptgrandtotalamount;
+    private JLabel lblCsmdd;
+    private JLabel lblCsmdd_2;
+    private JLabel lblCsmdd_4;
+    private JTextField CSMDD11;
+    private JTextField CSMDD9;
+    private JTextField CSMDD7;
+    private JTextField CSPTGRANDTOTALAMOUNT;
+    private JTextField CSBTIPADDRESS;
+    private JLabel lblCsbtcountry;
+    private JLabel lblCsbtphonenumber;
+    private JLabel lblCsbtlastname;
+    private JLabel lblCsbtstate;
+    private JLabel lblCsbtcustomerid;
+    private JLabel lblCsptcurrency;
+    private JLabel lblCSMDD6;
+    private JLabel lblCsmdd_1;
+    private JLabel lblCsmdd_3;
+    private JLabel lblCsbtstreet_1;
+    private JTextField CSBTSTREET2;
+    private JTextField CSMDD10;
+    private JTextField CSMDD8;
+    private JTextField CSMDD6;
+    private JTextField CSPTCURRENCY;
+    private JTextField CSBTCUSTOMERID;
+    private JTextField CSBTSTATE;
+    private JTextField CSBTLASTNAME;
+    private JTextField CSBTPHONENUMBER;
+    private JTextField CSBTCOUNTRY;
+    private JPanel panel_1;
+    private JLabel lblCsitproductname;
+    private JTextField CSITPRODUCTNAME;
+    private JLabel lblCsitproductcode;
+    private JTextField CSITPRODUCTCODE;
+    private JLabel lblCsmdd_7;
+    private JTextField CSMDD14;
+    private JLabel lblCsmdd_5;
+    private JTextField CSMDD12;
+    private JLabel lblCsststreet;
+    private JTextField CSSTSTREET1;
+    private JLabel lblCsstpostalcode;
+    private JTextField CSSTPOSTALCODE;
+    private JLabel lblCsstfirstname;
+    private JTextField CSSTFIRSTNAME;
+    private JLabel lblCsstemail;
+    private JTextField CSSTEMAIL;
+    private JLabel lblCsstcity;
+    private JTextField CSSTCITY;
+    private JLabel lblCsitproductsku_1;
+    private JTextField CSITTOTALAMOUNT;
+    private JLabel lblCsstcountry;
+    private JTextField CSSTCOUNTRY;
+    private JLabel lblCsstphonenumber;
+    private JLabel lblCsstlastname;
+    private JLabel lblCsststate;
+    private JTextField CSSTSTATE;
+    private JTextField CSSTLASTNAME;
+    private JTextField CSSTPHONENUMBER;
+    private JLabel lblCsmdd_6;
+    private JLabel lblCsmdd_8;
+    private JLabel lblCsitproductdescription;
+    private JLabel lblCsitproductsku;
+    private JLabel lblCsitquantity;
+    private JTextField CSITQUANTITY;
+    private JTextField CSITPRODUCTSKU;
+    private JTextField CSITPRODUCTDESCRIPTION;
+    private JTextField CSMDD15;
+    private JTextField CSMDD13;
+    private JLabel lblCsststreet_1;
+    private JTextField CSSTSTREET2;
+    private JLabel lblCsitunitprice;
+    private JTextField CSITUNITPRICE;
+    private JLabel lblCsmdd_9;
+    private JTextField CSMDD16;
     
-    
+    private JComboBox vertical;
     
     
     public SampleUI() {
@@ -98,10 +183,8 @@ public class SampleUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         tfAuthorizeWSDL = new javax.swing.JTextField();
-        tfAuthorizeEndpoint = new javax.swing.JTextField();
         tfOperationsEndpoiint = new javax.swing.JTextField();
         tfAuthorization = new javax.swing.JTextField();
         jBConfigure = new javax.swing.JButton();
@@ -161,17 +244,13 @@ public class SampleUI extends javax.swing.JFrame {
 
         jLabel26.setText("Endpoint");
 
-        jLabel27.setText("AuthorizeEndpoint");
-
         jLabel9.setText("AuthorizeWSDL");
 
         tfAuthorizeWSDL.setText("file:D:/WorkspaceJuno/TodoPago-sdk/res/Authorize.wsdl");
 
-        tfAuthorizeEndpoint.setText("https://developers.todopago.com.ar/services/t/1.1/Authorize");
+        tfOperationsEndpoiint.setText("https://developers.todopago.com.ar/");
 
-        tfOperationsEndpoiint.setText("https://developers.todopago.com.ar/t/1.1/");
-
-        tfAuthorization.setText("PRISMA 912EC803B2CE49E4A541068D495AB570");
+        tfAuthorization.setText("PRISMA f3d8b72c94ab4a06be2ef7c95490f7d3");
 
         jBConfigure.setText("Configure");
         jBConfigure.addActionListener(new java.awt.event.ActionListener() {
@@ -197,10 +276,6 @@ public class SampleUI extends javax.swing.JFrame {
         							.addPreferredGap(ComponentPlacement.UNRELATED)
         							.addComponent(tfAuthorization, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
         						.addGroup(jPanel4Layout.createSequentialGroup()
-        							.addComponent(jLabel27, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfAuthorizeEndpoint, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel4Layout.createSequentialGroup()
         							.addComponent(jLabel9, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.UNRELATED)
         							.addComponent(tfAuthorizeWSDL, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))))
@@ -216,11 +291,7 @@ public class SampleUI extends javax.swing.JFrame {
         			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jLabel9)
         				.addComponent(tfAuthorizeWSDL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(52)
-        			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel27)
-        				.addComponent(tfAuthorizeEndpoint, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGap(78)
         			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jLabel26)
         				.addComponent(tfOperationsEndpoiint, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -250,7 +321,7 @@ public class SampleUI extends javax.swing.JFrame {
 
         jLabel12.setText("Merchant");
 
-        tfMerchant.setText("305");
+        tfMerchant.setText("2153");
 
         jLabel13.setText("OperationId");
 
@@ -410,7 +481,7 @@ public class SampleUI extends javax.swing.JFrame {
 
         jLabel6.setText("Merchant");
 
-        tfMerchantAA.setText("305");
+        tfMerchantAA.setText("2153");
         
         jLabel7.setText("RequestKey");
 
@@ -495,7 +566,7 @@ public class SampleUI extends javax.swing.JFrame {
 
         jLabel21.setText("Merchant");
 
-        tfMerchantS.setText("305");
+        tfMerchantS.setText("2153");
 
         status.setText("getStatus");
         status.addActionListener(new java.awt.event.ActionListener() {
@@ -568,6 +639,686 @@ public class SampleUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
         );
+        
+        JPanel panel = new JPanel();
+        jTabbedPane1.addTab("CyberSource", null, panel, null);
+        
+        JLabel lblCsbtcity = new JLabel();
+        lblCsbtcity.setText("CSBTCITY");
+        
+        CSBTCITY = new JTextField();
+        CSBTCITY.setText("Villa General Belgrano");
+        
+        JLabel lblCsbtemail = new JLabel();
+        lblCsbtemail.setText("CSBTEMAIL");
+        
+        CSBTEMAIL = new JTextField();
+        CSBTEMAIL.setText("todopago@hotmail.com");
+        
+        JLabel lblCsbtfirstname = new JLabel();
+        lblCsbtfirstname.setText("CSBTFIRSTNAME");
+        
+        CSBTFIRSTNAME = new JTextField();
+        CSBTFIRSTNAME.setText("Cosme");
+        
+        JLabel lblCsbtpostalcode = new JLabel();
+        lblCsbtpostalcode.setText("CSBTPOSTALCODE");
+        
+        CSBTPOSTALCODE = new JTextField();
+        CSBTPOSTALCODE.setText("1010");
+        
+        JLabel lblCsbtstreet = new JLabel();
+        lblCsbtstreet.setText("CSBTSTREET1");
+        
+        CSBTSTREET1 = new JTextField();
+        CSBTSTREET1.setText("Cerrito 740");
+        
+        lblCsbtipaddress = new JLabel();
+        lblCsbtipaddress.setText("CSBTIPADDRESS");
+        
+        lblCsptgrandtotalamount = new JLabel();
+        lblCsptgrandtotalamount.setText("CSPTGRANDTOTALAMOUNT");
+        
+        lblCsmdd = new JLabel();
+        lblCsmdd.setText("CSMDD7");
+        
+        lblCsmdd_2 = new JLabel();
+        lblCsmdd_2.setText("CSMDD9");
+        
+        lblCsmdd_4 = new JLabel();
+        lblCsmdd_4.setText("CSMDD11");
+        
+        CSMDD11 = new JTextField();
+        CSMDD11.setText("");
+        
+        CSMDD9 = new JTextField();
+        CSMDD9.setText("");
+        
+        CSMDD7 = new JTextField();
+        CSMDD7.setText("");
+        
+        CSPTGRANDTOTALAMOUNT = new JTextField();
+        CSPTGRANDTOTALAMOUNT.setText("125.38");
+        
+        CSBTIPADDRESS = new JTextField();
+        CSBTIPADDRESS.setText("192.0.0.4");
+        
+        lblCsbtcountry = new JLabel();
+        lblCsbtcountry.setText("CSBTCOUNTRY");
+        
+        lblCsbtphonenumber = new JLabel();
+        lblCsbtphonenumber.setText("CSBTPHONENUMBER");
+        
+        lblCsbtlastname = new JLabel();
+        lblCsbtlastname.setText("CSBTLASTNAME");
+        
+        lblCsbtstate = new JLabel();
+        lblCsbtstate.setText("CSBTSTATE");
+        
+        lblCsbtcustomerid = new JLabel();
+        lblCsbtcustomerid.setText("CSBTCUSTOMERID");
+        
+        lblCsptcurrency = new JLabel();
+        lblCsptcurrency.setText("CSPTCURRENCY");
+        
+        lblCSMDD6 = new JLabel();
+        lblCSMDD6.setText("CSMDD6");
+        
+        lblCsmdd_1 = new JLabel();
+        lblCsmdd_1.setText("CSMDD8");
+        
+        lblCsmdd_3 = new JLabel();
+        lblCsmdd_3.setText("CSMDD10");
+        
+        lblCsbtstreet_1 = new JLabel();
+        lblCsbtstreet_1.setText("CSBTSTREET2");
+        
+        CSBTSTREET2 = new JTextField();
+        CSBTSTREET2.setText("");
+        
+        CSMDD10 = new JTextField();
+        CSMDD10.setText("");
+        
+        CSMDD8 = new JTextField();
+        CSMDD8.setText("Y");
+        
+        CSMDD6 = new JTextField();
+        CSMDD6.setText("");
+        
+        CSPTCURRENCY = new JTextField();
+        CSPTCURRENCY.setText("ARS");
+        
+        CSBTCUSTOMERID = new JTextField();
+        CSBTCUSTOMERID.setText("453458");
+        
+        CSBTSTATE = new JTextField();
+        CSBTSTATE.setText("B");
+        
+        CSBTLASTNAME = new JTextField();
+        CSBTLASTNAME.setText("Fulanito");
+        
+        CSBTPHONENUMBER = new JTextField();
+        CSBTPHONENUMBER.setText("541160913988");
+        
+        CSBTCOUNTRY = new JTextField();
+        CSBTCOUNTRY.setText("AR");
+        
+        vertical = new JComboBox();
+        vertical.setModel(new DefaultComboBoxModel(new String[] {"Retail"}));
+        vertical.setSelectedIndex(0);
+        
+        
+        
+        JLabel lblVertical = new JLabel("Vertical:");
+        GroupLayout gl_panel = new GroupLayout(panel);
+        gl_panel.setHorizontalGroup(
+        	gl_panel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsmdd_2, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSMDD9))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsmdd, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSMDD7))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsptgrandtotalamount, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSPTGRANDTOTALAMOUNT))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsbtipaddress, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSBTIPADDRESS))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsbtstreet, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSBTSTREET1))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsbtpostalcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSBTPOSTALCODE))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsbtfirstname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSBTFIRSTNAME))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsbtemail, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSBTEMAIL))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsbtcity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSBTCITY, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addComponent(lblCsmdd_4, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblVertical))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addComponent(vertical, 0, 191, Short.MAX_VALUE)
+        						.addComponent(CSMDD11))))
+        			.addGap(50)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblCsbtcountry, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(CSBTCOUNTRY, 191, 191, 191))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(lblCsbtphonenumber, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsbtlastname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsbtstate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addComponent(CSBTSTATE, 191, 191, 191)
+        						.addComponent(CSBTLASTNAME, 191, 191, 191)
+        						.addComponent(CSBTPHONENUMBER, 191, 191, 191)))
+        				.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+        					.addGroup(gl_panel.createSequentialGroup()
+        						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+        							.addComponent(lblCsbtcustomerid, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblCsptcurrency, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblCSMDD6, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblCsmdd_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblCsmdd_3, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        							.addComponent(CSMDD10, 191, 191, 191)
+        							.addComponent(CSMDD8, 191, 191, 191)
+        							.addComponent(CSMDD6, 191, 191, 191)
+        							.addComponent(CSPTCURRENCY, 191, 191, 191)
+        							.addComponent(CSBTCUSTOMERID, 191, 191, 191)))
+        					.addGroup(gl_panel.createSequentialGroup()
+        						.addComponent(lblCsbtstreet_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(CSBTSTREET2, 191, 191, 191))))
+        			.addContainerGap(83, Short.MAX_VALUE))
+        );
+        gl_panel.setVerticalGroup(
+        	gl_panel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsbtcity)
+        						.addComponent(CSBTCITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(4)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsbtemail)
+        						.addComponent(CSBTEMAIL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsbtfirstname))
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSBTFIRSTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsbtpostalcode))
+        						.addComponent(CSBTPOSTALCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsbtstreet))
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSBTSTREET1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsbtipaddress))
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSBTIPADDRESS, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsptgrandtotalamount))
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSPTGRANDTOTALAMOUNT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsmdd))
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSMDD7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsmdd_2))
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSMDD9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsmdd_4))
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSMDD11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addGap(3)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsbtcountry)
+        						.addComponent(CSBTCOUNTRY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(3)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsbtphonenumber)
+        						.addComponent(CSBTPHONENUMBER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsbtlastname)
+        						.addComponent(CSBTLASTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsbtstate)
+        						.addComponent(CSBTSTATE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsbtstreet_1)
+        						.addComponent(CSBTSTREET2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSBTCUSTOMERID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsbtcustomerid))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSPTCURRENCY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsptcurrency))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSMDD6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCSMDD6))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSMDD8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsmdd_1))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSMDD10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsmdd_3))))
+        			.addGap(18)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(vertical, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblVertical))
+        			.addContainerGap(241, Short.MAX_VALUE))
+        );
+        panel.setLayout(gl_panel);
+        
+        panel_1 = new JPanel();
+        jTabbedPane1.addTab("CS Retail", null, panel_1, null);
+        
+        lblCsitproductname = new JLabel();
+        lblCsitproductname.setText("CSITPRODUCTNAME");
+        
+        CSITPRODUCTNAME = new JTextField();
+        CSITPRODUCTNAME.setText("NOTEBOOK DF TOSHIBA#chocho");
+        
+        lblCsitproductcode = new JLabel();
+        lblCsitproductcode.setText("CSITPRODUCTCODE");
+        
+        CSITPRODUCTCODE = new JTextField();
+        CSITPRODUCTCODE.setText("electronic_good#chocho");
+        
+        lblCsmdd_7 = new JLabel();
+        lblCsmdd_7.setText("CSMDD14");
+        
+        CSMDD14 = new JTextField();
+        CSMDD14.setText("");
+        
+        lblCsmdd_5 = new JLabel();
+        lblCsmdd_5.setText("CSMDD12");
+        
+        CSMDD12 = new JTextField();
+        CSMDD12.setText("");
+        
+        lblCsststreet = new JLabel();
+        lblCsststreet.setText("CSSTSTREET1");
+        
+        CSSTSTREET1 = new JTextField();
+        CSSTSTREET1.setText("Cerrito 740");
+        
+        lblCsstpostalcode = new JLabel();
+        lblCsstpostalcode.setText("CSSTPOSTALCODE");
+        
+        CSSTPOSTALCODE = new JTextField();
+        CSSTPOSTALCODE.setText("1010");
+        
+        lblCsstfirstname = new JLabel();
+        lblCsstfirstname.setText("CSSTFIRSTNAME");
+        
+        CSSTFIRSTNAME = new JTextField();
+        CSSTFIRSTNAME.setText("Cosme");
+        
+        lblCsstemail = new JLabel();
+        lblCsstemail.setText("CSSTEMAIL");
+        
+        CSSTEMAIL = new JTextField();
+        CSSTEMAIL.setText("todopago@hotmail.com");
+        
+        lblCsstcity = new JLabel();
+        lblCsstcity.setText("CSSTCITY");
+        
+        CSSTCITY = new JTextField();
+        CSSTCITY.setText("Villa General Belgrano");
+        
+        lblCsitproductsku_1 = new JLabel();
+        lblCsitproductsku_1.setText("CSITTOTALAMOUNT");
+        
+        CSITTOTALAMOUNT = new JTextField();
+        CSITTOTALAMOUNT.setText("1254.40#10.00");
+        
+        lblCsstcountry = new JLabel();
+        lblCsstcountry.setText("CSSTCOUNTRY");
+        
+        CSSTCOUNTRY = new JTextField();
+        CSSTCOUNTRY.setText("AR");
+        
+        lblCsstphonenumber = new JLabel();
+        lblCsstphonenumber.setText("CSSTPHONENUMBER");
+        
+        lblCsstlastname = new JLabel();
+        lblCsstlastname.setText("CSSTLASTNAME");
+        
+        lblCsststate = new JLabel();
+        lblCsststate.setText("CSSTSTATE");
+        
+        CSSTSTATE = new JTextField();
+        CSSTSTATE.setText("B");
+        
+        CSSTLASTNAME = new JTextField();
+        CSSTLASTNAME.setText("Fulanito");
+        
+        CSSTPHONENUMBER = new JTextField();
+        CSSTPHONENUMBER.setText("541160913988");
+        
+        lblCsmdd_6 = new JLabel();
+        lblCsmdd_6.setText("CSMDD13");
+        
+        lblCsmdd_8 = new JLabel();
+        lblCsmdd_8.setText("CSMDD15");
+        
+        lblCsitproductdescription = new JLabel();
+        lblCsitproductdescription.setText("CSITPRODUCTDESCRIPTION");
+        
+        lblCsitproductsku = new JLabel();
+        lblCsitproductsku.setText("CSITPRODUCTSKU");
+        
+        lblCsitquantity = new JLabel();
+        lblCsitquantity.setText("CSITQUANTITY");
+        
+        CSITQUANTITY = new JTextField();
+        CSITQUANTITY.setText("1#1");
+        
+        CSITPRODUCTSKU = new JTextField();
+        CSITPRODUCTSKU.setText("LEVJNSL36GN#chocho");
+        
+        CSITPRODUCTDESCRIPTION = new JTextField();
+        CSITPRODUCTDESCRIPTION.setText("NOTEBOOK L845 SP4304LA DF TOSHIBA#chocho");
+        
+        CSMDD15 = new JTextField();
+        
+        CSMDD13 = new JTextField();
+        CSMDD13.setText("");
+        
+        lblCsststreet_1 = new JLabel();
+        lblCsststreet_1.setText("CSSTSTREET2");
+        
+        CSSTSTREET2 = new JTextField();
+        CSSTSTREET2.setText("");
+        
+        lblCsitunitprice = new JLabel();
+        lblCsitunitprice.setText("CSITUNITPRICE");
+        
+        CSITUNITPRICE = new JTextField();
+        CSITUNITPRICE.setText("1254.40#15.00");
+        
+        lblCsmdd_9 = new JLabel();
+        lblCsmdd_9.setText("CSMDD16");
+        
+        CSMDD16 = new JTextField();
+        CSMDD16.setText("");
+        GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+        gl_panel_1.setHorizontalGroup(
+        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_1.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel_1.createSequentialGroup()
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsitunitprice, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSITUNITPRICE, 191, 191, 191))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsitproductname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSITPRODUCTNAME, 191, 191, 191))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsitproductcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSITPRODUCTCODE, 191, 191, 191))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsststreet, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSSTSTREET1, 191, 191, 191))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsstpostalcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSSTPOSTALCODE, 191, 191, 191))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsstfirstname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSSTFIRSTNAME, 191, 191, 191))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsitproductsku_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSITTOTALAMOUNT, 191, 191, 191))
+        						.addComponent(lblCsmdd_7, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        								.addComponent(lblCsstemail, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(lblCsstcity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        								.addComponent(CSSTCITY, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+        								.addComponent(CSSTEMAIL, 191, 191, 191))))
+        					.addGap(50)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addComponent(lblCsstcountry, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSSTCOUNTRY, 191, 191, 191))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+        								.addComponent(lblCsstphonenumber, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(lblCsstlastname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(lblCsststate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        								.addComponent(CSSTSTATE, 191, 191, 191)
+        								.addComponent(CSSTLASTNAME, 191, 191, 191)
+        								.addComponent(CSSTPHONENUMBER, 191, 191, 191)))
+        						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+        							.addGroup(gl_panel_1.createSequentialGroup()
+        								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+        									.addComponent(lblCsitproductdescription, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(lblCsitproductsku, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(lblCsitquantity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(lblCsmdd_6, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(lblCsmdd_8, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        									.addComponent(CSMDD15, 191, 191, 191)
+        									.addComponent(CSMDD13, 191, 191, 191)
+        									.addComponent(CSITQUANTITY, 191, 191, 191)
+        									.addComponent(CSITPRODUCTSKU, 191, 191, 191)
+        									.addComponent(CSITPRODUCTDESCRIPTION, 191, 191, 191)))
+        							.addGroup(gl_panel_1.createSequentialGroup()
+        								.addComponent(lblCsststreet_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED)
+        								.addComponent(CSSTSTREET2, 191, 191, 191)))))
+        				.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+        					.addGroup(gl_panel_1.createSequentialGroup()
+        						.addComponent(lblCsmdd_9, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(CSMDD16))
+        					.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+        						.addComponent(lblCsmdd_5, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+        							.addComponent(CSMDD14, Alignment.TRAILING)
+        							.addComponent(CSMDD12, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))))
+        			.addContainerGap(83, Short.MAX_VALUE))
+        );
+        gl_panel_1.setVerticalGroup(
+        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_1.createSequentialGroup()
+        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel_1.createSequentialGroup()
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsstcity)
+        						.addComponent(CSSTCITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(4)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsstemail)
+        						.addComponent(CSSTEMAIL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsstfirstname))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSSTFIRSTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsstpostalcode))
+        						.addComponent(CSSTPOSTALCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsststreet))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSSTSTREET1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(52)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsitproductcode))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSITPRODUCTCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsitproductname))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSITPRODUCTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(lblCsitproductsku_1))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSITTOTALAMOUNT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        				.addGroup(gl_panel_1.createSequentialGroup()
+        					.addGap(3)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsstcountry)
+        						.addComponent(CSSTCOUNTRY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(3)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsstphonenumber)
+        						.addComponent(CSSTPHONENUMBER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsstlastname)
+        						.addComponent(CSSTLASTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsststate)
+        						.addComponent(CSSTSTATE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsststreet_1)
+        						.addComponent(CSSTSTREET2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(58)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSITPRODUCTDESCRIPTION, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsitproductdescription))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSITPRODUCTSKU, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsitproductsku))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSITQUANTITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsitquantity))))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(CSITUNITPRICE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblCsitunitprice))
+        			.addGap(62)
+        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel_1.createSequentialGroup()
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addGap(4)
+        							.addComponent(lblCsmdd_5))
+        						.addGroup(gl_panel_1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(CSMDD12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(6)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(CSMDD14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblCsmdd_7)))
+        				.addGroup(gl_panel_1.createSequentialGroup()
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsmdd_6)
+        						.addComponent(CSMDD13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblCsmdd_8)
+        						.addComponent(CSMDD15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        			.addGap(7)
+        			.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(lblCsmdd_9)
+        				.addComponent(CSMDD16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(119, Short.MAX_VALUE))
+        );
+        panel_1.setLayout(gl_panel_1);
 
         pack();
     }
@@ -623,14 +1374,14 @@ public class SampleUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btSARActionPerformed
-
     
+        
     private void jBConfigureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfigureActionPerformed
         Map<String, String> wsdls = new HashMap<String, String>();
         wsdls.put(ElementNames.AuthorizeWSDL, tfAuthorizeWSDL.getText());
         
         Map<String, String> endpoints = new HashMap<String, String>();
-        endpoints.put(ElementNames.AuthorizeWSDL, tfAuthorizeEndpoint.getText());
+        //endpoints.put(ElementNames.AuthorizeWSDL, tfAuthorizeEndpoint.getText());
         endpoints.put(ElementNames.Endpoint, tfOperationsEndpoiint.getText());
         
         Map<String, List<String>> auth = new HashMap<String, List<String>>();
@@ -704,69 +1455,67 @@ public class SampleUI extends javax.swing.JFrame {
     
     
   //Parametros para el control de fraude
-  	private static Map<String, String> getFraudControlParameters() {
+  	private Map<String, String> getFraudControlParameters() {
   		//Example
-  		Map<String, String> parameters = new HashMap<String, String>();     
-  		parameters.put("CSBTCITY", "Villa General Belgrano"); //MANDATORIO.
-  		parameters.put("CSSTCITY", "Villa General Belgrano"); //MANDATORIO.
+  		Map<String, String> parameters = new HashMap<String, String>();
   		
-  		parameters.put("CSBTCOUNTRY", "AR");//MANDATORIO. Código ISO.
-  		parameters.put("CSSTCOUNTRY", "AR");//MANDATORIO. Código ISO.
+  		parameters.put("CSBTCITY", ((CSBTCITY.getText()==null)?"":CSBTCITY.getText())); //MANDATORIO.
+  		parameters.put("CSBTCOUNTRY", ((CSBTCOUNTRY.getText()==null)?"":CSBTCOUNTRY.getText()));//MANDATORIO. Código ISO.
+  		parameters.put("CSBTEMAIL", ((CSBTEMAIL.getText()==null)?"":CSBTEMAIL.getText())); //MANDATORIO.
+  		parameters.put("CSBTPHONENUMBER", ((CSBTPHONENUMBER.getText()==null)?"":CSBTPHONENUMBER.getText()));//MANDATORIO.     
+  		parameters.put("CSBTFIRSTNAME", ((CSBTFIRSTNAME.getText()==null)?"":CSBTFIRSTNAME.getText()));//MANDATORIO.      
+  		parameters.put("CSBTLASTNAME", ((CSBTLASTNAME.getText()==null)?"":CSBTLASTNAME.getText()));//MANDATORIO.
+  		parameters.put("CSBTPOSTALCODE", ((CSBTPOSTALCODE.getText()==null)?"":CSBTPOSTALCODE.getText()));//MANDATORIO.
+  		parameters.put("CSBTSTATE", ((CSBTSTATE.getText()==null)?"":CSBTSTATE.getText()));//MANDATORIO
+  		parameters.put("CSBTSTREET1", ((CSBTSTREET1.getText()==null)?"":CSBTSTREET1.getText()));//MANDATORIO.
+  		parameters.put("CSBTSTREET2", ((CSBTSTREET2.getText()==null)?"":CSBTSTREET2.getText()));//MANDATORIO.
   		
-  		parameters.put("CSBTEMAIL", "todopago@hotmail.com"); //MANDATORIO.
-  		parameters.put("CSSTEMAIL", "todopago@hotmail.com"); //MANDATORIO.
+  		parameters.put("CSBTIPADDRESS", ((CSBTIPADDRESS.getText()==null)?"":CSBTIPADDRESS.getText())); //MANDATORIO.       
+  		parameters.put("CSBTCUSTOMERID", ((CSBTCUSTOMERID.getText()==null)?"":CSBTCUSTOMERID.getText())); //MANDATORIO.
+  		parameters.put("CSPTGRANDTOTALAMOUNT", ((CSPTGRANDTOTALAMOUNT.getText()==null)?"":CSPTGRANDTOTALAMOUNT.getText()));//MANDATORIO.
+  		parameters.put("CSPTCURRENCY", ((CSPTCURRENCY.getText()==null)?"":CSPTCURRENCY.getText()));//MANDATORIO.      
   		
-  		parameters.put("CSBTFIRSTNAME", "Juan");//MANDATORIO.      
-  		parameters.put("CSSTFIRSTNAME", "Juan");//MANDATORIO.      
+  		parameters.put("CSMDD6", ((CSMDD6.getText()==null)?"":CSMDD6.getText()));//NO MANDATORIO.        
+  		parameters.put("CSMDD7", ((CSMDD7.getText()==null)?"":CSMDD7.getText()));//NO MANDATORIO.        
+  		parameters.put("CSMDD8", ((CSMDD8.getText()==null)?"":CSMDD8.getText())); //NO MANDATORIO.       
+  		parameters.put("CSMDD9", ((CSMDD9.getText()==null)?"":CSMDD9.getText()));//NO MANDATORIO.       
+  		parameters.put("CSMDD10", ((CSMDD10.getText()==null)?"":CSMDD10.getText()));//NO MANDATORIO.      
+  		parameters.put("CSMDD11", ((CSMDD11.getText()==null)?"":CSMDD11.getText()));//NO MANDATORIO.
   		
-  		parameters.put("CSBTLASTNAME", "Perez");//MANDATORIO.
-  		parameters.put("CSSTLASTNAME", "Perez");//MANDATORIO.
+  		switch(vertical.getSelectedIndex()){
+	  		case 0:
+	  			setRetail(parameters);
+	  	  		break;
+  		}
   		
-  		parameters.put("CSBTPHONENUMBER", "541160913988");//MANDATORIO.     
-  		parameters.put("CSSTPHONENUMBER", "541160913988");//MANDATORIO.     
-  		
-  		parameters.put("CSBTPOSTALCODE", " C1010AAP");//MANDATORIO.
-  		parameters.put("CSSTPOSTALCODE", " C1010AAP");//MANDATORIO.
-  		
-  		parameters.put("CSBTSTATE", "B");//MANDATORIO
-  		parameters.put("CSSTSTATE", "B");//MANDATORIO
-  		
-  		parameters.put("CSBTSTREET1", "Cerrito 740");//MANDATORIO.
-  		parameters.put("CSSTSTREET1", "Cerrito 740");//MANDATORIO.
-  		
-  		parameters.put("CSBTCUSTOMERID", "453458"); //MANDATORIO.
-  		parameters.put("CSBTIPADDRESS", "192.0.0.4"); //MANDATORIO.       
-  		parameters.put("CSPTCURRENCY", "ARS");//MANDATORIO.      
-  		parameters.put("CSPTGRANDTOTALAMOUNT", "125.38");//MANDATORIO.
-  		parameters.put("CSMDD7", "");//NO MANDATORIO.        
-  		parameters.put("CSMDD8", "Y"); //NO MANDATORIO.       
-  		parameters.put("CSMDD9", "");//NO MANDATORIO.       
-  		parameters.put("CSMDD10", "");//NO MANDATORIO.      
-  		parameters.put("CSMDD11", "");//NO MANDATORIO.
-  		parameters.put("STCITY", "rosario");//MANDATORIO.       
-  		parameters.put("STCOUNTRY", "");//MANDATORIO.      
-  		parameters.put("STEMAIL", "jose@gmail.com");//MANDATORIO.        
-  		parameters.put("STFIRSTNAME", "Jose");//MANDATORIO.        
-  		parameters.put("STLASTNAME", "Perez");//MANDATORIO.      
-  		parameters.put("STPHONENUMBER", "541155893737");//MANDATORIO.        
-  		parameters.put("STPOSTALCODE", "1414");//MANDATORIO.        
-  		parameters.put("STSTATE", "D");//MANDATORIO     
-  		parameters.put("STSTREET1", "San Martín 123");//MANDATORIO.       
-  		parameters.put("CSMDD12", "");//NO MADATORIO.     
-  		parameters.put("CSMDD13", "");//NO MANDATORIO.     
-  		parameters.put("CSMDD14", "");//NO MANDATORIO.      
-  		parameters.put("CSMDD15", "");//NO MANDATORIO.        
-  		parameters.put("CSMDD16", "");//NO MANDATORIO.
-  		parameters.put("CSITPRODUCTCODE", "electronic_good");//CONDICIONAL
-  		parameters.put("CSITPRODUCTDESCRIPTION", "NOTEBOOK L845 SP4304LA DF TOSHIBA");//CONDICIONAL.     
-  		parameters.put("CSITPRODUCTNAME", "NOTEBOOK L845 SP4304LA DF TOSHIBA");//CONDICIONAL.  
-  		parameters.put("CSITPRODUCTSKU", "LEVJNSL36GN");//CONDICIONAL.      
-  		parameters.put("CSITTOTALAMOUNT", "1254.40");//CONDICIONAL.      
-  		parameters.put("CSITQUANTITY", "1");//CONDICIONAL.       
-  		parameters.put("CSITUNITPRICE", "1254.40");
   		return parameters;
   	}
-
-
-
+  	
+  	private void setRetail(Map<String, String> parameters){
+  		parameters.put("CSSTCITY", ((CSSTCITY.getText()==null)?"":CSSTCITY.getText())); //MANDATORIO.
+  		parameters.put("CSSTCOUNTRY", ((CSSTCOUNTRY.getText()==null)?"":CSSTCOUNTRY.getText()));//MANDATORIO. Código ISO.
+  		parameters.put("CSSTEMAIL", ((CSSTEMAIL.getText()==null)?"":CSSTEMAIL.getText())); //MANDATORIO.
+  		parameters.put("CSSTPHONENUMBER", ((CSSTPHONENUMBER.getText()==null)?"":CSSTPHONENUMBER.getText()));//MANDATORIO.     
+  		parameters.put("CSSTFIRSTNAME", ((CSSTFIRSTNAME.getText()==null)?"":CSSTFIRSTNAME.getText()));//MANDATORIO.      
+  		parameters.put("CSSTLASTNAME", ((CSSTLASTNAME.getText()==null)?"":CSSTLASTNAME.getText()));//MANDATORIO.
+  		parameters.put("CSSTPOSTALCODE", ((CSSTPOSTALCODE.getText()==null)?"":CSSTPOSTALCODE.getText()));//MANDATORIO.
+  		parameters.put("CSSTSTATE", ((CSSTSTATE.getText()==null)?"":CSSTSTATE.getText()));//MANDATORIO
+  		parameters.put("CSSTSTREET1", ((CSSTSTREET1.getText()==null)?"":CSSTSTREET1.getText()));//MANDATORIO.
+  		parameters.put("CSSTSTREET2", ((CSSTSTREET2.getText()==null)?"":CSSTSTREET2.getText()));//MANDATORIO.
+  		
+  		parameters.put("CSITPRODUCTCODE", ((CSITPRODUCTCODE.getText()==null)?"":CSITPRODUCTCODE.getText()));//CONDICIONAL
+  		parameters.put("CSITPRODUCTDESCRIPTION", ((CSITPRODUCTDESCRIPTION.getText()==null)?"":CSITPRODUCTDESCRIPTION.getText()));//CONDICIONAL.     
+  		parameters.put("CSITPRODUCTNAME", ((CSITPRODUCTNAME.getText()==null)?"":CSITPRODUCTNAME.getText()));//CONDICIONAL.  
+  		parameters.put("CSITPRODUCTSKU", ((CSITPRODUCTSKU.getText()==null)?"":CSITPRODUCTSKU.getText()));//CONDICIONAL.      
+  		parameters.put("CSITTOTALAMOUNT", ((CSITTOTALAMOUNT.getText()==null)?"":CSITTOTALAMOUNT.getText()));//CONDICIONAL.      
+  		parameters.put("CSITQUANTITY", ((CSITQUANTITY.getText()==null)?"":CSITQUANTITY.getText()));//CONDICIONAL.       
+  		parameters.put("CSITUNITPRICE", ((CSITUNITPRICE.getText()==null)?"":CSITUNITPRICE.getText()));
+  		
+  		parameters.put("CSMDD12", ((CSMDD12.getText()==null)?"":CSMDD12.getText()));//NO MADATORIO.     
+  		parameters.put("CSMDD13", ((CSMDD13.getText()==null)?"":CSMDD13.getText()));//NO MANDATORIO.     
+  		parameters.put("CSMDD14", ((CSMDD14.getText()==null)?"":CSMDD14.getText()));//NO MANDATORIO.      
+  		parameters.put("CSMDD15", ((CSMDD15.getText()==null)?"":CSMDD15.getText()));//NO MANDATORIO.        
+  		parameters.put("CSMDD16", ((CSMDD16.getText()==null)?"":CSMDD16.getText()));//NO MANDATORIO.
+  		
+  	}
 }

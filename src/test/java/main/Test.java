@@ -13,6 +13,11 @@ import ar.com.todopago.api.rest.RestConnector;
 
 public class Test {
 
+		//Verticales para CS
+		public final static int RETAIL = 0;
+		
+		public static int vertical = RETAIL;//Configurar vertical a usar
+	
 		public static void main(String[] args) throws MalformedURLException {
 
 		TodoPagoConector tpc = new TodoPagoConector(getWsdl(), getEndpoint(), getAuthorization(), true);
@@ -79,46 +84,49 @@ public class Test {
 		//Example
 		Map<String, String> parameters = new HashMap<String, String>();     
 		parameters.put("CSBTCITY", "Villa General Belgrano"); //MANDATORIO.
-		parameters.put("CSSTCITY", "Villa General Belgrano"); //MANDATORIO.
-		
 		parameters.put("CSBTCOUNTRY", "AR");//MANDATORIO. Código ISO.
-		parameters.put("CSSTCOUNTRY", "AR");//MANDATORIO. Código ISO.
-		
 		parameters.put("CSBTEMAIL", "todopago@hotmail.com"); //MANDATORIO.
-		parameters.put("CSSTEMAIL", "todopago@hotmail.com"); //MANDATORIO.
-		
 		parameters.put("CSBTFIRSTNAME", "Juan");//MANDATORIO.      
-		parameters.put("CSSTFIRSTNAME", "Juan");//MANDATORIO.      
-		
 		parameters.put("CSBTLASTNAME", "Perez");//MANDATORIO.
-		parameters.put("CSSTLASTNAME", "Perez");//MANDATORIO.
-		
 		parameters.put("CSBTPHONENUMBER", "541160913988");//MANDATORIO.     
-		parameters.put("CSSTPHONENUMBER", "541160913988");//MANDATORIO.     
-		
 		parameters.put("CSBTPOSTALCODE", " 1010");//MANDATORIO.
-		parameters.put("CSSTPOSTALCODE", " 1010");//MANDATORIO.
-		
 		parameters.put("CSBTSTATE", "B");//MANDATORIO
-		parameters.put("CSSTSTATE", "B");//MANDATORIO
-		
 		parameters.put("CSBTSTREET1", "Cerrito 740");//MANDATORIO.
-		parameters.put("CSSTSTREET1", "Cerrito 740");//MANDATORIO.
+		parameters.put("CSBTSTREET2", "");//NO MANDATORIO
 		
 		parameters.put("CSBTCUSTOMERID", "453458"); //MANDATORIO.
 		parameters.put("CSBTIPADDRESS", "192.0.0.4"); //MANDATORIO.       
 		parameters.put("CSPTCURRENCY", "ARS");//MANDATORIO.      
 		parameters.put("CSPTGRANDTOTALAMOUNT", "125.38");//MANDATORIO.
+		
+		parameters.put("CSMDD6", "");//NO MANDATORIO.
 		parameters.put("CSMDD7", "");//NO MANDATORIO.        
-		parameters.put("CSMDD8", "Y"); //NO MANDATORIO.       
+		parameters.put("CSMDD8", ""); //NO MANDATORIO.       
 		parameters.put("CSMDD9", "");//NO MANDATORIO.       
 		parameters.put("CSMDD10", "");//NO MANDATORIO.      
 		parameters.put("CSMDD11", "");//NO MANDATORIO.
-		parameters.put("CSMDD12", "");//NO MADATORIO.     
-		parameters.put("CSMDD13", "");//NO MANDATORIO.     
-		parameters.put("CSMDD14", "");//NO MANDATORIO.      
-		parameters.put("CSMDD15", "");//NO MANDATORIO.        
-		parameters.put("CSMDD16", "");//NO MANDATORIO.
+		
+		switch(vertical){
+			case RETAIL:
+				setRetail(parameters);
+				break;
+		}
+		
+		return parameters;
+	}
+	
+	private static void setRetail(Map<String, String> parameters){
+		parameters.put("CSSTCITY", "Villa General Belgrano"); //MANDATORIO.
+		parameters.put("CSSTCOUNTRY", "AR");//MANDATORIO. Código ISO.
+		parameters.put("CSSTEMAIL", "todopago@hotmail.com"); //MANDATORIO.
+		parameters.put("CSSTFIRSTNAME", "Juan");//MANDATORIO.      
+		parameters.put("CSSTLASTNAME", "Perez");//MANDATORIO.
+		parameters.put("CSSTPHONENUMBER", "541160913988");//MANDATORIO.     
+		parameters.put("CSSTPOSTALCODE", " 1010");//MANDATORIO.
+		parameters.put("CSSTSTATE", "B");//MANDATORIO
+		parameters.put("CSSTSTREET1", "Cerrito 740");//MANDATORIO.
+		parameters.put("CSSTSTREET2", "");//NO MANDATORIO.
+		
 		parameters.put("CSITPRODUCTCODE", "electronic_good#chocho");//CONDICIONAL
 		parameters.put("CSITPRODUCTDESCRIPTION", "NOTEBOOK L845 SP4304LA DF TOSHIBA#chocho");//CONDICIONAL.     
 		parameters.put("CSITPRODUCTNAME", "NOTEBOOK L845 SP4304LA DF TOSHIBA#chocho");//CONDICIONAL.  
@@ -126,7 +134,12 @@ public class Test {
 		parameters.put("CSITTOTALAMOUNT", "1254.40#10.00");//CONDICIONAL.      
 		parameters.put("CSITQUANTITY", "1#1");//CONDICIONAL.       
 		parameters.put("CSITUNITPRICE", "1254.40#15.00");
-		return parameters;
+		
+		parameters.put("CSMDD12", "");//NO MADATORIO.     
+		parameters.put("CSMDD13", "");//NO MANDATORIO.     
+		parameters.put("CSMDD14", "");//NO MANDATORIO.      
+		parameters.put("CSMDD15", "");//NO MANDATORIO.        
+		parameters.put("CSMDD16", "");//NO MANDATORIO.
 	}
 	
 
@@ -160,8 +173,8 @@ public class Test {
 
 	private static Map<String, String> getEndpoint() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.AuthorizeWSDL, "https://developers.todopago.com.ar/services/t/1.1/Authorize");
-		parameters.put(ElementNames.Endpoint, "https://developers.todopago.com.ar/t/1.1/");
+//		parameters.put(ElementNames.AuthorizeWSDL, "https://developers.todopago.com.ar/services/t/1.1/Authorize");
+		parameters.put(ElementNames.Endpoint, "https://developers.todopago.com.ar/");
 		return parameters;
 	}
 

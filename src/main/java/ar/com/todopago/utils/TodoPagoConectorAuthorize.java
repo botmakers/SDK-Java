@@ -159,6 +159,7 @@ public class TodoPagoConectorAuthorize{
 		
 		payload.append("</Request>");
 		String result = payload.toString();
+		//System.out.println(result);
 		logger.log(Level.INFO, "Armando payload: {0}", result);
 		return result;
 	}

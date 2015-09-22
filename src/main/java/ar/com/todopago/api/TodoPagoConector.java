@@ -20,8 +20,13 @@ import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
 	
-	final String versionTodoPago = "1.0.0";
+	final String versionTodoPago = "1.0.1";
 
+	final String soapAppend = "services/";
+	final String restAppend = "api/";
+	final String tenant = "t/1.1/";
+	final String authorizeSOAPAppend = "Authorize";
+	
 	Map<String, String>wsdl;
 	Map<String, String>endpoint;
 	TodoPagoConectorAuthorize authorize;
@@ -40,9 +45,12 @@ public class TodoPagoConector {
 
 		this.wsdl = wsdl;
 		this.endpoint = endpoint;
-		authorize = new TodoPagoConectorAuthorize(wsdl.get(ElementNames.AuthorizeWSDL), endpoint.get(ElementNames.AuthorizeWSDL), auth);
 		
-		restConector = new RestConnector(endpoint.get(ElementNames.Endpoint), auth);
+		String soapEndpoint = this.endpoint.get(ElementNames.Endpoint) + soapAppend + tenant + authorizeSOAPAppend;
+		authorize = new TodoPagoConectorAuthorize(wsdl.get(ElementNames.AuthorizeWSDL), soapEndpoint, auth);
+		
+		String restEndpoint = this.endpoint.get(ElementNames.Endpoint) + tenant + restAppend;
+		restConector = new RestConnector(restEndpoint, auth);
 		
 	}
 	

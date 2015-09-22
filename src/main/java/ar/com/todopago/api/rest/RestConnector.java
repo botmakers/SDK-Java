@@ -43,7 +43,7 @@ public class RestConnector {
 	
 	
 	public Map<String, Object> getByOperationId(Map<String, String>params){
-		String url = endpoint + "api/Operations/GetByOperationId/";
+		String url = endpoint + "Operations/GetByOperationId/";
 		//Merchant
 		url += ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/";
 		//OperationID
@@ -68,7 +68,7 @@ public class RestConnector {
 
 	public Map<String, Object> getPaymentMethods(Map<String, String> params) {
 		
-		String url = endpoint + "api/PaymentMethods/Get/";
+		String url = endpoint + "PaymentMethods/Get/";
 		//Merchant
 		url += ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/";
 		
@@ -96,7 +96,7 @@ public class RestConnector {
 	
 	
 	public Map<String, Object> getPromotions(Map<String, String> params){
-		String url = endpoint + "api/PaymentMethods/Get/";
+		String url = endpoint + "PaymentMethods/Get/";
 		//Merchant
 		url += ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/";
 		url += ElementNames.PaymentMethod.toUpperCase() + "/" + params.get(ElementNames.PaymentMethod) + "/";
