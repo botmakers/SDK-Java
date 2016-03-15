@@ -2,14 +2,14 @@ package ar.com.todopago.api;
 
 public final class ElementNames {
 
-	//Enum for WSDL & Endpoint
+	// Enum for WSDL & Endpoint
 	public static final String AuthorizeWSDL = "AuthorizeWSDL";
 	public static final String OperationsWSDL = "OperationsWSDL";
 	public static final String PaymentMethodsWSDL = "PaymentMethodsWSDL";
 	public static final String Endpoint = "Endpoint";
-	
-	//Operations 
-	public static final String 	OperationID = "OperationID";
+
+	// Operations
+	public static final String OperationID = "OperationID";
 	public static final String Barcode = "Barcode";
 	public static final String CardHolderName = "CardHolderName";
 	public static final String CardNumber = "CardNumber";
@@ -29,8 +29,11 @@ public final class ElementNames {
 	public static final String TicketNumber = "TicketNumber";
 	public static final String ErrorMessage = "ErrorMessage";
 	public static final String Operation = "Operation";
-	
-	//PaymentMethods
+	public static final String STARTDATE = "STARTDATE";
+	public static final String ENDDATE = "ENDDATE";
+	public static final String PAGENUMBER = "PAGENUMBER";
+
+	// PaymentMethods
 	public static final String Id = "Id";
 	public static final String Name = "Name";
 	public static final String Logo = "Logo";
@@ -59,28 +62,29 @@ public final class ElementNames {
 	public static final String SellerCfBonus = "SellerCfBonus";
 	public static final String Tna = "Tna";
 	public static final String PromotionsCollection = "PromotionsCollection";
-	
-	//Authorize
-	public static final String Security = "Security";
-    public static final String Session = "Session";
-    public static final String Merchant = "Merchant";
-    public static final String RequestKey = "RequestKey";
-    public static final String AnswerKey = "AnswerKey";
-    public static final String StatusCode = "StatusCode";
-    public static final String StatusMessage = "StatusMessage";
-    public static final String AuthorizationKey = "AuthorizationKey";
-    public static final String EncodingMethod = "EncodingMethod";
-    public static final String Payload = "Payload"; 
-    public static final String UrlRequest = "URL_Request"; 
-    public static final String UrlError = "URL_ERROR"; 
-    public static final String UrlOK = "URL_OK";
-    public static final String PublicRequestKey = "PublicRequestKey";
-    
 
-	//Headder
+	// Authorize
+	public static final String Security = "Security";
+	public static final String Session = "Session";
+	public static final String Merchant = "Merchant";
+	public static final String RequestKey = "RequestKey";
+	public static final String AnswerKey = "AnswerKey";
+	public static final String StatusCode = "StatusCode";
+	public static final String StatusMessage = "StatusMessage";
+	public static final String AuthorizationKey = "AuthorizationKey";
+	public static final String EncodingMethod = "EncodingMethod";
+	public static final String Payload = "Payload";
+	public static final String UrlRequest = "URL_Request";
+	public static final String UrlError = "URL_ERROR";
+	public static final String UrlOK = "URL_OK";
+	public static final String PublicRequestKey = "PublicRequestKey";
+	public static final String EMAILCLIENTE = "EMAILCLIENTE";
+
+	// Authorize return
+	public static final String RequestChannel = "RequestChannel";
+	public static final String Authorizationcode = "Authorizationcode";
+
+	// Headder
 	public static final String Authorization = "Authorization";
-	
-	
- 
-    
+
 }

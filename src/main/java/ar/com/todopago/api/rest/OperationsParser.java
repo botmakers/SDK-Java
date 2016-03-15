@@ -15,16 +15,16 @@ import org.xml.sax.SAXException;
 
 public class OperationsParser {
 
-
-
-	//from InputStream to Map
-	public static Map<String, Object> inputStreamToMap(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException {
+	// from InputStream to Map
+	public static Map<String, Object> inputStreamToMap(InputStream inputStream)
+			throws ParserConfigurationException, SAXException, IOException {
 		NodeList nList = inputStreamToNodeList(inputStream);
 		return parseNodeListToMap(nList);
 	}
 
-	//From InputStream to NodeList
-	public static NodeList inputStreamToNodeList(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException{
+	// From InputStream to NodeList
+	public static NodeList inputStreamToNodeList(InputStream inputStream)
+			throws ParserConfigurationException, SAXException, IOException {
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -33,23 +33,20 @@ public class OperationsParser {
 		return doc.getChildNodes();
 	}
 
-	//From NodeList to Map
-	public static Map<String, Object> parseNodeListToMap(NodeList nList){
+	// From NodeList to Map
+	public static Map<String, Object> parseNodeListToMap(NodeList nList) {
 		Map<String, Object> ret = new HashMap<String, Object>();
-		for(int i = 0; i<nList.getLength(); i++){
-			if (nList.item(i).hasChildNodes() && nList.item(i).getChildNodes().item(0).hasChildNodes()){
-				//call recursive, fill a new map
+		for (int i = 0; i < nList.getLength(); i++) {
+			if (nList.item(i).hasChildNodes() && nList.item(i).getChildNodes().item(0).hasChildNodes()) {
+				// call recursive, fill a new map
 				ret.put(nList.item(i).getNodeName(), parseNodeListToMap(nList.item(i).getChildNodes()));
-			}else{
-				//add value to this map
+			} else {
+				// add value to this map
 				ret.put(nList.item(i).getNodeName(), nList.item(i).getTextContent());
 			}
 		}
 		return ret;
 
 	}
-
-
-
 
 }

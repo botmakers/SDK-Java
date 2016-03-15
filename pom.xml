@@ -4,7 +4,7 @@
 	<groupId>com.ar.todopago</groupId>
 	<artifactId>TodoPago</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.1</version>
+	<version>1.2.0</version>
 	<name>sdk-java</name>
 	<properties>
 		<jdk.version>1.5</jdk.version>
@@ -24,6 +24,7 @@
 			<version>${log4j.version}</version>
 		</dependency>
 	</dependencies>
+	
 
 	<build>
 		<finalName>sdk-java</finalName>
@@ -69,5 +70,10 @@
 			</plugin>
 
 		</plugins>
+		<resources>
+	     <resource>
+	       <directory>src/main/resources</directory>
+	     </resource>
+	   </resources>
 	</build>
 </project>

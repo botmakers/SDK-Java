@@ -3,6 +3,7 @@ package ar.com.todopago.api.authorize;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
@@ -17,7 +18,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "Authorize", targetNamespace = "http://api.todopago.com.ar", wsdlLocation = "file:/D:/WorkspaceJuno/wsdl/Authorize.wsdl")
+@WebServiceClient(name = "Authorize", targetNamespace = "http://api.todopago.com.ar", wsdlLocation = "file:/C:/Users/juan.peregrina/dev-sdk-java/src/main/resources/Authorize.wsdl")
 public class Authorize
     extends Service
 {
@@ -30,7 +31,7 @@ public class Authorize
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/D:/WorkspaceJuno/wsdl/Authorize.wsdl");
+            url = new URL("file:/C:/Users/juan.peregrina/dev-sdk-java/src/main/resources/Authorize.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

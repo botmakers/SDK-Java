@@ -16,20 +16,24 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ar.com.todopago.api.ElementNames;
+import ar.com.todopago.api.TodoPagoConector;
 import ar.com.todopago.api.authorize.Authorize;
 import ar.com.todopago.api.authorize.AuthorizePortType;
 import ar.com.todopago.api.authorize.GetAuthorizeAnswer;
 import ar.com.todopago.api.authorize.GetAuthorizeAnswerResponse;
 import ar.com.todopago.api.authorize.ObjectFactory;
+import ar.com.todopago.api.authorize.ReturnRequest;
+import ar.com.todopago.api.authorize.ReturnResponse;
 import ar.com.todopago.api.authorize.SendAuthorizeRequest;
 import ar.com.todopago.api.authorize.SendAuthorizeRequestResponse;
+import ar.com.todopago.api.authorize.VoidRequest;
+import ar.com.todopago.api.authorize.VoidResponse;
 
-public class TodoPagoConectorAuthorize{
+public class TodoPagoConectorAuthorize {
 
 	private final static Logger logger = Logger.getLogger(TodoPagoConectorAuthorize.class.getName());
 
 	private ObjectFactory factory;
-	private String wsdl = null;
 	private String endpoint = null;
 	private AuthorizePortType service = null;
 
@@ -40,15 +44,17 @@ public class TodoPagoConectorAuthorize{
 	 * @param security
 	 * @throws MalformedURLException
 	 */
-	public TodoPagoConectorAuthorize(String wsdl, String endpoint, Map<String, List<String>> auth) throws MalformedURLException {
+	public TodoPagoConectorAuthorize(URL wsdl, String endpoint, Map<String, List<String>> auth)
+			throws MalformedURLException {
 		this.factory = new ObjectFactory();
-		this.wsdl = wsdl;
 		this.endpoint = endpoint;
-		this.service = new Authorize(new URL(this.wsdl)).getAuthorizeHttpsSoap11Endpoint();
+
+		// this.service = new Authorize(new
+		// URL(this.wsdl)).getAuthorizeHttpsSoap11Endpoint();
+		this.service = new Authorize(wsdl).getAuthorizeHttpsSoap11Endpoint();
 		((BindingProvider) service).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, this.endpoint);
 		((BindingProvider) service).getRequestContext().put(MessageContext.HTTP_REQUEST_HEADERS, auth);
 	}
-
 
 	/**
 	 * 
@@ -81,6 +87,89 @@ public class TodoPagoConectorAuthorize{
 		return response;
 	}
 
+	// Devoluciones
+	public Map<String, Object> voidRequest(Map<String, String> parameters) {
+		logger.info("VoidRequest");
+		VoidRequest voidRequest = this.parseToVoidRequest(parameters);
+		VoidResponse voidResponse = service.voidRequest(voidRequest);
+		System.err.println("-------------------------" + voidResponse);
+		// devuelve el formato de array el resultado de de la operación
+		// Authorize
+		Map<String, Object> response = this.parseVoidRequestToArray(voidResponse);
+		return response;
+	}
+
+	// Devoluciones
+	public Map<String, Object> returnRequest(Map<String, String> parameters) {
+		logger.info("ReturnRequest");
+		ReturnRequest returnRequest = this.parseToReturnRequest(parameters);
+		ReturnResponse returnResponse = service.returnRequest(returnRequest);
+		System.err.println("-------------------------" + returnResponse);
+		// devuelve el formato de array el resultado de de la operación
+		// Authorize
+		Map<String, Object> response = this.parseReturnRequestToArray(returnResponse);
+		return response;
+	}
+
+	private VoidRequest parseToVoidRequest(Map<String, String> parameters) {
+		VoidRequest o = factory.createVoidRequest();
+		if (parameters != null) {
+			o.setAuthorizationKey(
+					factory.createVoidRequestAuthorizationKey(parameters.get(ElementNames.AuthorizationKey)));
+			o.setChannel(factory.createVoidRequestChannel(parameters.get(ElementNames.RequestChannel)));
+			o.setMerchant(parameters.get(ElementNames.Merchant));
+			o.setRequestKey(factory.createVoidRequestRequestKey(parameters.get(ElementNames.RequestKey)));
+			o.setSecurity(factory.createVoidRequestSecurity(parameters.get(ElementNames.Security)));
+		}
+		return o;
+	}
+
+	private Map<String, Object> parseVoidRequestToArray(VoidResponse voidResponse) {
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		result.put(ElementNames.AuthorizationKey, getValue(voidResponse.getAuthorizationKey()));
+		result.put(ElementNames.StatusCode, getValue(voidResponse.getStatusCode()));
+		result.put(ElementNames.StatusMessage, getValue(voidResponse.getStatusMessage()));
+		result.put(ElementNames.Authorizationcode, getValue(voidResponse.getAUTHORIZATIONCODE()));
+
+		logger.log(Level.INFO, "Armando voidRequestResponse: {0}", result);
+		return result;
+	}
+
+	private ReturnRequest parseToReturnRequest(Map<String, String> parameters) {
+		ReturnRequest o = factory.createReturnRequest();
+		if (parameters != null) {
+
+			o.setAuthorizationKey(
+					factory.createVoidRequestAuthorizationKey(parameters.get(ElementNames.AuthorizationKey)));
+			o.setChannel(factory.createVoidRequestChannel(parameters.get(ElementNames.RequestChannel)));
+			o.setMerchant(parameters.get(ElementNames.Merchant));
+			o.setRequestKey(factory.createVoidRequestRequestKey(parameters.get(ElementNames.RequestKey)));
+			o.setSecurity(factory.createVoidRequestSecurity(parameters.get(ElementNames.Security)));
+			try {
+				o.setAMOUNT(factory.createReturnRequestAMOUNT(Float.valueOf(parameters.get(ElementNames.Amount))));
+			} catch (NumberFormatException e) {
+				logger.log(Level.INFO, "The amount is incorrect", e);
+				e.printStackTrace();
+			}
+			o.setCURRENCYCODE(factory.createReturnRequestCURRENCYCODE(parameters.get(ElementNames.CurrencyCode)));
+
+		}
+		return o;
+	}
+
+	private Map<String, Object> parseReturnRequestToArray(ReturnResponse returnResponse) {
+		Map<String, Object> result = new HashMap<String, Object>();
+
+		result.put(ElementNames.AuthorizationKey, getValue(returnResponse.getAuthorizationKey()));
+		result.put(ElementNames.StatusCode, getValue(returnResponse.getStatusCode()));
+		result.put(ElementNames.StatusMessage, getValue(returnResponse.getStatusMessage()));
+		result.put(ElementNames.Authorizationcode, getValue(returnResponse.getAUTHORIZATIONCODE()));
+
+		logger.log(Level.INFO, "Armando returnRequestResponse: {0}", result);
+		return result;
+	}
+
 	private GetAuthorizeAnswer parseToAuthorizeAnswer(Map<String, String> parameters) {
 		GetAuthorizeAnswer o = factory.createGetAuthorizeAnswer();
 		if (parameters != null) {
@@ -106,7 +195,6 @@ public class TodoPagoConectorAuthorize{
 		return s;
 	}
 
-
 	private Map<String, Object> parseSendAuthorizeRequestResponseToArray(
 			SendAuthorizeRequestResponse sendAuthorizeRequestResponse) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -119,11 +207,12 @@ public class TodoPagoConectorAuthorize{
 		return result;
 	}
 
-	private SendAuthorizeRequest parseToSendAuthorizeRequest(Map<String, String> parameters, Map<String, String> fraudControl) {
+	private SendAuthorizeRequest parseToSendAuthorizeRequest(Map<String, String> parameters,
+			Map<String, String> fraudControl) {
 		SendAuthorizeRequest o = factory.createSendAuthorizeRequest();
 		if (parameters != null) {
-			o.setEncodingMethod(factory.createSendAuthorizeRequestEncodingMethod(parameters
-					.get(ElementNames.EncodingMethod)));
+			o.setEncodingMethod(
+					factory.createSendAuthorizeRequestEncodingMethod(parameters.get(ElementNames.EncodingMethod)));
 			o.setMerchant(parameters.get(ElementNames.Merchant));
 			o.setPayload(factory.createSendAuthorizeRequestPayload(createPayload(parameters, fraudControl)));
 			o.setSecurity(parameters.get(ElementNames.Security));
@@ -138,11 +227,20 @@ public class TodoPagoConectorAuthorize{
 	private String createPayload(Map<String, String> parameters, Map<String, String> fraudControl) {
 		StringBuilder payload = new StringBuilder("<Request>");
 		
+//		parameters.put("SDK", "JAVA");
+//		parameters.put("SDKVERSION", TodoPagoConector.versionTodoPago);
+//		parameters.put("LENGUAGEVERSION" , System.getProperty("java.version"));
+				
 		for (Map.Entry<String, String> entry : parameters.entrySet()) {
 			payload.append("<");
 			payload.append(entry.getKey().toUpperCase());
 			payload.append(">");
-			payload.append(entry.getValue());
+
+			// Crop String a 256 chars
+			String aux = (entry.getValue().length() > 254) ? entry.getValue().substring(0, 253) : entry.getValue();
+			payload.append(aux);
+			// End Crop
+
 			payload.append("</");
 			payload.append(entry.getKey().toUpperCase());
 			payload.append(">");
@@ -151,15 +249,20 @@ public class TodoPagoConectorAuthorize{
 			payload.append("<");
 			payload.append(entry.getKey().toUpperCase());
 			payload.append(">");
-			payload.append(entry.getValue());
+
+			// Crop String a 256 chars
+			String aux = (entry.getValue().length() > 254) ? entry.getValue().substring(0, 253) : entry.getValue();
+			payload.append(aux);
+			// End Crop
+
 			payload.append("</");
 			payload.append(entry.getKey().toUpperCase());
 			payload.append(">");
 		}
-		
+
 		payload.append("</Request>");
 		String result = payload.toString();
-		//System.out.println(result);
+		// System.out.println(result);
 		logger.log(Level.INFO, "Armando payload: {0}", result);
 		return result;
 	}
@@ -169,16 +272,17 @@ public class TodoPagoConectorAuthorize{
 		result.put(ElementNames.AuthorizationKey, getValue(authorizeAnswerResponse.getAuthorizationKey()));
 		result.put(ElementNames.EncodingMethod, getValue(authorizeAnswerResponse.getEncodingMethod()));
 		payloadToArray(result, authorizeAnswerResponse.getPayload());
-		//TODO fix previos line remove following
-		//result.put("payload", getValue(authorizeAnswerResponse.getPayload()));
-//		result.put("payload", authorizeAnswerResponse.getPayload());
+		// TODO fix previos line remove following
+		// result.put("payload",
+		// getValue(authorizeAnswerResponse.getPayload()));
+		// result.put("payload", authorizeAnswerResponse.getPayload());
 		result.put(ElementNames.StatusCode, getValue(authorizeAnswerResponse.getStatusCode()));
 		result.put(ElementNames.StatusMessage, getValue(authorizeAnswerResponse.getStatusMessage()));
 		return result;
 	}
 
 	private void payloadToArray(Map<String, Object> result, Node node) {
-		if(node!=null){
+		if (node != null) {
 			Node answer = node.getFirstChild();
 			Node request = answer.getNextSibling();
 			nodeToMap(answer, result);

@@ -4,13 +4,10 @@ package ar.com.todopago.api.authorize;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.w3c.dom.Node;
 
 
 /**
@@ -26,8 +23,7 @@ import org.w3c.dom.Node;
  *         &lt;element name="StatusCode" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="StatusMessage" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="AuthorizationKey" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="EncodingMethod" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Payload" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/>
+ *         &lt;element name="AUTHORIZATIONCODE" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,11 +37,10 @@ import org.w3c.dom.Node;
     "statusCode",
     "statusMessage",
     "authorizationKey",
-    "encodingMethod",
-    "payload"
+    "authorizationcode"
 })
-@XmlRootElement(name = "GetAuthorizeAnswerResponse")
-public class GetAuthorizeAnswerResponse {
+@XmlRootElement(name = "VoidResponse")
+public class VoidResponse {
 
     @XmlElement(name = "StatusCode")
     protected int statusCode;
@@ -53,12 +48,8 @@ public class GetAuthorizeAnswerResponse {
     protected JAXBElement<String> statusMessage;
     @XmlElementRef(name = "AuthorizationKey", namespace = "http://api.todopago.com.ar", type = JAXBElement.class, required = false)
     protected JAXBElement<String> authorizationKey;
-    @XmlElementRef(name = "EncodingMethod", namespace = "http://api.todopago.com.ar", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> encodingMethod;
-//    @XmlElementRef(name = "Payload", namespace = "http://api.todopago.com.ar", type = JAXBElement.class, required = false)
-//    protected JAXBElement<Object> payload;
-    @XmlAnyElement
-    protected Node payload;
+    @XmlElementRef(name = "AUTHORIZATIONCODE", namespace = "http://api.todopago.com.ar", type = JAXBElement.class, required = false)
+    protected JAXBElement<String> authorizationcode;
 
     /**
      * Gets the value of the statusCode property.
@@ -125,59 +116,27 @@ public class GetAuthorizeAnswerResponse {
     }
 
     /**
-     * Gets the value of the encodingMethod property.
+     * Gets the value of the authorizationcode property.
      * 
      * @return
      *     possible object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public JAXBElement<String> getEncodingMethod() {
-        return encodingMethod;
+    public JAXBElement<String> getAUTHORIZATIONCODE() {
+        return authorizationcode;
     }
 
     /**
-     * Sets the value of the encodingMethod property.
+     * Sets the value of the authorizationcode property.
      * 
      * @param value
      *     allowed object is
      *     {@link JAXBElement }{@code <}{@link String }{@code >}
      *     
      */
-    public void setEncodingMethod(JAXBElement<String> value) {
-        this.encodingMethod = value;
-    }
-
-    /**
-     * Gets the value of the payload property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Object }{@code >}
-     *     
-     */
-//    public JAXBElement<Object> getPayload() {
-//        return payload;
-//    }
-    
-    public Node getPayload() {
-        return payload;
-    }
-
-    /**
-     * Sets the value of the payload property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Object }{@code >}
-     *     
-     */
-//    public void setPayload(JAXBElement<Object> value) {
-//        this.payload = value;
-//    }
-//    
-    public void setPayload(Node value) {
-        this.payload = value;
+    public void setAUTHORIZATIONCODE(JAXBElement<String> value) {
+        this.authorizationcode = value;
     }
 
 }

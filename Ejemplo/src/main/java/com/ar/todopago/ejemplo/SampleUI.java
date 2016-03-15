@@ -22,11 +22,21 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
 
 public class SampleUI extends javax.swing.JFrame {
 
     
-    TodoPagoConector tpc;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	TodoPagoConector tpc;
     
     private javax.swing.JButton AA;
     private javax.swing.JButton btSAR;
@@ -67,7 +77,6 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JTextField tfAmmount;
     private javax.swing.JTextField tfAnswerKeyAA;
     private javax.swing.JTextField tfAuthorization;
-    private javax.swing.JTextField tfAuthorizeWSDL;
     private javax.swing.JTextField tfCurrencyCode;
     private javax.swing.JTextField tfEMAILCLIENTE;
     private javax.swing.JTextField tfEncoding;
@@ -168,12 +177,87 @@ public class SampleUI extends javax.swing.JFrame {
     private JTextField CSMDD16;
     
     private JComboBox vertical;
+    private JPanel panel_2;
+    private JTabbedPane tabbedPane;
+    private JPanel panel_3;
+    private JButton btnGetallpaymentmethods;
+    private JLabel label;
+    private JTextField tfGAPMMerchant;
+    private JLabel label_2;
+    private JTextArea tpAnswerGetAllPaymentMethods;
+    private JPanel panel_4;
+    private JButton btnDiscoverpaymentmethods;
+    private JLabel label_3;
     
+    private JTextArea tpAnswerDiscoverPaymentMethods;
+    private JPanel panel_5;
+    private JLabel lblAvailablepaymentmethodsids;
+    private JLabel lblPushnotifymethod;
+    private JLabel lblPushnotifyendpoint;
+    private JLabel lblPushnotifystates;
+    private JTextField AVAILABLEPAYMENTMETHODSIDS;
+    private JTextField PushNotifyMethod;
+    private JTextField PushNotifyEndpoint;
+    private JTextField PushNotifyStates;
+    private JLabel lblIncluir;
+    private JCheckBox checkBox_AVAILABLEPAYMENTMETHODSIDS;
+    private JCheckBox checkBox_PushNotifyMethod;
+    private JCheckBox checkBox_PushNotifyEndpoint;
+    private JCheckBox checkBox_PushNotifyStates;
+    
+    //voidRequest
+    private javax.swing.JPanel jPanel60;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JScrollPane jScrollPane60; 
+    private javax.swing.JScrollPane jScrollPane61;
+    private javax.swing.JTextField tfMerchant60;
+    private javax.swing.JTextField tfRequestKey60;
+    private javax.swing.JTextField tfSecurity60;
+    private javax.swing.JTextArea tpAnswer60;
+    private javax.swing.JButton jbutton60;
+    
+  //returnRequest
+    private javax.swing.JPanel jPanel70;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JScrollPane jScrollPane70; 
+    private javax.swing.JScrollPane jScrollPane71;
+    private javax.swing.JTextField tfMerchant70;
+    private javax.swing.JTextField tfRequestKey70;
+    private javax.swing.JTextField tfSecurity70;
+    private javax.swing.JTextField tfAmount70;
+    private javax.swing.JTextArea tpAnswer70;
+    private javax.swing.JButton jbutton70;
+    
+  //getByRangeDateTime
+    private javax.swing.JPanel jPanel80;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
+    private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
+    private javax.swing.JScrollPane jScrollPane80; 
+    private javax.swing.JScrollPane jScrollPane81;
+    private javax.swing.JTextField tfMerchant80;
+    private javax.swing.JTextField tfStartdate80;
+    private javax.swing.JTextField tfEnddate80;
+    private javax.swing.JTextField tfPageNumber80;
+    private javax.swing.JTextArea tpAnswer80;
+    private javax.swing.JButton jbutton80;
     
     public SampleUI() {
     	setFont(new Font("Tahoma", Font.PLAIN, 11));
     	setTitle("TodoPago Ejemplo");
-    	setPreferredSize(new Dimension(800, 600));
+    	setPreferredSize(new Dimension(1050, 700));
         initComponents();
     }
 
@@ -184,36 +268,9 @@ public class SampleUI extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        tfAuthorizeWSDL = new javax.swing.JTextField();
         tfOperationsEndpoiint = new javax.swing.JTextField();
         tfAuthorization = new javax.swing.JTextField();
         jBConfigure = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        tfSession = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        tfSecurity = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        tfEncoding = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        tfMerchant = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        tfOperationId = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        tfCurrencyCode = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        tfAmmount = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        tfURLOk = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        tfURLError = new javax.swing.JTextField();
-        btSAR = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tpResponse = new javax.swing.JTextArea();
-        tpResponse.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        jLabel18 = new javax.swing.JLabel();
-        tfEMAILCLIENTE = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         tfSecurityAA = new javax.swing.JTextField();
@@ -237,16 +294,64 @@ public class SampleUI extends javax.swing.JFrame {
         jScrollPane11 = new javax.swing.JScrollPane();
         tpAnswerStatus = new javax.swing.JTextArea();
         tpAnswerStatus.setFont(new Font("Tahoma", Font.PLAIN, 11));
-
+        
+        //void request
+        jPanel60 = new javax.swing.JPanel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        jLabel64 = new javax.swing.JLabel();
+        jScrollPane60 = new javax.swing.JScrollPane();
+        jScrollPane61 = new javax.swing.JScrollPane();
+        tfMerchant60 = new javax.swing.JTextField();
+        tfRequestKey60 = new javax.swing.JTextField();
+        tfSecurity60 = new javax.swing.JTextField();
+        tpAnswer60 = new javax.swing.JTextArea();
+        tpAnswer60.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        jbutton60 = new javax.swing.JButton();
+               
+        //returnRequest
+        jPanel70 = new javax.swing.JPanel();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jScrollPane70 = new javax.swing.JScrollPane();
+        jScrollPane71 = new javax.swing.JScrollPane();
+        tfMerchant70 = new javax.swing.JTextField();
+        tfRequestKey70 = new javax.swing.JTextField();
+        tfSecurity70 = new javax.swing.JTextField();
+        tfAmount70 = new javax.swing.JTextField();
+        tpAnswer70 = new javax.swing.JTextArea();
+        tpAnswer70.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        jbutton70 = new javax.swing.JButton();
+              
+        //getByRangeDateTime        
+        jPanel80 = new javax.swing.JPanel();
+        jLabel80 = new javax.swing.JLabel();
+        jLabel81 = new javax.swing.JLabel();
+        jLabel82 = new javax.swing.JLabel();
+        jLabel83 = new javax.swing.JLabel();
+        jLabel84 = new javax.swing.JLabel();
+        jLabel85 = new javax.swing.JLabel();
+        jScrollPane80 = new javax.swing.JScrollPane();
+        jScrollPane81 = new javax.swing.JScrollPane();
+        tfMerchant80 = new javax.swing.JTextField();
+        tfStartdate80 = new javax.swing.JTextField();
+        tfEnddate80 = new javax.swing.JTextField();
+        tfPageNumber80 = new javax.swing.JTextField();
+        tpAnswer80 = new javax.swing.JTextArea();
+        tpAnswer80.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        jbutton80 = new javax.swing.JButton();
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel22.setText("Authorization");
 
         jLabel26.setText("Endpoint");
-
-        jLabel9.setText("AuthorizeWSDL");
-
-        tfAuthorizeWSDL.setText("file:D:/WorkspaceJuno/TodoPago-sdk/res/Authorize.wsdl");
 
         tfOperationsEndpoiint.setText("https://developers.todopago.com.ar/");
 
@@ -277,8 +382,7 @@ public class SampleUI extends javax.swing.JFrame {
         							.addComponent(tfAuthorization, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
         						.addGroup(jPanel4Layout.createSequentialGroup()
         							.addComponent(jLabel9, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfAuthorizeWSDL, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))))
+        							.addPreferredGap(ComponentPlacement.UNRELATED))))
         				.addGroup(jPanel4Layout.createSequentialGroup()
         					.addGap(175)
         					.addComponent(jBConfigure, GroupLayout.PREFERRED_SIZE, 321, GroupLayout.PREFERRED_SIZE)))
@@ -289,8 +393,7 @@ public class SampleUI extends javax.swing.JFrame {
         		.addGroup(jPanel4Layout.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel9)
-        				.addComponent(tfAuthorizeWSDL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(jLabel9))
         			.addGap(78)
         			.addGroup(jPanel4Layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jLabel26)
@@ -306,178 +409,986 @@ public class SampleUI extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
 
         jTabbedPane1.addTab("Config", jPanel4);
-
-        jLabel1.setText("Session");
-
-        tfSession.setText("ABCDEF-1234-12221-FDE1-00000200");
-
-        jLabel2.setText("Security");
-
-        tfSecurity.setText("1234567890ABCDEF1234567890ABCDEF");
-
-        jLabel11.setText("EncodingMethod");
-
-        tfEncoding.setText("XML");
-
-        jLabel12.setText("Merchant");
-
-        tfMerchant.setText("2153");
-
-        jLabel13.setText("OperationId");
-
-        tfOperationId.setText("01");
-
-        jLabel14.setText("CurrencyCode");
-
-        tfCurrencyCode.setText("032");
-
-        jLabel15.setText("Amount");
-
-        tfAmmount.setText("54");
-
-        jLabel16.setText("URL_OK");
-
-        tfURLOk.setText("http,//www.google.com");
-
-        jLabel17.setText("URL_Error");
-
-        tfURLError.setText("http,//www.yahoo.com");
-
-        btSAR.setText("sendAuthorizeRequest");
-        btSAR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSARActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Answer:");
-
-        tpResponse.setColumns(20);
-        tpResponse.setRows(5);
-        jScrollPane8.setViewportView(tpResponse);
-
-        jLabel18.setText("EMAILCLIENTE");
-
-        tfEMAILCLIENTE.setText("email_cliente@dominio.com");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2Layout.setHorizontalGroup(
-        	jPanel2Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel2Layout.createSequentialGroup()
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel2Layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfOperationId, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel14, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfCurrencyCode, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel15, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfAmmount, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel16, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfURLOk, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel17, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfURLError, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfSecurity, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel11, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfEncoding, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel12, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfMerchant, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel2Layout.createSequentialGroup()
-        							.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(tfSession, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))))
-        				.addGroup(jPanel2Layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(jLabel18, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(tfEMAILCLIENTE, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(jPanel2Layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(btSAR))
-        				.addGroup(jPanel2Layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(jPanel2Layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(jScrollPane8, GroupLayout.PREFERRED_SIZE, 614, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(155, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-        	jPanel2Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel2Layout.createSequentialGroup()
+        
+        panel_2 = new JPanel();
+        jTabbedPane1.addTab("SendAuthorizeRequest", null, panel_2, null);
+        
+        tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+        gl_panel_2.setHorizontalGroup(
+        	gl_panel_2.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_2.createSequentialGroup()
         			.addContainerGap()
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel1)
-        				.addComponent(tfSession, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel2)
-        				.addComponent(tfSecurity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel11)
-        				.addComponent(tfEncoding, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel12)
-        				.addComponent(tfMerchant, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel13)
-        				.addComponent(tfOperationId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel14)
-        				.addComponent(tfCurrencyCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel15)
-        				.addComponent(tfAmmount, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel16)
-        				.addComponent(tfURLOk, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel17)
-        				.addComponent(tfURLError, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel18)
-        				.addComponent(tfEMAILCLIENTE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(btSAR)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(jLabel4)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(jScrollPane8, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+        			.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
         			.addContainerGap())
         );
-        jPanel2.setLayout(jPanel2Layout);
-
-        jTabbedPane1.addTab("sendAuthorizeRequest", jPanel2);
+        gl_panel_2.setVerticalGroup(
+        	gl_panel_2.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_2.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+        			.addContainerGap())
+        );
+        jPanel2 = new javax.swing.JPanel();
+        tabbedPane.addTab("SendAuthorizeRequest", null, jPanel2, null);
+        jLabel1 = new javax.swing.JLabel();
+        tfSession = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tfSecurity = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        tfEncoding = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        tfMerchant = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        tfOperationId = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        tfCurrencyCode = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        tfAmmount = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        tfURLOk = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        tfURLError = new javax.swing.JTextField();
+        btSAR = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tpResponse = new javax.swing.JTextArea();
+        tpResponse.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        jLabel18 = new javax.swing.JLabel();
+        tfEMAILCLIENTE = new javax.swing.JTextField();
+        
+                jLabel1.setText("Session");
+                
+                        tfSession.setText("ABCDEF-1234-12221-FDE1-00000200");
+                        
+                                jLabel2.setText("Security");
+                                
+                                        //tfSecurity.setText("f3d8b72c94ab4a06be2ef7c95490f7d3");
+                                        tfSecurity.setText("f3d8b72c94ab4a06be2ef7c95490f7d3");
+                                
+                    
+                                                jLabel11.setText("EncodingMethod");
+                                                
+                                                        tfEncoding.setText("XML");
+                                                        
+                                                                jLabel12.setText("Merchant");
+                                                                
+                                                                        tfMerchant.setText("2153");
+                                                                        
+                                                                                jLabel13.setText("OperationId");
+                                                                                
+                                                                                        tfOperationId.setText("8000");
+                                                                                        
+                                                                                                jLabel14.setText("CurrencyCode");
+                                                                                                
+                                                                                                        tfCurrencyCode.setText("032");
+                                                                                                        
+                                                                                                                jLabel15.setText("Amount");
+                                                                                                                
+                                                                                                                        tfAmmount.setText("1.00");
+                                                                                                                        
+                                                                                                                                jLabel16.setText("URL_OK");
+                                                                                                                                
+                                                                                                                                        tfURLOk.setText("http://someurl.com/ok");
+                                                                                                                                        
+                                                                                                                                                jLabel17.setText("URL_Error");
+                                                                                                                                                
+                                                                                                                                                        tfURLError.setText("http://someurl.com/error");
+                                                                                                                                                        
+                                                                                                                                                                btSAR.setText("sendAuthorizeRequest");
+                                                                                                                                                                btSAR.addActionListener(new java.awt.event.ActionListener() {
+                                                                                                                                                                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                                                                                                                                                        btSARActionPerformed(evt);
+                                                                                                                                                                    }
+                                                                                                                                                                });
+                                                                                                                                                                
+                                                                                                                                                                        jLabel4.setText("Answer:");
+                                                                                                                                                                        
+                                                                                                                                                                                tpResponse.setColumns(20);
+                                                                                                                                                                                tpResponse.setRows(5);
+                                                                                                                                                                                jScrollPane8.setViewportView(tpResponse);
+                                                                                                                                                                                
+                                                                                                                                                                                        jLabel18.setText("EMAILCLIENTE");
+                                                                                                                                                                                        
+                                                                                                                                                                                                tfEMAILCLIENTE.setText("some@someurl.com");
+                                                                                                                                                                                                
+                                                                                                                                                                                                        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+                                                                                                                                                                                                        jPanel2Layout.setHorizontalGroup(
+                                                                                                                                                                                                        	jPanel2Layout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        			.addContainerGap()
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel13, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfOperationId, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel14, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfCurrencyCode, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel15, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfAmmount, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel16, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfURLOk, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel17, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfURLError, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfSecurity, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel11, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfEncoding, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfSession, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel12, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfMerchant, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(jLabel18, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                                                                                                                                                        					.addComponent(tfEMAILCLIENTE, GroupLayout.PREFERRED_SIZE, 488, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        				.addComponent(jScrollPane8, GroupLayout.PREFERRED_SIZE, 614, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        				.addComponent(btSAR))
+                                                                                                                                                                                                        			.addContainerGap(130, Short.MAX_VALUE))
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        jPanel2Layout.setVerticalGroup(
+                                                                                                                                                                                                        	jPanel2Layout.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(jPanel2Layout.createSequentialGroup()
+                                                                                                                                                                                                        			.addContainerGap()
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel1)
+                                                                                                                                                                                                        				.addComponent(tfSession, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel2)
+                                                                                                                                                                                                        				.addComponent(tfSecurity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel11)
+                                                                                                                                                                                                        				.addComponent(tfEncoding, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel12)
+                                                                                                                                                                                                        				.addComponent(tfMerchant, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel13)
+                                                                                                                                                                                                        				.addComponent(tfOperationId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel14)
+                                                                                                                                                                                                        				.addComponent(tfCurrencyCode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel15)
+                                                                                                                                                                                                        				.addComponent(tfAmmount, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel16)
+                                                                                                                                                                                                        				.addComponent(tfURLOk, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel17)
+                                                                                                                                                                                                        				.addComponent(tfURLError, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(jPanel2Layout.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(jLabel18)
+                                                                                                                                                                                                        				.addComponent(tfEMAILCLIENTE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addGap(14)
+                                                                                                                                                                                                        			.addComponent(btSAR)
+                                                                                                                                                                                                        			.addGap(18)
+                                                                                                                                                                                                        			.addComponent(jLabel4)
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addComponent(jScrollPane8, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                                                                                                                                                                                        			.addContainerGap())
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        jPanel2.setLayout(jPanel2Layout);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        JPanel panel = new JPanel();
+                                                                                                                                                                                                        tabbedPane.addTab("CyberSource", null, panel, null);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        JLabel lblCsbtcity = new JLabel();
+                                                                                                                                                                                                        lblCsbtcity.setText("CSBTCITY");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTCITY = new JTextField();
+                                                                                                                                                                                                        CSBTCITY.setText("Villa General Belgrano");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        JLabel lblCsbtemail = new JLabel();
+                                                                                                                                                                                                        lblCsbtemail.setText("CSBTEMAIL");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTEMAIL = new JTextField();
+                                                                                                                                                                                                        CSBTEMAIL.setText("some@someurl.com");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        JLabel lblCsbtfirstname = new JLabel();
+                                                                                                                                                                                                        lblCsbtfirstname.setText("CSBTFIRSTNAME");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTFIRSTNAME = new JTextField();
+                                                                                                                                                                                                        CSBTFIRSTNAME.setText("Juan");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        JLabel lblCsbtpostalcode = new JLabel();
+                                                                                                                                                                                                        lblCsbtpostalcode.setText("CSBTPOSTALCODE");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTPOSTALCODE = new JTextField();
+                                                                                                                                                                                                        CSBTPOSTALCODE.setText("1010");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        JLabel lblCsbtstreet = new JLabel();
+                                                                                                                                                                                                        lblCsbtstreet.setText("CSBTSTREET1");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTSTREET1 = new JTextField();
+                                                                                                                                                                                                        CSBTSTREET1.setText("Some Street 2153");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsbtipaddress = new JLabel();
+                                                                                                                                                                                                        lblCsbtipaddress.setText("CSBTIPADDRESS");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsptgrandtotalamount = new JLabel();
+                                                                                                                                                                                                        lblCsptgrandtotalamount.setText("CSPTGRANDTOTALAMOUNT");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd = new JLabel();
+                                                                                                                                                                                                        lblCsmdd.setText("CSMDD7");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_2 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_2.setText("CSMDD9");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_4 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_4.setText("CSMDD11");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD11 = new JTextField();
+                                                                                                                                                                                                        CSMDD11.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD9 = new JTextField();
+                                                                                                                                                                                                        CSMDD9.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD7 = new JTextField();
+                                                                                                                                                                                                        CSMDD7.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSPTGRANDTOTALAMOUNT = new JTextField();
+                                                                                                                                                                                                        CSPTGRANDTOTALAMOUNT.setText("10.01");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTIPADDRESS = new JTextField();
+                                                                                                                                                                                                        CSBTIPADDRESS.setText("192.0.0.4");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsbtcountry = new JLabel();
+                                                                                                                                                                                                        lblCsbtcountry.setText("CSBTCOUNTRY");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsbtphonenumber = new JLabel();
+                                                                                                                                                                                                        lblCsbtphonenumber.setText("CSBTPHONENUMBER");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsbtlastname = new JLabel();
+                                                                                                                                                                                                        lblCsbtlastname.setText("CSBTLASTNAME");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsbtstate = new JLabel();
+                                                                                                                                                                                                        lblCsbtstate.setText("CSBTSTATE");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsbtcustomerid = new JLabel();
+                                                                                                                                                                                                        lblCsbtcustomerid.setText("CSBTCUSTOMERID");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsptcurrency = new JLabel();
+                                                                                                                                                                                                        lblCsptcurrency.setText("CSPTCURRENCY");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCSMDD6 = new JLabel();
+                                                                                                                                                                                                        lblCSMDD6.setText("CSMDD6");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_1 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_1.setText("CSMDD8");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_3 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_3.setText("CSMDD10");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsbtstreet_1 = new JLabel();
+                                                                                                                                                                                                        lblCsbtstreet_1.setText("CSBTSTREET2");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTSTREET2 = new JTextField();
+                                                                                                                                                                                                        CSBTSTREET2.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD10 = new JTextField();
+                                                                                                                                                                                                        CSMDD10.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD8 = new JTextField();
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD6 = new JTextField();
+                                                                                                                                                                                                        CSMDD6.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSPTCURRENCY = new JTextField();
+                                                                                                                                                                                                        CSPTCURRENCY.setText("ARS");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTCUSTOMERID = new JTextField();
+                                                                                                                                                                                                        CSBTCUSTOMERID.setText("453458");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTSTATE = new JTextField();
+                                                                                                                                                                                                        CSBTSTATE.setText("B");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTLASTNAME = new JTextField();
+                                                                                                                                                                                                        CSBTLASTNAME.setText("Perez");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTPHONENUMBER = new JTextField();
+                                                                                                                                                                                                        CSBTPHONENUMBER.setText("541160913988");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSBTCOUNTRY = new JTextField();
+                                                                                                                                                                                                        CSBTCOUNTRY.setText("AR");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        vertical = new JComboBox();
+                                                                                                                                                                                                        vertical.setModel(new DefaultComboBoxModel(new String[] {"Retail"}));
+                                                                                                                                                                                                        vertical.setSelectedIndex(0);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        JLabel lblVertical = new JLabel("Vertical:");
+                                                                                                                                                                                                        GroupLayout gl_panel = new GroupLayout(panel);
+                                                                                                                                                                                                        gl_panel.setHorizontalGroup(
+                                                                                                                                                                                                        	gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        			.addContainerGap()
+                                                                                                                                                                                                        			.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsmdd_2, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSMDD9))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsmdd, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSMDD7))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsptgrandtotalamount, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSPTGRANDTOTALAMOUNT))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsbtipaddress, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSBTIPADDRESS))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsbtstreet, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSBTSTREET1))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsbtpostalcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSBTPOSTALCODE))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsbtfirstname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSBTFIRSTNAME))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsbtemail, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSBTEMAIL))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsbtcity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSBTCITY, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_4, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblVertical))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addComponent(vertical, 0, 191, Short.MAX_VALUE)
+                                                                                                                                                                                                        						.addComponent(CSMDD11))))
+                                                                                                                                                                                                        			.addGap(50)
+                                                                                                                                                                                                        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addComponent(lblCsbtcountry, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addComponent(CSBTCOUNTRY, 191, 191, 191))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        						.addComponent(lblCsbtphonenumber, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtlastname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtstate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addComponent(CSBTSTATE, 191, 191, 191)
+                                                                                                                                                                                                        						.addComponent(CSBTLASTNAME, 191, 191, 191)
+                                                                                                                                                                                                        						.addComponent(CSBTPHONENUMBER, 191, 191, 191)))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        							.addComponent(lblCsbtcustomerid, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addComponent(lblCsptcurrency, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addComponent(lblCSMDD6, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addComponent(lblCsmdd_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addComponent(lblCsmdd_3, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        						.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        							.addComponent(CSMDD10, 191, 191, 191)
+                                                                                                                                                                                                        							.addComponent(CSMDD8, 191, 191, 191)
+                                                                                                                                                                                                        							.addComponent(CSMDD6, 191, 191, 191)
+                                                                                                                                                                                                        							.addComponent(CSPTCURRENCY, 191, 191, 191)
+                                                                                                                                                                                                        							.addComponent(CSBTCUSTOMERID, 191, 191, 191)))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        						.addComponent(lblCsbtstreet_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        						.addComponent(CSBTSTREET2, 191, 191, 191))))
+                                                                                                                                                                                                        			.addContainerGap(83, Short.MAX_VALUE))
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        gl_panel.setVerticalGroup(
+                                                                                                                                                                                                        	gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtcity)
+                                                                                                                                                                                                        						.addComponent(CSBTCITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGap(4)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtemail)
+                                                                                                                                                                                                        						.addComponent(CSBTEMAIL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsbtfirstname))
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSBTFIRSTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsbtpostalcode))
+                                                                                                                                                                                                        						.addComponent(CSBTPOSTALCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsbtstreet))
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSBTSTREET1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsbtipaddress))
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSBTIPADDRESS, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsptgrandtotalamount))
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSPTGRANDTOTALAMOUNT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsmdd))
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSMDD7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsmdd_2))
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSMDD9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsmdd_4))
+                                                                                                                                                                                                        						.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSMDD11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                                                                                                                                                                                                        				.addGroup(gl_panel.createSequentialGroup()
+                                                                                                                                                                                                        					.addGap(3)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtcountry)
+                                                                                                                                                                                                        						.addComponent(CSBTCOUNTRY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGap(3)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtphonenumber)
+                                                                                                                                                                                                        						.addComponent(CSBTPHONENUMBER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtlastname)
+                                                                                                                                                                                                        						.addComponent(CSBTLASTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtstate)
+                                                                                                                                                                                                        						.addComponent(CSBTSTATE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtstreet_1)
+                                                                                                                                                                                                        						.addComponent(CSBTSTREET2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSBTCUSTOMERID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsbtcustomerid))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSPTCURRENCY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsptcurrency))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSMDD6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCSMDD6))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSMDD8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_1))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSMDD10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_3))))
+                                                                                                                                                                                                        			.addGap(18)
+                                                                                                                                                                                                        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(vertical, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        				.addComponent(lblVertical))
+                                                                                                                                                                                                        			.addContainerGap(241, Short.MAX_VALUE))
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        panel.setLayout(gl_panel);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        panel_1 = new JPanel();
+                                                                                                                                                                                                        tabbedPane.addTab("CS - Retail", null, panel_1, null);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsitproductname = new JLabel();
+                                                                                                                                                                                                        lblCsitproductname.setText("CSITPRODUCTNAME");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSITPRODUCTNAME = new JTextField();
+                                                                                                                                                                                                        CSITPRODUCTNAME.setText("TestPrd");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsitproductcode = new JLabel();
+                                                                                                                                                                                                        lblCsitproductcode.setText("CSITPRODUCTCODE");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSITPRODUCTCODE = new JTextField();
+                                                                                                                                                                                                        CSITPRODUCTCODE.setText("electronic_good");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_7 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_7.setText("CSMDD14");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD14 = new JTextField();
+                                                                                                                                                                                                        CSMDD14.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_5 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_5.setText("CSMDD12");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD12 = new JTextField();
+                                                                                                                                                                                                        CSMDD12.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsststreet = new JLabel();
+                                                                                                                                                                                                        lblCsststreet.setText("CSSTSTREET1");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTSTREET1 = new JTextField();
+                                                                                                                                                                                                        CSSTSTREET1.setText("Some Street 2153");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsstpostalcode = new JLabel();
+                                                                                                                                                                                                        lblCsstpostalcode.setText("CSSTPOSTALCODE");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTPOSTALCODE = new JTextField();
+                                                                                                                                                                                                        CSSTPOSTALCODE.setText("1010");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsstfirstname = new JLabel();
+                                                                                                                                                                                                        lblCsstfirstname.setText("CSSTFIRSTNAME");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTFIRSTNAME = new JTextField();
+                                                                                                                                                                                                        CSSTFIRSTNAME.setText("Jose");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsstemail = new JLabel();
+                                                                                                                                                                                                        lblCsstemail.setText("CSSTEMAIL");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTEMAIL = new JTextField();
+                                                                                                                                                                                                        CSSTEMAIL.setText("some@someurl.com");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsstcity = new JLabel();
+                                                                                                                                                                                                        lblCsstcity.setText("CSSTCITY");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTCITY = new JTextField();
+                                                                                                                                                                                                        CSSTCITY.setText("Villa General Belgrano");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsitproductsku_1 = new JLabel();
+                                                                                                                                                                                                        lblCsitproductsku_1.setText("CSITTOTALAMOUNT");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSITTOTALAMOUNT = new JTextField();
+                                                                                                                                                                                                        CSITTOTALAMOUNT.setText("10.01");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsstcountry = new JLabel();
+                                                                                                                                                                                                        lblCsstcountry.setText("CSSTCOUNTRY");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTCOUNTRY = new JTextField();
+                                                                                                                                                                                                        CSSTCOUNTRY.setText("AR");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsstphonenumber = new JLabel();
+                                                                                                                                                                                                        lblCsstphonenumber.setText("CSSTPHONENUMBER");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsstlastname = new JLabel();
+                                                                                                                                                                                                        lblCsstlastname.setText("CSSTLASTNAME");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsststate = new JLabel();
+                                                                                                                                                                                                        lblCsststate.setText("CSSTSTATE");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTSTATE = new JTextField();
+                                                                                                                                                                                                        CSSTSTATE.setText("B");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTLASTNAME = new JTextField();
+                                                                                                                                                                                                        CSSTLASTNAME.setText("Perez");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTPHONENUMBER = new JTextField();
+                                                                                                                                                                                                        CSSTPHONENUMBER.setText("541160913988");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_6 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_6.setText("CSMDD13");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_8 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_8.setText("CSMDD15");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsitproductdescription = new JLabel();
+                                                                                                                                                                                                        lblCsitproductdescription.setText("CSITPRODUCTDESCRIPTION");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsitproductsku = new JLabel();
+                                                                                                                                                                                                        lblCsitproductsku.setText("CSITPRODUCTSKU");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsitquantity = new JLabel();
+                                                                                                                                                                                                        lblCsitquantity.setText("CSITQUANTITY");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSITQUANTITY = new JTextField();
+                                                                                                                                                                                                        CSITQUANTITY.setText("1");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSITPRODUCTSKU = new JTextField();
+                                                                                                                                                                                                        CSITPRODUCTSKU.setText("SKU1234");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSITPRODUCTDESCRIPTION = new JTextField();
+                                                                                                                                                                                                        CSITPRODUCTDESCRIPTION.setText("Test Prd Description");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD15 = new JTextField();
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD13 = new JTextField();
+                                                                                                                                                                                                        CSMDD13.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsststreet_1 = new JLabel();
+                                                                                                                                                                                                        lblCsststreet_1.setText("CSSTSTREET2");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSSTSTREET2 = new JTextField();
+                                                                                                                                                                                                        CSSTSTREET2.setText("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsitunitprice = new JLabel();
+                                                                                                                                                                                                        lblCsitunitprice.setText("CSITUNITPRICE");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSITUNITPRICE = new JTextField();
+                                                                                                                                                                                                        CSITUNITPRICE.setText("10.01");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblCsmdd_9 = new JLabel();
+                                                                                                                                                                                                        lblCsmdd_9.setText("CSMDD16");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        CSMDD16 = new JTextField();
+                                                                                                                                                                                                        CSMDD16.setText("");
+                                                                                                                                                                                                        GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+                                                                                                                                                                                                        gl_panel_1.setHorizontalGroup(
+                                                                                                                                                                                                        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        			.addContainerGap()
+                                                                                                                                                                                                        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        				.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsitunitprice, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSITUNITPRICE, 191, 191, 191))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsitproductname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSITPRODUCTNAME, 191, 191, 191))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsitproductcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSITPRODUCTCODE, 191, 191, 191))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsststreet, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSSTSTREET1, 191, 191, 191))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsstpostalcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSSTPOSTALCODE, 191, 191, 191))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsstfirstname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSSTFIRSTNAME, 191, 191, 191))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsitproductsku_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSITTOTALAMOUNT, 191, 191, 191))
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_7, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        								.addComponent(lblCsstemail, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        								.addComponent(lblCsstcity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        								.addComponent(CSSTCITY, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                                                                                                                                                                                                        								.addComponent(CSSTEMAIL, 191, 191, 191))))
+                                                                                                                                                                                                        					.addGap(50)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addComponent(lblCsstcountry, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSSTCOUNTRY, 191, 191, 191))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        								.addComponent(lblCsstphonenumber, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        								.addComponent(lblCsstlastname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        								.addComponent(lblCsststate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        								.addComponent(CSSTSTATE, 191, 191, 191)
+                                                                                                                                                                                                        								.addComponent(CSSTLASTNAME, 191, 191, 191)
+                                                                                                                                                                                                        								.addComponent(CSSTPHONENUMBER, 191, 191, 191)))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        							.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        									.addComponent(lblCsitproductdescription, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        									.addComponent(lblCsitproductsku, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        									.addComponent(lblCsitquantity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        									.addComponent(lblCsmdd_6, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        									.addComponent(lblCsmdd_8, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        								.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        									.addComponent(CSMDD15, 191, 191, 191)
+                                                                                                                                                                                                        									.addComponent(CSMDD13, 191, 191, 191)
+                                                                                                                                                                                                        									.addComponent(CSITQUANTITY, 191, 191, 191)
+                                                                                                                                                                                                        									.addComponent(CSITPRODUCTSKU, 191, 191, 191)
+                                                                                                                                                                                                        									.addComponent(CSITPRODUCTDESCRIPTION, 191, 191, 191)))
+                                                                                                                                                                                                        							.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        								.addComponent(lblCsststreet_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        								.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        								.addComponent(CSSTSTREET2, 191, 191, 191)))))
+                                                                                                                                                                                                        				.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_9, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        						.addComponent(CSMDD16))
+                                                                                                                                                                                                        					.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_5, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+                                                                                                                                                                                                        							.addComponent(CSMDD14, Alignment.TRAILING)
+                                                                                                                                                                                                        							.addComponent(CSMDD12, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))))
+                                                                                                                                                                                                        			.addContainerGap(83, Short.MAX_VALUE))
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        gl_panel_1.setVerticalGroup(
+                                                                                                                                                                                                        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        				.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsstcity)
+                                                                                                                                                                                                        						.addComponent(CSSTCITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGap(4)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsstemail)
+                                                                                                                                                                                                        						.addComponent(CSSTEMAIL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsstfirstname))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSSTFIRSTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsstpostalcode))
+                                                                                                                                                                                                        						.addComponent(CSSTPOSTALCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsststreet))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSSTSTREET1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGap(52)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsitproductcode))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSITPRODUCTCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsitproductname))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSITPRODUCTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(9)
+                                                                                                                                                                                                        							.addComponent(lblCsitproductsku_1))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSITTOTALAMOUNT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                                                                                                                                                                                                        				.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        					.addGap(3)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsstcountry)
+                                                                                                                                                                                                        						.addComponent(CSSTCOUNTRY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGap(3)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsstphonenumber)
+                                                                                                                                                                                                        						.addComponent(CSSTPHONENUMBER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsstlastname)
+                                                                                                                                                                                                        						.addComponent(CSSTLASTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsststate)
+                                                                                                                                                                                                        						.addComponent(CSSTSTATE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsststreet_1)
+                                                                                                                                                                                                        						.addComponent(CSSTSTREET2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addGap(58)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSITPRODUCTDESCRIPTION, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsitproductdescription))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSITPRODUCTSKU, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsitproductsku))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSITQUANTITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsitquantity))))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(CSITUNITPRICE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        				.addComponent(lblCsitunitprice))
+                                                                                                                                                                                                        			.addGap(62)
+                                                                                                                                                                                                        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        				.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addGap(4)
+                                                                                                                                                                                                        							.addComponent(lblCsmdd_5))
+                                                                                                                                                                                                        						.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        							.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        							.addComponent(CSMDD12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                                                                                                                                                        					.addGap(6)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(CSMDD14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_7)))
+                                                                                                                                                                                                        				.addGroup(gl_panel_1.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_6)
+                                                                                                                                                                                                        						.addComponent(CSMDD13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        						.addComponent(lblCsmdd_8)
+                                                                                                                                                                                                        						.addComponent(CSMDD15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                                                                                                                                                                                                        			.addGap(7)
+                                                                                                                                                                                                        			.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        				.addComponent(lblCsmdd_9)
+                                                                                                                                                                                                        				.addComponent(CSMDD16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addContainerGap(119, Short.MAX_VALUE))
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        panel_1.setLayout(gl_panel_1);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        panel_5 = new JPanel();
+                                                                                                                                                                                                        tabbedPane.addTab("Optionals", null, panel_5, null);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblAvailablepaymentmethodsids = new JLabel("AVAILABLEPAYMENTMETHODSIDS");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblPushnotifymethod = new JLabel("PUSHNOTIFYENDPOINT");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblPushnotifyendpoint = new JLabel("PUSHNOTIFYMETHOD");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblPushnotifystates = new JLabel("PUSHNOTIFYSTATES");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        AVAILABLEPAYMENTMETHODSIDS = new JTextField();
+                                                                                                                                                                                                        AVAILABLEPAYMENTMETHODSIDS.setText("1#194#43#45");
+                                                                                                                                                                                                        AVAILABLEPAYMENTMETHODSIDS.setColumns(10);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        PushNotifyMethod = new JTextField();
+                                                                                                                                                                                                        PushNotifyMethod.setColumns(10);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        PushNotifyEndpoint = new JTextField();
+                                                                                                                                                                                                        PushNotifyEndpoint.setColumns(10);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        PushNotifyStates = new JTextField();
+                                                                                                                                                                                                        PushNotifyStates.setColumns(10);
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        lblIncluir = new JLabel("Incluir");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        checkBox_AVAILABLEPAYMENTMETHODSIDS = new JCheckBox("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        checkBox_PushNotifyMethod = new JCheckBox("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        checkBox_PushNotifyEndpoint = new JCheckBox("");
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        checkBox_PushNotifyStates = new JCheckBox("");
+                                                                                                                                                                                                        GroupLayout gl_panel_5 = new GroupLayout(panel_5);
+                                                                                                                                                                                                        gl_panel_5.setHorizontalGroup(
+                                                                                                                                                                                                        	gl_panel_5.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(gl_panel_5.createSequentialGroup()
+                                                                                                                                                                                                        			.addContainerGap()
+                                                                                                                                                                                                        			.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        				.addGroup(gl_panel_5.createSequentialGroup()
+                                                                                                                                                                                                        					.addGroup(gl_panel_5.createParallelGroup(Alignment.TRAILING)
+                                                                                                                                                                                                        						.addComponent(checkBox_PushNotifyStates, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(checkBox_PushNotifyEndpoint, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(checkBox_PushNotifyMethod, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        						.addComponent(checkBox_AVAILABLEPAYMENTMETHODSIDS))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addComponent(lblAvailablepaymentmethodsids)
+                                                                                                                                                                                                        						.addComponent(lblPushnotifymethod)
+                                                                                                                                                                                                        						.addComponent(lblPushnotifyendpoint)
+                                                                                                                                                                                                        						.addComponent(lblPushnotifystates))
+                                                                                                                                                                                                        					.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        						.addComponent(PushNotifyMethod)
+                                                                                                                                                                                                        						.addComponent(PushNotifyEndpoint)
+                                                                                                                                                                                                        						.addComponent(PushNotifyStates, GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                                                                                                                                                                                                        						.addComponent(AVAILABLEPAYMENTMETHODSIDS, GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)))
+                                                                                                                                                                                                        				.addComponent(lblIncluir))
+                                                                                                                                                                                                        			.addContainerGap())
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        gl_panel_5.setVerticalGroup(
+                                                                                                                                                                                                        	gl_panel_5.createParallelGroup(Alignment.LEADING)
+                                                                                                                                                                                                        		.addGroup(gl_panel_5.createSequentialGroup()
+                                                                                                                                                                                                        			.addContainerGap()
+                                                                                                                                                                                                        			.addComponent(lblIncluir)
+                                                                                                                                                                                                        			.addGap(4)
+                                                                                                                                                                                                        			.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(lblAvailablepaymentmethodsids)
+                                                                                                                                                                                                        				.addComponent(checkBox_AVAILABLEPAYMENTMETHODSIDS)
+                                                                                                                                                                                                        				.addComponent(AVAILABLEPAYMENTMETHODSIDS, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(lblPushnotifymethod)
+                                                                                                                                                                                                        				.addComponent(checkBox_PushNotifyMethod, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        				.addComponent(PushNotifyMethod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(lblPushnotifyendpoint)
+                                                                                                                                                                                                        				.addComponent(checkBox_PushNotifyEndpoint, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        				.addComponent(PushNotifyEndpoint, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addPreferredGap(ComponentPlacement.RELATED)
+                                                                                                                                                                                                        			.addGroup(gl_panel_5.createParallelGroup(Alignment.BASELINE)
+                                                                                                                                                                                                        				.addComponent(lblPushnotifystates)
+                                                                                                                                                                                                        				.addComponent(checkBox_PushNotifyStates, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                                        				.addComponent(PushNotifyStates, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                                                                        			.addContainerGap(356, Short.MAX_VALUE))
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                        panel_5.setLayout(gl_panel_5);
+        panel_2.setLayout(gl_panel_2);
 
         jLabel5.setText("Security");
 
-        tfSecurityAA.setText("1234567890ABCDEF1234567890ABCDEF");
+        //tfSecurityAA.setText("f3d8b72c94ab4a06be2ef7c95490f7d3");
+        tfSecurityAA.setText("f3d8b72c94ab4a06be2ef7c95490f7d3");
 
         jLabel6.setText("Merchant");
 
@@ -485,11 +1396,11 @@ public class SampleUI extends javax.swing.JFrame {
         
         jLabel7.setText("RequestKey");
 
-        tfRequestKeyAA.setText("8496472a-8c87-e35b-dcf2-94d5e31eb12f");
+        tfRequestKeyAA.setText("710268a7-7688-c8bf-68c9-430107e6b9da");
 
         jLabel8.setText("AnswerKey");
 
-        tfAnswerKeyAA.setText("8496472a-8c87-e35b-dcf2-94d5e31eb12f");
+        tfAnswerKeyAA.setText("693ca9cc-c940-06a4-8d96-1ab0d66f3ee6");
 
         AA.setText("getAuthorizeAnswer");
         AA.addActionListener(new java.awt.event.ActionListener() {
@@ -579,7 +1490,7 @@ public class SampleUI extends javax.swing.JFrame {
 
         jLabel24.setText("OperationID");
 
-        tfOperationIdS.setText("01");
+        tfOperationIdS.setText("02");
 
         tpAnswerStatus.setColumns(20);
         tpAnswerStatus.setRows(5);
@@ -640,687 +1551,366 @@ public class SampleUI extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
         );
         
-        JPanel panel = new JPanel();
-        jTabbedPane1.addTab("CyberSource", null, panel, null);
+        panel_3 = new JPanel();
+        jTabbedPane1.addTab("GetAllPaymentMethods", null, panel_3, null);
         
-        JLabel lblCsbtcity = new JLabel();
-        lblCsbtcity.setText("CSBTCITY");
+        btnGetallpaymentmethods = new JButton();
+        btnGetallpaymentmethods.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		getAllPaymentMethodsActionPerformed(arg0);
+        	}
+        });
+        btnGetallpaymentmethods.setText("getAllPaymentMethods");
         
-        CSBTCITY = new JTextField();
-        CSBTCITY.setText("Villa General Belgrano");
+        label = new JLabel();
+        label.setText("Merchant");
         
-        JLabel lblCsbtemail = new JLabel();
-        lblCsbtemail.setText("CSBTEMAIL");
+        tfGAPMMerchant = new JTextField();
+        tfGAPMMerchant.setText("2153");
         
-        CSBTEMAIL = new JTextField();
-        CSBTEMAIL.setText("todopago@hotmail.com");
+        label_2 = new JLabel();
+        label_2.setText("Answer");
         
-        JLabel lblCsbtfirstname = new JLabel();
-        lblCsbtfirstname.setText("CSBTFIRSTNAME");
-        
-        CSBTFIRSTNAME = new JTextField();
-        CSBTFIRSTNAME.setText("Cosme");
-        
-        JLabel lblCsbtpostalcode = new JLabel();
-        lblCsbtpostalcode.setText("CSBTPOSTALCODE");
-        
-        CSBTPOSTALCODE = new JTextField();
-        CSBTPOSTALCODE.setText("1010");
-        
-        JLabel lblCsbtstreet = new JLabel();
-        lblCsbtstreet.setText("CSBTSTREET1");
-        
-        CSBTSTREET1 = new JTextField();
-        CSBTSTREET1.setText("Cerrito 740");
-        
-        lblCsbtipaddress = new JLabel();
-        lblCsbtipaddress.setText("CSBTIPADDRESS");
-        
-        lblCsptgrandtotalamount = new JLabel();
-        lblCsptgrandtotalamount.setText("CSPTGRANDTOTALAMOUNT");
-        
-        lblCsmdd = new JLabel();
-        lblCsmdd.setText("CSMDD7");
-        
-        lblCsmdd_2 = new JLabel();
-        lblCsmdd_2.setText("CSMDD9");
-        
-        lblCsmdd_4 = new JLabel();
-        lblCsmdd_4.setText("CSMDD11");
-        
-        CSMDD11 = new JTextField();
-        CSMDD11.setText("");
-        
-        CSMDD9 = new JTextField();
-        CSMDD9.setText("");
-        
-        CSMDD7 = new JTextField();
-        CSMDD7.setText("");
-        
-        CSPTGRANDTOTALAMOUNT = new JTextField();
-        CSPTGRANDTOTALAMOUNT.setText("125.38");
-        
-        CSBTIPADDRESS = new JTextField();
-        CSBTIPADDRESS.setText("192.0.0.4");
-        
-        lblCsbtcountry = new JLabel();
-        lblCsbtcountry.setText("CSBTCOUNTRY");
-        
-        lblCsbtphonenumber = new JLabel();
-        lblCsbtphonenumber.setText("CSBTPHONENUMBER");
-        
-        lblCsbtlastname = new JLabel();
-        lblCsbtlastname.setText("CSBTLASTNAME");
-        
-        lblCsbtstate = new JLabel();
-        lblCsbtstate.setText("CSBTSTATE");
-        
-        lblCsbtcustomerid = new JLabel();
-        lblCsbtcustomerid.setText("CSBTCUSTOMERID");
-        
-        lblCsptcurrency = new JLabel();
-        lblCsptcurrency.setText("CSPTCURRENCY");
-        
-        lblCSMDD6 = new JLabel();
-        lblCSMDD6.setText("CSMDD6");
-        
-        lblCsmdd_1 = new JLabel();
-        lblCsmdd_1.setText("CSMDD8");
-        
-        lblCsmdd_3 = new JLabel();
-        lblCsmdd_3.setText("CSMDD10");
-        
-        lblCsbtstreet_1 = new JLabel();
-        lblCsbtstreet_1.setText("CSBTSTREET2");
-        
-        CSBTSTREET2 = new JTextField();
-        CSBTSTREET2.setText("");
-        
-        CSMDD10 = new JTextField();
-        CSMDD10.setText("");
-        
-        CSMDD8 = new JTextField();
-        CSMDD8.setText("Y");
-        
-        CSMDD6 = new JTextField();
-        CSMDD6.setText("");
-        
-        CSPTCURRENCY = new JTextField();
-        CSPTCURRENCY.setText("ARS");
-        
-        CSBTCUSTOMERID = new JTextField();
-        CSBTCUSTOMERID.setText("453458");
-        
-        CSBTSTATE = new JTextField();
-        CSBTSTATE.setText("B");
-        
-        CSBTLASTNAME = new JTextField();
-        CSBTLASTNAME.setText("Fulanito");
-        
-        CSBTPHONENUMBER = new JTextField();
-        CSBTPHONENUMBER.setText("541160913988");
-        
-        CSBTCOUNTRY = new JTextField();
-        CSBTCOUNTRY.setText("AR");
-        
-        vertical = new JComboBox();
-        vertical.setModel(new DefaultComboBoxModel(new String[] {"Retail"}));
-        vertical.setSelectedIndex(0);
-        
-        
-        
-        JLabel lblVertical = new JLabel("Vertical:");
-        GroupLayout gl_panel = new GroupLayout(panel);
-        gl_panel.setHorizontalGroup(
-        	gl_panel.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel.createSequentialGroup()
+        JScrollPane scrollPane = new JScrollPane();
+        GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+        gl_panel_3.setHorizontalGroup(
+        	gl_panel_3.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_3.createSequentialGroup()
+        			.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel_3.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+        						.addComponent(btnGetallpaymentmethods)
+        						.addGroup(gl_panel_3.createSequentialGroup()
+        							.addComponent(label, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(tfGAPMMerchant, GroupLayout.PREFERRED_SIZE, 429, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(label_2)))
+        				.addGroup(gl_panel_3.createSequentialGroup()
+        					.addGap(54)
+        					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 556, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(169, Short.MAX_VALUE))
+        );
+        gl_panel_3.setVerticalGroup(
+        	gl_panel_3.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_3.createSequentialGroup()
         			.addContainerGap()
-        			.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsmdd_2, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSMDD9))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsmdd, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSMDD7))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsptgrandtotalamount, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSPTGRANDTOTALAMOUNT))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsbtipaddress, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSBTIPADDRESS))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsbtstreet, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSBTSTREET1))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsbtpostalcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSBTPOSTALCODE))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsbtfirstname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSBTFIRSTNAME))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsbtemail, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSBTEMAIL))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsbtcity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSBTCITY, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblCsmdd_4, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblVertical))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addComponent(vertical, 0, 191, Short.MAX_VALUE)
-        						.addComponent(CSMDD11))))
-        			.addGap(50)
-        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addComponent(lblCsbtcountry, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(CSBTCOUNTRY, 191, 191, 191))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(lblCsbtphonenumber, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsbtlastname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsbtstate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addComponent(CSBTSTATE, 191, 191, 191)
-        						.addComponent(CSBTLASTNAME, 191, 191, 191)
-        						.addComponent(CSBTPHONENUMBER, 191, 191, 191)))
-        				.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-        					.addGroup(gl_panel.createSequentialGroup()
-        						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-        							.addComponent(lblCsbtcustomerid, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addComponent(lblCsptcurrency, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addComponent(lblCSMDD6, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addComponent(lblCsmdd_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addComponent(lblCsmdd_3, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        							.addComponent(CSMDD10, 191, 191, 191)
-        							.addComponent(CSMDD8, 191, 191, 191)
-        							.addComponent(CSMDD6, 191, 191, 191)
-        							.addComponent(CSPTCURRENCY, 191, 191, 191)
-        							.addComponent(CSBTCUSTOMERID, 191, 191, 191)))
-        					.addGroup(gl_panel.createSequentialGroup()
-        						.addComponent(lblCsbtstreet_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addComponent(CSBTSTREET2, 191, 191, 191))))
-        			.addContainerGap(83, Short.MAX_VALUE))
-        );
-        gl_panel.setVerticalGroup(
-        	gl_panel.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel.createSequentialGroup()
-        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsbtcity)
-        						.addComponent(CSBTCITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(4)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsbtemail)
-        						.addComponent(CSBTEMAIL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsbtfirstname))
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSBTFIRSTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsbtpostalcode))
-        						.addComponent(CSBTPOSTALCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsbtstreet))
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSBTSTREET1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsbtipaddress))
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSBTIPADDRESS, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsptgrandtotalamount))
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSPTGRANDTOTALAMOUNT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsmdd))
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSMDD7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsmdd_2))
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSMDD9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsmdd_4))
-        						.addGroup(gl_panel.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSMDD11, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-        				.addGroup(gl_panel.createSequentialGroup()
-        					.addGap(3)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsbtcountry)
-        						.addComponent(CSBTCOUNTRY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(3)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsbtphonenumber)
-        						.addComponent(CSBTPHONENUMBER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsbtlastname)
-        						.addComponent(CSBTLASTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsbtstate)
-        						.addComponent(CSBTSTATE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsbtstreet_1)
-        						.addComponent(CSBTSTREET2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSBTCUSTOMERID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsbtcustomerid))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSPTCURRENCY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsptcurrency))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSMDD6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCSMDD6))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSMDD8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsmdd_1))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSMDD10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsmdd_3))))
-        			.addGap(18)
-        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(vertical, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(lblVertical))
-        			.addContainerGap(241, Short.MAX_VALUE))
-        );
-        panel.setLayout(gl_panel);
-        
-        panel_1 = new JPanel();
-        jTabbedPane1.addTab("CS Retail", null, panel_1, null);
-        
-        lblCsitproductname = new JLabel();
-        lblCsitproductname.setText("CSITPRODUCTNAME");
-        
-        CSITPRODUCTNAME = new JTextField();
-        CSITPRODUCTNAME.setText("NOTEBOOK DF TOSHIBA#chocho");
-        
-        lblCsitproductcode = new JLabel();
-        lblCsitproductcode.setText("CSITPRODUCTCODE");
-        
-        CSITPRODUCTCODE = new JTextField();
-        CSITPRODUCTCODE.setText("electronic_good#chocho");
-        
-        lblCsmdd_7 = new JLabel();
-        lblCsmdd_7.setText("CSMDD14");
-        
-        CSMDD14 = new JTextField();
-        CSMDD14.setText("");
-        
-        lblCsmdd_5 = new JLabel();
-        lblCsmdd_5.setText("CSMDD12");
-        
-        CSMDD12 = new JTextField();
-        CSMDD12.setText("");
-        
-        lblCsststreet = new JLabel();
-        lblCsststreet.setText("CSSTSTREET1");
-        
-        CSSTSTREET1 = new JTextField();
-        CSSTSTREET1.setText("Cerrito 740");
-        
-        lblCsstpostalcode = new JLabel();
-        lblCsstpostalcode.setText("CSSTPOSTALCODE");
-        
-        CSSTPOSTALCODE = new JTextField();
-        CSSTPOSTALCODE.setText("1010");
-        
-        lblCsstfirstname = new JLabel();
-        lblCsstfirstname.setText("CSSTFIRSTNAME");
-        
-        CSSTFIRSTNAME = new JTextField();
-        CSSTFIRSTNAME.setText("Cosme");
-        
-        lblCsstemail = new JLabel();
-        lblCsstemail.setText("CSSTEMAIL");
-        
-        CSSTEMAIL = new JTextField();
-        CSSTEMAIL.setText("todopago@hotmail.com");
-        
-        lblCsstcity = new JLabel();
-        lblCsstcity.setText("CSSTCITY");
-        
-        CSSTCITY = new JTextField();
-        CSSTCITY.setText("Villa General Belgrano");
-        
-        lblCsitproductsku_1 = new JLabel();
-        lblCsitproductsku_1.setText("CSITTOTALAMOUNT");
-        
-        CSITTOTALAMOUNT = new JTextField();
-        CSITTOTALAMOUNT.setText("1254.40#10.00");
-        
-        lblCsstcountry = new JLabel();
-        lblCsstcountry.setText("CSSTCOUNTRY");
-        
-        CSSTCOUNTRY = new JTextField();
-        CSSTCOUNTRY.setText("AR");
-        
-        lblCsstphonenumber = new JLabel();
-        lblCsstphonenumber.setText("CSSTPHONENUMBER");
-        
-        lblCsstlastname = new JLabel();
-        lblCsstlastname.setText("CSSTLASTNAME");
-        
-        lblCsststate = new JLabel();
-        lblCsststate.setText("CSSTSTATE");
-        
-        CSSTSTATE = new JTextField();
-        CSSTSTATE.setText("B");
-        
-        CSSTLASTNAME = new JTextField();
-        CSSTLASTNAME.setText("Fulanito");
-        
-        CSSTPHONENUMBER = new JTextField();
-        CSSTPHONENUMBER.setText("541160913988");
-        
-        lblCsmdd_6 = new JLabel();
-        lblCsmdd_6.setText("CSMDD13");
-        
-        lblCsmdd_8 = new JLabel();
-        lblCsmdd_8.setText("CSMDD15");
-        
-        lblCsitproductdescription = new JLabel();
-        lblCsitproductdescription.setText("CSITPRODUCTDESCRIPTION");
-        
-        lblCsitproductsku = new JLabel();
-        lblCsitproductsku.setText("CSITPRODUCTSKU");
-        
-        lblCsitquantity = new JLabel();
-        lblCsitquantity.setText("CSITQUANTITY");
-        
-        CSITQUANTITY = new JTextField();
-        CSITQUANTITY.setText("1#1");
-        
-        CSITPRODUCTSKU = new JTextField();
-        CSITPRODUCTSKU.setText("LEVJNSL36GN#chocho");
-        
-        CSITPRODUCTDESCRIPTION = new JTextField();
-        CSITPRODUCTDESCRIPTION.setText("NOTEBOOK L845 SP4304LA DF TOSHIBA#chocho");
-        
-        CSMDD15 = new JTextField();
-        
-        CSMDD13 = new JTextField();
-        CSMDD13.setText("");
-        
-        lblCsststreet_1 = new JLabel();
-        lblCsststreet_1.setText("CSSTSTREET2");
-        
-        CSSTSTREET2 = new JTextField();
-        CSSTSTREET2.setText("");
-        
-        lblCsitunitprice = new JLabel();
-        lblCsitunitprice.setText("CSITUNITPRICE");
-        
-        CSITUNITPRICE = new JTextField();
-        CSITUNITPRICE.setText("1254.40#15.00");
-        
-        lblCsmdd_9 = new JLabel();
-        lblCsmdd_9.setText("CSMDD16");
-        
-        CSMDD16 = new JTextField();
-        CSMDD16.setText("");
-        GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-        gl_panel_1.setHorizontalGroup(
-        	gl_panel_1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel_1.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_panel_1.createSequentialGroup()
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsitunitprice, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSITUNITPRICE, 191, 191, 191))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsitproductname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSITPRODUCTNAME, 191, 191, 191))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsitproductcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSITPRODUCTCODE, 191, 191, 191))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsststreet, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSSTSTREET1, 191, 191, 191))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsstpostalcode, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSSTPOSTALCODE, 191, 191, 191))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsstfirstname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSSTFIRSTNAME, 191, 191, 191))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsitproductsku_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSITTOTALAMOUNT, 191, 191, 191))
-        						.addComponent(lblCsmdd_7, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        								.addComponent(lblCsstemail, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(lblCsstcity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        								.addComponent(CSSTCITY, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-        								.addComponent(CSSTEMAIL, 191, 191, 191))))
-        					.addGap(50)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addComponent(lblCsstcountry, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSSTCOUNTRY, 191, 191, 191))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-        								.addComponent(lblCsstphonenumber, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(lblCsstlastname, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(lblCsststate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        								.addComponent(CSSTSTATE, 191, 191, 191)
-        								.addComponent(CSSTLASTNAME, 191, 191, 191)
-        								.addComponent(CSSTPHONENUMBER, 191, 191, 191)))
-        						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-        							.addGroup(gl_panel_1.createSequentialGroup()
-        								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-        									.addComponent(lblCsitproductdescription, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        									.addComponent(lblCsitproductsku, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        									.addComponent(lblCsitquantity, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        									.addComponent(lblCsmdd_6, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        									.addComponent(lblCsmdd_8, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-        								.addPreferredGap(ComponentPlacement.RELATED)
-        								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        									.addComponent(CSMDD15, 191, 191, 191)
-        									.addComponent(CSMDD13, 191, 191, 191)
-        									.addComponent(CSITQUANTITY, 191, 191, 191)
-        									.addComponent(CSITPRODUCTSKU, 191, 191, 191)
-        									.addComponent(CSITPRODUCTDESCRIPTION, 191, 191, 191)))
-        							.addGroup(gl_panel_1.createSequentialGroup()
-        								.addComponent(lblCsststreet_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        								.addPreferredGap(ComponentPlacement.RELATED)
-        								.addComponent(CSSTSTREET2, 191, 191, 191)))))
-        				.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-        					.addGroup(gl_panel_1.createSequentialGroup()
-        						.addComponent(lblCsmdd_9, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addComponent(CSMDD16))
-        					.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-        						.addComponent(lblCsmdd_5, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-        							.addComponent(CSMDD14, Alignment.TRAILING)
-        							.addComponent(CSMDD12, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))))
-        			.addContainerGap(83, Short.MAX_VALUE))
-        );
-        gl_panel_1.setVerticalGroup(
-        	gl_panel_1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel_1.createSequentialGroup()
-        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_panel_1.createSequentialGroup()
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsstcity)
-        						.addComponent(CSSTCITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(4)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsstemail)
-        						.addComponent(CSSTEMAIL, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsstfirstname))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSSTFIRSTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsstpostalcode))
-        						.addComponent(CSSTPOSTALCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsststreet))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSSTSTREET1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGap(52)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsitproductcode))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSITPRODUCTCODE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsitproductname))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSITPRODUCTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(lblCsitproductsku_1))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSITTOTALAMOUNT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-        				.addGroup(gl_panel_1.createSequentialGroup()
-        					.addGap(3)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsstcountry)
-        						.addComponent(CSSTCOUNTRY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(3)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsstphonenumber)
-        						.addComponent(CSSTPHONENUMBER, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsstlastname)
-        						.addComponent(CSSTLASTNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsststate)
-        						.addComponent(CSSTSTATE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsststreet_1)
-        						.addComponent(CSSTSTREET2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(58)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSITPRODUCTDESCRIPTION, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsitproductdescription))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSITPRODUCTSKU, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsitproductsku))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSITQUANTITY, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsitquantity))))
+        			.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(label)
+        				.addComponent(tfGAPMMerchant, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(24)
+        			.addComponent(btnGetallpaymentmethods)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(label_2)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(CSITUNITPRICE, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(lblCsitunitprice))
-        			.addGap(62)
-        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_panel_1.createSequentialGroup()
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addGap(4)
-        							.addComponent(lblCsmdd_5))
-        						.addGroup(gl_panel_1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(CSMDD12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGap(6)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(CSMDD14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblCsmdd_7)))
-        				.addGroup(gl_panel_1.createSequentialGroup()
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsmdd_6)
-        						.addComponent(CSMDD13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblCsmdd_8)
-        						.addComponent(CSMDD15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-        			.addGap(7)
-        			.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(lblCsmdd_9)
-        				.addComponent(CSMDD16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(119, Short.MAX_VALUE))
+        			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(17, Short.MAX_VALUE))
         );
-        panel_1.setLayout(gl_panel_1);
+        
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane.setViewportView(scrollPane_1);
+        
+        tpAnswerGetAllPaymentMethods = new JTextArea();
+        tpAnswerGetAllPaymentMethods.setRows(5);
+        tpAnswerGetAllPaymentMethods.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        tpAnswerGetAllPaymentMethods.setColumns(20);
+        scrollPane_1.setViewportView(tpAnswerGetAllPaymentMethods);
+        panel_3.setLayout(gl_panel_3);
+        
+        panel_4 = new JPanel();
+        jTabbedPane1.addTab("discoverPaymentMethods", null, panel_4, null);
+        
+        btnDiscoverpaymentmethods = new JButton();
+        btnDiscoverpaymentmethods.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		discoverPaymentMethodsActionPerformed(arg0);
+        	}
+        });
+        btnDiscoverpaymentmethods.setText("discoverPaymentMethods");
+        
+        label_3 = new JLabel();
+        label_3.setText("Answer");
+        
+        tpAnswerDiscoverPaymentMethods = new JTextArea();
+        GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+        gl_panel_4.setHorizontalGroup(
+        	gl_panel_4.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_4.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+        				.addComponent(tpAnswerDiscoverPaymentMethods, GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
+        				.addComponent(btnDiscoverpaymentmethods)
+        				.addComponent(label_3))
+        			.addContainerGap())
+        );
+        gl_panel_4.setVerticalGroup(
+        	gl_panel_4.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_4.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(btnDiscoverpaymentmethods)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(label_3)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(tpAnswerDiscoverPaymentMethods, GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+        			.addContainerGap())
+        );
+        panel_4.setLayout(gl_panel_4);
 
-        pack();
+        
+// ---------------------------------   voidRequest   ------------------------------------ 
+        
+        jLabel60.setText("Security");
+        tfSecurity60.setText("f3d8b72c94ab4a06be2ef7c95490f7d3");
+        
+        jLabel61.setText("Merchant");
+        tfMerchant60.setText("2153");
+        
+        jLabel62.setText("RequestKey");
+        tfRequestKey60.setText("710268a7-7688-c8bf-68c9-430107e6b9da");
+        
+        jbutton60.setText("voidResquest");
+        jbutton60.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jbutton60ActionPerformed(evt);
+            }
+        });
+            
+        jLabel63.setText("Answer");      
+        tpAnswer60.setColumns(20);
+        tpAnswer60.setRows(5);
+        
+        jScrollPane60.setViewportView(tpAnswer60);
+        jScrollPane61.setViewportView(jScrollPane60);
+        
+        javax.swing.GroupLayout jPane60Layout = new javax.swing.GroupLayout(jPanel60);
+        
+        jPane60Layout.setHorizontalGroup(
+        		jPane60Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane60Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane60Layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(jScrollPane60, Alignment.LEADING)
+        				.addGroup(Alignment.LEADING, jPane60Layout.createSequentialGroup()
+        					.addGroup(jPane60Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel60, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel61, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel62, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(jPane60Layout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(tfSecurity60, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+        						.addComponent(tfMerchant60)
+        						.addComponent(tfRequestKey60)))
+        				.addComponent(jbutton60, Alignment.LEADING)
+        				.addComponent(jScrollPane61, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel64, Alignment.LEADING))
+        			.addContainerGap(560, Short.MAX_VALUE))
+        );
+        jPane60Layout.setVerticalGroup(
+        		jPane60Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane60Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane60Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel60)
+        				.addComponent(tfSecurity60, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(jPane60Layout.createParallelGroup(Alignment.BASELINE)
+            				.addComponent(jLabel61)
+            				.addComponent(tfMerchant60, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            			.addPreferredGap(ComponentPlacement.RELATED)
+            			.addGroup(jPane60Layout.createParallelGroup(Alignment.BASELINE)
+                				.addComponent(jLabel62)
+                				.addComponent(tfRequestKey60, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jbutton60)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel64)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane60, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jScrollPane61, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        );
+        
+        jPanel60.setLayout(jPane60Layout);
+        jTabbedPane1.addTab("voidRequest", jPanel60);
+        
+              
+        
+     // ---------------------------------   returnRequest   ------------------------------------ 
+        
+        jLabel70.setText("Security");
+        tfSecurity70.setText("f3d8b72c94ab4a06be2ef7c95490f7d3");
+        
+        jLabel71.setText("Merchant");
+        tfMerchant70.setText("2153");
+        
+        jLabel72.setText("RequestKey");
+        tfRequestKey70.setText("710268a7-7688-c8bf-68c9-430107e6b9da");
+        
+        jLabel73.setText("Amount");
+        tfAmount70.setText("10");
+        
+        jbutton70.setText("returnRequest");
+        jbutton70.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jbutton70ActionPerformed(evt);
+            }
+        });
+            
+        jLabel74.setText("Answer");      
+        tpAnswer70.setColumns(20);
+        tpAnswer70.setRows(5);
+        
+        jScrollPane70.setViewportView(tpAnswer70);
+        jScrollPane71.setViewportView(jScrollPane70);
+        
+        javax.swing.GroupLayout jPane70Layout = new javax.swing.GroupLayout(jPanel70);
+        
+        jPane70Layout.setHorizontalGroup(
+        		jPane70Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane70Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane70Layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(jScrollPane70, Alignment.LEADING)
+        				.addGroup(Alignment.LEADING, jPane70Layout.createSequentialGroup()
+        					.addGroup(jPane70Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel70, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel71, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel72, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel73, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(jPane70Layout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(tfSecurity70, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+        						.addComponent(tfMerchant70)
+        						.addComponent(tfRequestKey70)
+        						.addComponent(tfAmount70)))
+        				.addComponent(jbutton70, Alignment.LEADING)
+        				.addComponent(jScrollPane71, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel75, Alignment.LEADING))
+        			.addContainerGap(560, Short.MAX_VALUE))
+        );
+        jPane70Layout.setVerticalGroup(
+        		jPane70Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane70Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane70Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel70)
+        				.addComponent(tfSecurity70, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(jPane70Layout.createParallelGroup(Alignment.BASELINE)
+            				.addComponent(jLabel71)
+            				.addComponent(tfMerchant70, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            		.addPreferredGap(ComponentPlacement.RELATED)
+            		.addGroup(jPane70Layout.createParallelGroup(Alignment.BASELINE)
+                			.addComponent(jLabel72)
+                			.addComponent(tfRequestKey70, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                	.addPreferredGap(ComponentPlacement.RELATED)
+                	.addGroup(jPane70Layout.createParallelGroup(Alignment.BASELINE)
+                			.addComponent(jLabel73)
+                			.addComponent(tfAmount70, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                	.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jbutton70)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel75)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane70, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jScrollPane71, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        );
+        
+        jPanel70.setLayout(jPane70Layout);
+        jTabbedPane1.addTab("returnRequest", jPanel70);
+        
+        
+        // ---------------------------------   getByRangeDateTime   ------------------------------------ 
+        
+        jLabel80.setText("Merchant");
+        tfMerchant80.setText("2153");
+        
+        jLabel81.setText("Start Date");
+        tfStartdate80.setText("2016-01-01");
+        
+        jLabel82.setText("End Date");
+        tfEnddate80.setText("2016-03-03");
+        
+        jLabel83.setText("Page Number");
+        tfPageNumber80.setText("1");
+        
+        jbutton80.setText("getByRangeDateTime");
+        jbutton80.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jbutton80ActionPerformed(evt);
+            }
+        });
+            
+        jLabel84.setText("Answer");      
+        tpAnswer80.setColumns(20);
+        tpAnswer80.setRows(5);
+        
+        jScrollPane80.setViewportView(tpAnswer80);
+        jScrollPane81.setViewportView(jScrollPane80);
+        
+        javax.swing.GroupLayout jPane80Layout = new javax.swing.GroupLayout(jPanel80);
+        
+        jPane80Layout.setHorizontalGroup(
+        		jPane80Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane80Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane80Layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(jScrollPane80, Alignment.LEADING)
+        				.addGroup(Alignment.LEADING, jPane80Layout.createSequentialGroup()
+        					.addGroup(jPane80Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel80, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel81, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel82, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel83, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(jPane80Layout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(tfMerchant80, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+        						.addComponent(tfStartdate80)
+        						.addComponent(tfEnddate80)
+        						.addComponent(tfPageNumber80)))
+        				.addComponent(jbutton80, Alignment.LEADING)
+        				.addComponent(jScrollPane81, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel85, Alignment.LEADING))
+        			.addContainerGap(560, Short.MAX_VALUE))
+        );
+        jPane80Layout.setVerticalGroup(
+        		jPane80Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane80Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane80Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel80)
+        				.addComponent(tfMerchant80, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(jPane80Layout.createParallelGroup(Alignment.BASELINE)
+            				.addComponent(jLabel81)
+            				.addComponent(tfStartdate80, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            		.addPreferredGap(ComponentPlacement.RELATED)
+            		.addGroup(jPane80Layout.createParallelGroup(Alignment.BASELINE)
+                			.addComponent(jLabel82)
+                			.addComponent(tfEnddate80, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                	.addPreferredGap(ComponentPlacement.RELATED)
+                	.addGroup(jPane80Layout.createParallelGroup(Alignment.BASELINE)
+                			.addComponent(jLabel83)
+                			.addComponent(tfPageNumber80, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                	.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jbutton80)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel85)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane80, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jScrollPane81, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        );
+        
+        jPanel80.setLayout(jPane80Layout);
+        jTabbedPane1.addTab("getByRangeDateTime", jPanel80);  
+        
+        
+        pack();   
     }
     
     
@@ -1337,6 +1927,30 @@ public class SampleUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_statusActionPerformed
 
+    
+    private void getAllPaymentMethodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("Merchant", tfGAPMMerchant.getText());
+        if(tpc !=null){
+            Map<String, Object> a = tpc.getAllPaymentMethods(parameters);
+            tpAnswerGetAllPaymentMethods.setText(printMap(a, ""));
+        }else{
+        	tpAnswerGetAllPaymentMethods.setText("Run Config");
+        }
+    }//GEN-LAST:event_statusActionPerformed
+
+    
+    private void discoverPaymentMethodsActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tpc !=null){
+            Map<String, Object> a = tpc.discoverPaymentMethods();
+            tpAnswerDiscoverPaymentMethods.setText(printMap(a, ""));
+        }else{
+        	tpAnswerDiscoverPaymentMethods.setText("Run Config");
+        }
+    }
+    
+    
+    
     private void AAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AAActionPerformed
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("Security", tfSecurityAA.getText());
@@ -1365,6 +1979,20 @@ public class SampleUI extends javax.swing.JFrame {
         parameters.put("URL_OK", tfURLOk.getText());
         parameters.put("URL_ERROR", tfURLError.getText());
         parameters.put("EMAILCLIENTE", tfEMAILCLIENTE.getText());
+        
+        //Add Optionals if enabled
+        if(checkBox_AVAILABLEPAYMENTMETHODSIDS.isSelected()){
+        	parameters.put("AVAILABLEPAYMENTMETHODSIDS", AVAILABLEPAYMENTMETHODSIDS.getText());
+        }
+        if(checkBox_PushNotifyEndpoint.isSelected()){
+        	parameters.put("PUSHNOTIFYENDPOINT", PushNotifyEndpoint.getText());
+        }
+        if(checkBox_PushNotifyMethod.isSelected()){
+        	parameters.put("PUSHNOTIFYMETHOD", PushNotifyMethod.getText());
+        }
+        if(checkBox_PushNotifyStates.isSelected()){
+        	parameters.put("PUSHNOTIFYSTATES", PushNotifyStates.getText());
+        }
 
         if(tpc !=null){
             Map<String, Object> a = tpc.sendAuthorizeRequest(parameters, getFraudControlParameters());
@@ -1377,9 +2005,7 @@ public class SampleUI extends javax.swing.JFrame {
     
         
     private void jBConfigureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfigureActionPerformed
-        Map<String, String> wsdls = new HashMap<String, String>();
-        wsdls.put(ElementNames.AuthorizeWSDL, tfAuthorizeWSDL.getText());
-        
+    
         Map<String, String> endpoints = new HashMap<String, String>();
         //endpoints.put(ElementNames.AuthorizeWSDL, tfAuthorizeEndpoint.getText());
         endpoints.put(ElementNames.Endpoint, tfOperationsEndpoiint.getText());
@@ -1387,7 +2013,7 @@ public class SampleUI extends javax.swing.JFrame {
         Map<String, List<String>> auth = new HashMap<String, List<String>>();
         auth.put("Authorization", Collections.singletonList(tfAuthorization.getText()));
         try {
-            tpc = new TodoPagoConector(wsdls, endpoints, auth, true);
+            tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, auth);
         } catch (MalformedURLException ex) {
             Logger.getLogger(SampleUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1409,8 +2035,7 @@ public class SampleUI extends javax.swing.JFrame {
 			if(tmp!=null && tmp.getClass().isInstance(aux)){
 				output += (tab + "- " + keys.get(i)) + "\n\r";
 				aux = (Map<String, Object>)(tmp);
-				tab+="  ";
-				output += printMap(aux, tab);
+				output += printMap(aux, tab+"  ");
 				
 			}else{
 				output += (tab + "- " + keys.get(i) + " : " + pr.get(keys.get(i))) + "\n\r";
@@ -1418,6 +2043,53 @@ public class SampleUI extends javax.swing.JFrame {
 		}
 		return output;
 	}
+    
+    // voidRequest
+    private void jbutton60ActionPerformed(java.awt.event.ActionEvent evt) {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("Security", tfSecurity60.getText());
+        parameters.put("Merchant", tfMerchant60.getText());
+        parameters.put("RequestKey", tfRequestKey60.getText());
+
+        if(tpc !=null){
+            Map<String, Object> a = tpc.voidRequest(parameters);
+            tpAnswer60.setText(printMap(a, ""));
+        }else{
+        	tpAnswer60.setText("Run Config");
+        }
+    }
+    
+    //returnRequest    
+    private void jbutton70ActionPerformed(java.awt.event.ActionEvent evt) {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("Security", tfSecurity70.getText());
+        parameters.put("Merchant", tfMerchant70.getText());
+        parameters.put("RequestKey", tfRequestKey70.getText());
+        parameters.put("Amount", tfAmount70.getText());
+  
+        if(tpc !=null){
+            Map<String, Object> a = tpc.returnRequest(parameters);
+            tpAnswer70.setText(printMap(a, ""));
+        }else{
+        	tpAnswer70.setText("Run Config");
+        }
+    }
+    
+    //getByRangeDateTime
+    private void jbutton80ActionPerformed(java.awt.event.ActionEvent evt) {
+        Map<String, String> parameters = new HashMap<String, String>();    	
+        parameters.put("Merchant", tfMerchant80.getText());
+        parameters.put("STARTDATE", tfStartdate80.getText());
+        parameters.put("ENDDATE", tfEnddate80.getText());
+        parameters.put("PAGENUMBER", tfPageNumber80.getText());
+  
+        if(tpc !=null){
+            Map<String, Object> a = tpc.getByRangeDateTime(parameters);
+            tpAnswer80.setText(printMap(a, ""));
+        }else{
+        	tpAnswer80.setText("Run Config");
+        }
+    }
     
     
     

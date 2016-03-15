@@ -2,22 +2,24 @@
 sdk-java	
 =======		
 		
-Modulo para conexión con gateway de pago Todo Pago		
+Modulo para conexi�n con gateway de pago Todo Pago		
 
-######[Instalación](#instalacion)		
+######[Instalaci�n](#instalacion)		
 ######[Versiones de Java soportadas](#Versionesdejavasoportadas)
 ######[Generalidades](#general)	
 ######[Uso](#uso)		
 ######[Datos adicionales para prevencion de fraude] (#datosadicionales) 		
 ######[Ejemplo](#ejemplo)		
 ######[Modo test](#test)
-######[Status de la operación](#status)
+######[Status de la operaci�n](#status)
+######[Consulta de operaciones por rango de tiempo](#statusdate)
+######[Devoluci�nes](#devolucion)
 ######[Tablas de referencia](#tablas)		
 ######[Agregar el proyecto a Eclipse](#eclipse)
 
 <a name="instalacion"></a>		
-## Instalación		
-Se debe descargar la última versión del SDK desde el botón Download ZIP, branch master.		
+## Instalaci�n		
+Se debe descargar la �ltima versi�n del SDK desde el bot�n Download ZIP, branch master.		
 Una vez descargado y descomprimido, debe hacerse el siguiente include.
 ```java
 import ar.com.todopago.api.ElementNames;
@@ -33,7 +35,7 @@ Una vez hecho esto se puede agregar la dependencia a este paquete desde el pom.x
 <dependency>
 	<groupId>com.ar.todopago</groupId>
 	<artifactId>sdk-java</artifactId>
-	<version>1.0</version>
+	<version>1.2.0</version>
 </dependency>
 ```
 
@@ -41,8 +43,8 @@ El Ejemplo es un proyecto hecho en maven, con un pom.xml que incluye la configur
 
 Para agregar el proyecto de ejemplo a Eclipse, una vez descargado, por consola ir hasta su carpeta y ejecutar las siguientes lineas:
 ```
-mvn clean install –Dwtpversion=2.0
-mvn eclipse:clean eclipse:eclipse –Dwtpversion=2.0
+mvn clean install �Dwtpversion=2.0
+mvn eclipse:clean eclipse:eclipse �Dwtpversion=2.0
 ```
 Luego, importar el proyecto normalmente en eclipse.
 
@@ -57,67 +59,61 @@ La versi&oacute;n implementada de la SDK, esta testeada para versiones desde  Ja
 
 <a name="general"></a>
 ## Generalidades
-Esta versión soporta únicamente pago en moneda nacional argentina (CURRENCYCODE = 32).
+Esta versi�n soporta �nicamente pago en moneda nacional argentina (CURRENCYCODE = 32).
 [<sub>Volver a inicio</sub>](#inicio)		
 
 
 <a name="uso"></a>		
 ## Uso		
 ####1.Inicializar la clase correspondiente al conector (TodoPago).
-- crear un Map<String, String> con las wsdl suministradas por Todo Pago
 
 ```java
-Map<String, String> wsdl = new HashMap<String, String>();
-wsdl.put(ElementNames.AuthorizeWSDL.getValue(), "file:./Authorize.wsdl");
-wsdl.put(ElementNames.OperationsWSDL.getValue(), "file:./Operations.wsdl");
-
-Map<String, String> pendpoint = new HashMap<>();
-pendpoint.put(ElementNames.AuthorizeWSDL.getValue(), "https://developers.todopago.com.ar/services/Authorize");
-pendpoint.put(ElementNames.OperationsWSDL.getValue(), "https://developers.todopago.com.ar/services/Operations");
+Map<String, String> endpoint = new HashMap<>();
+endpoint.put(ElementNames.AuthorizeWSDL.getValue(), "https://developers.todopago.com.ar/");
 ```
 - crear un Map<String, List<String>> con los http header suministrados por Todo Pago
 ```java
 Map<String, List<String>> auth = new HashMap<>(String, List<String>);
-auth.put("Authorization", Collections.singletonList("PRISMA 912EC803B2CE49E4A541068D495AB570"));
-auth.put("Username", Collections.singletonList("Test"));
+auth.put("Authorization", Collections.singletonList("PRISMA f3d8b72c94ab4a06be2ef7c95490f7d3"));
 ```
 - crear una instancia de la clase TodoPago
 ```java		
-TodoPagoConector tpc = new TodoPagoConector(wsdl, endpoint, auth, true);// wsdl, End Point y http_header provisto por TODO PAGO	
+TodoPagoConector tpc = new TodoPagoConector(endpoint, auth);//End Point y http_header provisto por TODO PAGO	
 ```		
 		
-####2.Solicitud de autorización		
+####2.Solicitud de autorizaci�n		
 En este caso hay que llamar a sendAuthorizeRequest(). 		
 ```java		
-Map<String, Object> a = tpc.sendAuthorizeRequest(parameters)		
+Map<String, Object> a = tpc.sendAuthorizeRequest(sARParameters, getFraudControlParameters());		
 ```		
 <ins><strong>datos propios del comercio</strong></ins>		
  
 $optionsSAR_comercio debe ser un Map<String, String> con la siguiente estructura:		
 		
 ```java
-Map<String, String> parameters = new HashMap<String, String>();
-parameters.put("Session", "ABCDEF-1234-12221-FDE1-00000200");
-parameters.put("Security", "1234567890ABCDEF1234567890ABCDEF");
-parameters.put("EncodingMethod", "XML");
-parameters.put("URL_OK", "http,//www.google.com");
-parameters.put("URL_ERROR", "http,//www.yahoo.com");
-parameters.put("Merchant", "305");//datos propios de la operación
-parameters.put("OperationId", "01");//datos propios de la operación
-parameters.put("CurrencyCode", "032");//datos propios de la operación
-parameters.put("Ammount", "54");//datos propios de la operación
-parameters.put("EMAILCLIENTE", "email_cliente@dominio.com");//datos propios de la operación
-		
+Map<String, String> sARParameters = new HashMap<String, String>();
+sARParameters.put("Session", "ABCDEF-1234-12221-FDE1-00000200");
+sARParameters.put("Security", "f3d8b72c94ab4a06be2ef7c95490f7d3");
+sARParameters.put("EncodingMethod", "XML");
+sARParameters.put("Merchant", "2153");
+sARParameters.put("OperationId", "8000");
+sARParameters.put("CurrencyCode", "032");
+sARParameters.put("Amount", "1.00");
+sARParameters.put("URL_OK", "http,//someurl.com/ok/");
+sARParameters.put("URL_ERROR", "http,//someurl/fail/");
+sARParameters.put("EMAILCLIENTE", "some@someurl.com");
+
+
 ```		
 		
-####3.Confirmación de transacción.		
-En este caso hay que llamar a getAuthorizeAnswer(), enviando como parámetro un Map<String, String> como se describe a continuación.		
+####3.Confirmaci�n de transacci�n.		
+En este caso hay que llamar a getAuthorizeAnswer(), enviando como parámetro un Map<String, String> como se describe a continuaci�n.		
 ```java		
 Map<String, String> parameters = new HashMap<String, String>();
-parameters.put("Security", "1234567890ABCDEF1234567890ABCDEF");
-parameters.put("Merchant", "305");
-parameters.put("RequestKey", "8496472a-8c87-e35b-dcf2-94d5e31eb12f");
-parameters.put("AnswerKey", "8496472a-8c87-e35b-dcf2-94d5e31eb12f");		
+parameters.put("Security", "f3d8b72c94ab4a06be2ef7c95490f7d3");
+parameters.put("Merchant", "2153");
+parameters.put("RequestKey", "710268a7-7688-c8bf-68c9-430107e6b9da");
+parameters.put("AnswerKey", "693ca9cc-c940-06a4-8d96-1ab0d66f3ee6");		
 
 Map<String, Object> b = tpc.getAuthorizeAnswer(parameters);
 
@@ -156,65 +152,71 @@ payload.put("Request", request);
 parameters.put("Payload", payload);
 
 ```		
-Este método devuelve el resumen de los datos de la transacción.		
+Este método devuelve el resumen de los datos de la transacci�n.		
 <br />		
 		
 [<sub>Volver a inicio</sub>](#inicio)		
 		
 <a name="datosadicionales"></a>		
 ## Datos adicionales para control de fraude		
-Para el envío de información adicional para control de fraude, el comercio debe enviar los siguientes datos:		
+Para el envío de informaci�n adicional para control de fraude, el comercio debe enviar los siguientes datos:		
 		
 ```java		
-//Example
-Map<String, String> parameters = new HashMap<String, String>();		
-parameters.put("CSBTCITY", "Villa General Belgrano"); //Ciudad de facturación, MANDATORIO.		
-parameters.put("CSBTCOUNTRY", "AR");//País de facturación. MANDATORIO. Código ISO.
-parameters.put("CSBTCUSTOMERID", "453458"); //Identificador del usuario al que se le emite la factura. MANDATORIO. No 
-			//puede contener un correo electrónico.		
-parameters.put(CSBTIPADDRESS", "192.0.0.4"); //IP de la PC del comprador. MANDATORIO.		
-parameters.put(CSBTEMAIL", "todopago@hotmail.com"); //Mail del usuario al que se le emite la factura. MANDATORIO.
-parameters.put(CSBTFIRSTNAME", "Juan");//Nombre del usuario al que se le emite la factura. MANDATORIO.		
-parameters.put(CSBTLASTNAME", "Perez");//Apellido del usuario al que se le emite la factura. MANDATORIO.
-parameters.put(CSBTPHONENUMBER", "541160913988");//Teléfono del usuario al que se le emite la factura. No utilizar 
-			//guiones, puntos o espacios. Incluir código de país. MANDATORIO.		
-parameters.put(CSBTPOSTALCODE", " C1010AAP");//Código Postal de la dirección de facturación. MANDATORIO.
-parameters.put(CSBTSTATE", "B");//Provincia de la dirección de facturación. MANDATORIO. Ver tabla anexa de provincias.
-parameters.put(CSBTSTREET1", "Cerrito 740");//Domicilio de facturación (calle y nro). MANDATORIO.		
-parameters.put(CSPTCURRENCY", "ARS");//Moneda. MANDATORIO.		
-parameters.put(CSPTGRANDTOTALAMOUNT", "125.38");//Con decimales opcional usando el puntos como separador de decimales.
-			//No se permiten comas, ni como separador de miles ni como separador de decimales. MANDATORIO.
-			//(Ejemplos:$125,38-> 125.38 $12-> 12 o 12.00)		
-parameters.put(CSMDD7", "");// Fecha registro comprador(num Dias). NO MANDATORIO.		
-parameters.put(CSMDD8", "Y"); //Usuario Guest? (Y/N). En caso de ser Y, el campo CSMDD9 no deberá enviarse. NO 
-			//MANDATORIO.		
-parameters.put(CSMDD9", "");//Customer password Hash: criptograma asociado al password del comprador final. NO 	
-			//MANDATORIO.		
-parameters.put(CSMDD10", "");//Histórica de compras del comprador (Num transacciones). NO MANDATORIO.		
-parameters.put(CSMDD11", "");//Customer Cell Phone. NO MANDATORIO.		
+//Parametros para el control de fraude
+private static Map<String, String> getFraudControlParameters() {
+	//Example
+	Map<String, String> parameters = new HashMap<String, String>();		
+	parameters.put("CSBTCITY", "Villa General Belgrano"); //Ciudad de facturaci�n, MANDATORIO.		
+	parameters.put("CSBTCOUNTRY", "AR");//País de facturaci�n. MANDATORIO. C�digo ISO.
+	parameters.put("CSBTCUSTOMERID", "453458"); //Identificador del usuario al que se le emite la factura. MANDATORIO. No 
+				//puede contener un correo electr�nico.		
+	parameters.put(CSBTIPADDRESS", "192.0.0.4"); //IP de la PC del comprador. MANDATORIO.		
+	parameters.put(CSBTEMAIL", "some@someurl.com"); //Mail del usuario al que se le emite la factura. MANDATORIO.
+	parameters.put(CSBTFIRSTNAME", "Juan");//Nombre del usuario al que se le emite la factura. MANDATORIO.		
+	parameters.put(CSBTLASTNAME", "Perez");//Apellido del usuario al que se le emite la factura. MANDATORIO.
+	parameters.put(CSBTPHONENUMBER", "541160913988");//Teléfono del usuario al que se le emite la factura. No utilizar 
+				//guiones, puntos o espacios. Incluir c�digo de país. MANDATORIO.		
+	parameters.put(CSBTPOSTALCODE", "1010");//C�digo Postal de la direcci�n de facturaci�n. MANDATORIO.
+	parameters.put(CSBTSTATE", "B");//Provincia de la direcci�n de facturaci�n. MANDATORIO. Ver tabla anexa de provincias.
+	parameters.put(CSBTSTREET1", "Some Street 2153");//Domicilio de facturaci�n (calle y nro). MANDATORIO.		
+	parameters.put("CSBTSTREET2", "");//NO MANDATORIO.
+	parameters.put(CSPTCURRENCY", "ARS");//Moneda. MANDATORIO.		
+	parameters.put(CSPTGRANDTOTALAMOUNT", "125.38");//Con decimales opcional usando el puntos como separador de decimales.
+				//No se permiten comas, ni como separador de miles ni como separador de decimales. MANDATORIO.
+				//(Ejemplos:$125,38-> 125.38 $12-> 12 o 12.00)		
+	parameters.put(CSMDD7", "");// Fecha registro comprador(num Dias). NO MANDATORIO.		
+	parameters.put(CSMDD8", "Y"); //Usuario Guest? (Y/N). En caso de ser Y, el campo CSMDD9 no deberá enviarse. NO 
+				//MANDATORIO.		
+	parameters.put(CSMDD9", "");//Customer password Hash: criptograma asociado al password del comprador final. NO 	
+				//MANDATORIO.		
+	parameters.put(CSMDD10", "");//Hist�rica de compras del comprador (Num transacciones). NO MANDATORIO.		
+	parameters.put(CSMDD11", "");//Customer Cell Phone. NO MANDATORIO.		
 
-parameters.put("CSSTCITY", "rosario");//Ciudad de enví­o de la orden. MANDATORIO.		
-parameters.put("CSSTCOUNTRY", "");//País de envío de la orden. MANDATORIO.		
-parameters.put("CSSTEMAIL", "jose@gmail.com");//Mail del destinatario, MANDATORIO.		
-parameters.put("CSSTFIRSTNAME", "Jose");//Nombre del destinatario. MANDATORIO.		
-parameters.put("CSSTLASTNAME", "Perez");//Apellido del destinatario. MANDATORIO.		
-parameters.put("CSSTPHONENUMBER", "541155893737");//Número de teléfono del destinatario. MANDATORIO.		
-parameters.put("CSSTPOSTALCODE", "1414");//Código postal del domicilio de envío. MANDATORIO.		
-parameters.put("CSSTSTATE", "D");//Provincia de envío. MANDATORIO. Son de 1 caracter		
-parameters.put("CSSTSTREET1", "San Martín 123");//Domicilio de envío. MANDATORIO.		
-parameters.put("CSMDD12", "");//Shipping DeadLine (Num Dias). NO MADATORIO.		
-parameters.put("CSMDD13", "");//Método de Despacho. NO MANDATORIO.		
-parameters.put("CSMDD14", "");//Customer requires Tax Bill ? (Y/N). NO MANDATORIO.		
-parameters.put("CSMDD15", "");//Customer Loyality Number. NO MANDATORIO. 		
-parameters.put("CSMDD16", "");//Promotional / Coupon Code. NO MANDATORIO. 		
+	//Retail
+	parameters.put("CSSTCITY", "Villa General Belgrano");//Ciudad de enví­o de la orden. MANDATORIO.		
+	parameters.put("CSSTCOUNTRY", "AR");//País de envío de la orden. MANDATORIO.		
+	parameters.put("CSSTEMAIL", "some@someurl.com");//Mail del destinatario, MANDATORIO.		
+	parameters.put("CSSTFIRSTNAME", "Juan");//Nombre del destinatario. MANDATORIO.		
+	parameters.put("CSSTLASTNAME", "Perez");//Apellido del destinatario. MANDATORIO.		
+	parameters.put("CSSTPHONENUMBER", "541160913988");//N�mero de teléfono del destinatario. MANDATORIO.		
+	parameters.put("CSSTPOSTALCODE", "1010");//C�digo postal del domicilio de envío. MANDATORIO.		
+	parameters.put("CSSTSTATE", "B");//Provincia de envío. MANDATORIO. Son de 1 caracter		
+	parameters.put("CSSTSTREET1", "Some Street 2153");//Domicilio de envío. MANDATORIO.		
+	parameters.put("CSSTSTREET2", "");//NO MANDATORIO.
+	parameters.put("CSMDD12", "");//Shipping DeadLine (Num Dias). NO MADATORIO.		
+	parameters.put("CSMDD13", "");//Método de Despacho. NO MANDATORIO.		
+	parameters.put("CSMDD14", "");//Customer requires Tax Bill ? (Y/N). NO MANDATORIO.		
+	parameters.put("CSMDD15", "");//Customer Loyality Number. NO MANDATORIO. 		
+	parameters.put("CSMDD16", "");//Promotional / Coupon Code. NO MANDATORIO. 		
+	
 	//datos a enviar por cada producto, los valores deben estar separado con #:		
-parameters.put("CSITPRODUCTCODE", "electronic_good");//Código de producto. CONDICIONAL. Valores posibles(adult_content;coupon;default;electronic_good;electronic_software;gift_certificate;handling_only;service;shipping_and_handling;shipping_only;subscription)		
-parameters.put("CSITPRODUCTDESCRIPTION", "NOTEBOOK L845 SP4304LA DF TOSHIBA");//Descripción del producto. CONDICIONAL.		
-parameters.put("CSITPRODUCTNAME", "NOTEBOOK L845 SP4304LA DF TOSHIBA");//Nombre del producto. CONDICIONAL.	
-parameters.put("CSITPRODUCTSKU", "LEVJNSL36GN");//Código identificador del producto. CONDICIONAL.		
-parameters.put("CSITTOTALAMOUNT", "1254.40");//CSITTOTALAMOUNT=CSITUNITPRICE*CSITQUANTITY "999999[.CC]" Con decimales opcional usando el puntos como separador de decimales. No se permiten comas, ni como separador de miles ni como separador de decimales. CONDICIONAL.		
-parameters.put("CSITQUANTITY", "1");//Cantidad del producto. CONDICIONAL.		
-parameters.put("CSITUNITPRICE", "1254.40");//Formato Idem CSITTOTALAMOUNT. CONDICIONAL.	
+	parameters.put("CSITPRODUCTCODE", "electronic_good");//C�digo de producto. CONDICIONAL. Valores posibles(adult_content;coupon;default;electronic_good;electronic_software;gift_certificate;handling_only;service;shipping_and_handling;shipping_only;subscription)		
+	parameters.put("CSITPRODUCTDESCRIPTION", "Test Prd Description");//Descripci�n del producto. CONDICIONAL.		
+	parameters.put("CSITPRODUCTNAME", "TestPrd");//Nombre del producto. CONDICIONAL.	
+	parameters.put("CSITPRODUCTSKU", "SKU1234");//C�digo identificador del producto. CONDICIONAL.		
+	parameters.put("CSITTOTALAMOUNT", "10.01");//CSITTOTALAMOUNT=CSITUNITPRICE*CSITQUANTITY "999999[.CC]" Con decimales opcional usando el puntos como separador de decimales. No se permiten comas, ni como separador de miles ni como separador de decimales. CONDICIONAL.		
+	parameters.put("CSITQUANTITY", "1");//Cantidad del producto. CONDICIONAL.		
+	parameters.put("CSITUNITPRICE", "10.01");//Formato Idem CSITTOTALAMOUNT. CONDICIONAL.	
 ```		
 
 [<sub>Volver a inicio</sub>](#inicio)		
@@ -225,29 +227,84 @@ Existe un ejemplo en la carpeta https://github.com/TodoPago/sdk-java/tree/master
 		
 [<sub>Volver a inicio</sub>](#inicio)	
 <a name="status"></a>
-## Status de la Operación
+## Status de la Operaci�n
 La SDK cuenta con un m&eacute;todo para consultar el status de la transacci&oacute;n desde la misma SDK. El m&eacute;todo se utiliza de la siguiente manera:
 ```java
-TodoPagoConector tpc = new TodoPagoConector(getWsdl(), getEndpoint(),getAuthorization(), true);
+TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint ,getAuthorization());
+
 private static Map<String, String> getSParameters(){
 	Map<String, String> parameters = new HashMap<String, String>();
 	parameters.put("Merchant", "305");
 	parameters.put("OperationID", "01");
 	return parameters;
 }
-Map<String, Object> d = tpc.getStatus(getSParameters());// Merchant es el id site y $operation_id es el id operación que se envión en el array a través del método sendAuthorizeRequest() 
+Map<String, Object> d = tpc.getStatus(getSParameters());// Merchant es el id site y $operation_id es el id operaci�n que se envi�n en el array a través del método sendAuthorizeRequest() 
 ```
 El siguiente m&eacute;todo retornara el status actual de la transacci&oacute;n en Todopago.
-[<sub>Volver a inicio</sub>](#inicio)		
+[<sub>Volver a inicio</sub>](#inicio)
+
+<a name="statusdate"></a>
+## Consulta de operaciones por rango de tiempo
+En este caso hay que llamar a getByRangeDateTime() y devolvera todas las operaciones realizadas en el rango de fechas dado
+
+```java
+TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint ,getAuthorization());
+private static Map<String, String> getBRYParameters() {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(ElementNames.Merchant, "2153");
+		parameters.put(ElementNames.STARTDATE, "2016-01-01");
+		parameters.put(ElementNames.ENDDATE, "2016-03-03");
+		parameters.put(ElementNames.PAGENUMBER, "1");	
+		return parameters;
+	});
+	
+	Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
+```
+
+[<sub>Volver a inicio</sub>](#inicio)	
+
+<a name="devolucion"></a>
+## Devoluci�nes
+La SDK dispone de dos m&eacute;todos para realizar la devoluci�n online, total o parcial, de una transacci&oacute;n realizada a traves de TodoPago. El m&eacute;todo se utiliza de la siguiente manera:
+
+Devoluci�n Total
+```java
+TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint ,getAuthorization());
+private static Map<String, String> getVRParameters() {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
+		parameters.put(ElementNames.Merchant, "2153");
+		parameters.put(ElementNames.AuthorizationKey, "e31d340c-690c-afe6-c478-fc1bef3fc157");
+		return parameters;
+	}
+Map<String, Object> h = tpc.voidRequest(getVRParameters());// Merchant es el id site y AuthorizationKey es la key se que retorna a través del método getAuthorizeAnswer() 
+```
+Devoluci�n Parcial
+```java
+TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint ,getAuthorization());
+private static Map<String, String> getRRParameters() {
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
+		parameters.put(ElementNames.Merchant, "2153");
+		parameters.put(ElementNames.AuthorizationKey, "c7a2b859-e850-7460-4752-61951fed2195");
+		parameters.put(ElementNames.Amount, "0.5");
+		return parameters;
+	}
+Map<String, Object> i = tpc.returnRequest(getRRParameters());// Merchant es el id site , AuthorizationKey es la key se que retorna a través del método getAuthorizeAnswer() y Amount la cantidad a devolver (float Type)
+```
+
+Si la operaci�n fue realizada correctamente se informar� con un c�digo 2011 y un mensaje indicando el �xito de la operaci�n.
+
+[<sub>Volver a inicio</sub>](#inicio)	
 
 <a name="tablas"></a>		
 ## Tablas de Referencia		
-######[Códigos de Estado](#cde)		
+######[C�digos de Estado](#cde)		
 ######[Provincias](#p)		
 <a name="cde"></a>		
 <p>Codigos de Estado</p>		
 <table>		
-<tr><th>IdEstado</th><th>Descripción</th></tr>		
+<tr><th>IdEstado</th><th>Descripcion</th></tr>		
 <tr><td>1</td><td>Ingresada</td></tr>		
 <tr><td>2</td><td>A procesar</td></tr>		
 <tr><td>3</td><td>Procesada</td></tr>		
@@ -255,16 +312,16 @@ El siguiente m&eacute;todo retornara el status actual de la transacci&oacute;n e
 <tr><td>5</td><td>Rechazada</td></tr>		
 <tr><td>6</td><td>Acreditada</td></tr>		
 <tr><td>7</td><td>Anulada</td></tr>		
-<tr><td>8</td><td>Anulación Confirmada</td></tr>		
+<tr><td>8</td><td>Anulacion Confirmada</td></tr>		
 <tr><td>9</td><td>Devuelta</td></tr>		
-<tr><td>10</td><td>Devolución Confirmada</td></tr>		
+<tr><td>10</td><td>Devolucion Confirmada</td></tr>		
 <tr><td>11</td><td>Pre autorizada</td></tr>		
 <tr><td>12</td><td>Vencida</td></tr>		
-<tr><td>13</td><td>Acreditación no cerrada</td></tr>		
+<tr><td>13</td><td>Acreditacion no cerrada</td></tr>		
 <tr><td>14</td><td>Autorizada *</td></tr>		
 <tr><td>15</td><td>A reversar</td></tr>		
 <tr><td>16</td><td>A registar en Visa</td></tr>		
-<tr><td>17</td><td>Validación iniciada en Visa</td></tr>		
+<tr><td>17</td><td>Validacion iniciada en Visa</td></tr>		
 <tr><td>18</td><td>Enviada a validar en Visa</td></tr>		
 <tr><td>19</td><td>Validada OK en Visa</td></tr>		
 <tr><td>20</td><td>Recibido desde Visa</td></tr>		
@@ -286,15 +343,15 @@ El siguiente m&eacute;todo retornara el status actual de la transacci&oacute;n e
 <p>Provincias</p>
 <p>Solo utilizado para incluir los datos de control de fraude</p>
 <table>		
-<tr><th>Provincia</th><th>Código</th></tr>		
+<tr><th>Provincia</th><th>Codigo</th></tr>		
 <tr><td>CABA</td><td>C</td></tr>		
 <tr><td>Buenos Aires</td><td>B</td></tr>		
 <tr><td>Catamarca</td><td>K</td></tr>		
 <tr><td>Chaco</td><td>H</td></tr>		
 <tr><td>Chubut</td><td>U</td></tr>		
-<tr><td>Córdoba</td><td>X</td></tr>		
+<tr><td>Cordoba</td><td>X</td></tr>		
 <tr><td>Corrientes</td><td>W</td></tr>		
-<tr><td>Entre Ríos</td><td>R</td></tr>		
+<tr><td>Entre Ríos</td><td>E</td></tr>		
 <tr><td>Formosa</td><td>P</td></tr>		
 <tr><td>Jujuy</td><td>Y</td></tr>		
 <tr><td>La Pampa</td><td>L</td></tr>		
@@ -318,13 +375,13 @@ El siguiente m&eacute;todo retornara el status actual de la transacci&oacute;n e
 ## Agregar el proyecto a Eclipse		
 - Bajar Maven 3 de la siguiente URL: http://maven.apache.org/download.cgi
 - Descomprimir lo descargado.
-- Agregar o modificar la variable de entorno M2_HOME con path a donde se descomprimió Maven 
+- Agregar o modificar la variable de entorno M2_HOME con path a donde se descomprimi� Maven 
 - Descargar el proyecto de GitHub
 - Por consola ir a la carpeta donde se descargo el proyecto
 - Ejecutar las siguientes líneas:
-	- mvn clean install –Dwtpversion=2.0
-	- mvn eclipse:clean eclipse:eclipse –Dwtpversion=2.0
-- Ir a Eclipse e importar el Proyecto normalmente: File – Import – Existing Projects into Workspace
+	- mvn clean install �Dwtpversion=2.0
+	- mvn eclipse:clean eclipse:eclipse �Dwtpversion=2.0
+- Ir a Eclipse e importar el Proyecto normalmente: File � Import � Existing Projects into Workspace
 
 <br />		
-[<sub>Volver a inicio</sub>](#inicio)		
+[<sub>Volver a inicio</sub>](#inicio)

@@ -1,9 +1,6 @@
 package ar.com.todopago.api.rest;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -12,114 +9,148 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import ar.com.todopago.api.ElementNames;
 
 public class RestConnector {
 
 	private final static Logger logger = Logger.getLogger(RestConnector.class.getName());
-	
+
 	private final String USER_AGENT = "Mozilla/5.0";
-	private String endpoint; //https://developers.todopago.com.ar/api/t/1.1/
-	private Map <String, String> headders;
-	
-	
+	private String endpoint; // https://developers.todopago.com.ar/api/t/1.1/
+	private Map<String, String> headders;
+
 	public RestConnector(String endpoint, Map<String, List<String>> headder) {
 
 		this.endpoint = endpoint;
 		this.headders = new HashMap<String, String>();
-		
+
 		List<String> aux = headder.get(ElementNames.Authorization);
 		this.headders.put(ElementNames.Authorization, aux.get(0));
-		
+
 	}
-	
-	
-	public Map<String, Object> getByOperationId(Map<String, String>params){
+
+	public Map<String, Object> getByOperationId(Map<String, String> params) {
 		String url = endpoint + "Operations/GetByOperationId/";
-		//Merchant
+		// Merchant
 		url += ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/";
-		//OperationID
+		// OperationID
 		url += ElementNames.OperationID.toUpperCase() + "/" + params.get(ElementNames.OperationID);
-		
-		logger.log(Level.INFO, "URLCreation getByOperationId"+ url);
-		
+
+		logger.log(Level.INFO, "URLCreation getByOperationId" + url);
+
 		Map<String, Object> ret = new HashMap<String, Object>();
-		try{
-			
+		try {
+
 			ret = OperationsParser.inputStreamToMap(sendGet(url));
-		}catch(Exception e){
+		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error on get", e.getMessage() + " - " + e.getLocalizedMessage());
 			ret.put("Error", e.getMessage());
 			ret.put("StackTrace", e.getStackTrace());
 		}
-		
+
 		return ret;
-		
+
 	}
-	
 
 	public Map<String, Object> getPaymentMethods(Map<String, String> params) {
-		
+
 		String url = endpoint + "PaymentMethods/Get/";
-		//Merchant
+		// Merchant
 		url += ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/";
-		
-		logger.log(Level.INFO, "URLCreation getPaymentMethods"+ url);
-		
+
+		logger.log(Level.INFO, "URLCreation getPaymentMethods" + url);
+
 		Map<String, Object> ret = new HashMap<String, Object>();
-		try{
-			
-			//ret = PaymentMethodsParser.inputStreamToMap(sendGet(url));
-		
-			//streamToMap
+		try {
+
+			// ret = PaymentMethodsParser.inputStreamToMap(sendGet(url));
+
+			// streamToMap
 			PaymentMethodsParser pmp = new PaymentMethodsParser();
-			
+
 			ret = pmp.streamToMap(sendGet(url));
-		
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error on get", e.getMessage() + " - " + e.getLocalizedMessage());
 			ret.put("Error", e.getMessage());
 			ret.put("StackTrace", e.getStackTrace());
 		}
-		
+
 		return ret;
 	}
-	
-	
-	
-	public Map<String, Object> getPromotions(Map<String, String> params){
+
+	public Map<String, Object> discoverPaymentMethods() {
+
+		String url = endpoint + "PaymentMethods/Discover";
+
+		logger.log(Level.INFO, "URLCreation getPaymentMethods" + url);
+
+		Map<String, Object> ret = new HashMap<String, Object>();
+		try {
+			// streamToMap
+			PaymentMethodsParser pmp = new PaymentMethodsParser();
+			ret = pmp.streamToMap(sendGet(url));
+
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error on get: ", e.getMessage());
+			ret.put("Error", e.getMessage());
+			ret.put("StackTrace", e.getStackTrace());
+		}
+
+		return ret;
+	}
+
+	public Map<String, Object> getByRangeDateTime(Map<String, String> params) {
+		String url = endpoint + "Operations/GetByRangeDateTime/";
+		// Merchant
+		url += ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/";
+		// start date
+		url += ElementNames.STARTDATE.toUpperCase() + "/" + params.get(ElementNames.STARTDATE) + "/";
+		// end date
+		url += ElementNames.ENDDATE.toUpperCase() + "/" + params.get(ElementNames.ENDDATE) + "/";
+		// page number
+		url += ElementNames.PAGENUMBER.toUpperCase() + "/" + params.get(ElementNames.PAGENUMBER);
+
+		logger.log(Level.INFO, "URLCreation GetByRangeDateTime " + url);
+
+		Map<String, Object> ret = new HashMap<String, Object>();
+		try {
+
+			ret = OperationsParser.inputStreamToMap(sendGet(url));
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Error on get", e.getMessage() + " - " + e.getLocalizedMessage());
+			ret.put("Error", e.getMessage());
+			ret.put("StackTrace", e.getStackTrace());
+		}
+
+		return ret;
+
+	}
+
+	public Map<String, Object> getPromotions(Map<String, String> params) {
 		String url = endpoint + "PaymentMethods/Get/";
-		//Merchant
+		// Merchant
 		url += ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/";
 		url += ElementNames.PaymentMethod.toUpperCase() + "/" + params.get(ElementNames.PaymentMethod) + "/";
 		url += ElementNames.Bank.toUpperCase() + "/" + params.get(ElementNames.Bank) + "/";
 		url += ElementNames.Amount.toUpperCase() + "/" + params.get(ElementNames.Amount) + "/";
-		
-		logger.log(Level.INFO, "URLCreation getPaymentMethods"+ url);
-		
+
+		logger.log(Level.INFO, "URLCreation getPaymentMethods" + url);
+
 		Map<String, Object> ret = new HashMap<String, Object>();
-		try{
-			
-			//ret = PaymentMethodsParser.inputStreamToMap(sendGet(url));
-		}catch(Exception e){
+		try {
+
+			// ret = PaymentMethodsParser.inputStreamToMap(sendGet(url));
+		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error on get", e.getMessage() + " - " + e.getLocalizedMessage());
 			ret.put("Error", e.getMessage());
 			ret.put("StackTrace", e.getStackTrace());
 		}
-		
+
 		return ret;
 	}
-	
 
-	//Do Connection recover InputStream
+	// Do Connection recover InputStream
 	private InputStream sendGet(String url) throws Exception {
 
 		URL obj = new URL(url);
@@ -129,13 +160,13 @@ public class RestConnector {
 		con.setRequestMethod("GET");
 		// add request header
 		con.setRequestProperty("User-Agent", USER_AGENT);
-		//Set Prisma Headder
+		// Set Prisma Headder
 		con.setRequestProperty("Authorization", headders.get("Authorization"));
 		int responseCode = con.getResponseCode();
 		logger.log(Level.INFO, "\nSending 'GET' request to URL : " + url);
 		logger.log(Level.INFO, "Response Code : " + responseCode);
-		
+
 		return con.getInputStream();
 	}
-	
+
 }

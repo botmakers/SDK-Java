@@ -15,9 +15,9 @@ import org.xml.sax.SAXException;
 
 public class PaymentMethodsParser {
 
-
-	//From InputStream to NodeList
-	public static NodeList inputStreamToNodeList(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException{
+	// From InputStream to NodeList
+	public static NodeList inputStreamToNodeList(InputStream inputStream)
+			throws ParserConfigurationException, SAXException, IOException {
 
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -26,31 +26,32 @@ public class PaymentMethodsParser {
 		return doc.getChildNodes();
 	}
 
-	public Map<String, Object> streamToMap(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException {
+	public Map<String, Object> streamToMap(InputStream inputStream)
+			throws ParserConfigurationException, SAXException, IOException {
 
 		NodeList nList = inputStreamToNodeList(inputStream);
 		Pair p = parseToMap(nList);
 		return p.getMap();
 	}
 
-	public Pair parseToMap(NodeList nList){
+	public Pair parseToMap(NodeList nList) {
 		Map<String, Object> ret = new HashMap<String, Object>();
 		String keyVal = "";
-		for(int i = 0; i<nList.getLength(); i++){
-			if (nList.item(i).hasChildNodes() && nList.item(i).getChildNodes().item(0).hasChildNodes()){
-				//Go to child
+		for (int i = 0; i < nList.getLength(); i++) {
+			if (nList.item(i).hasChildNodes() && nList.item(i).getChildNodes().item(0).hasChildNodes()) {
+				// Go to child
 				Pair p = parseToMap(nList.item(i).getChildNodes());
 
-				if(!p.getKey().equalsIgnoreCase("")){
+				if (!p.getKey().equalsIgnoreCase("")) {
 					ret.put(p.getKey(), p.getMap());
-				}else{
+				} else {
 					ret.put(nList.item(i).getNodeName(), p.getMap());
 				}
-				
-			}else{
-				//add value to this map
-				if(nList.item(i).getNodeName().contains("Id")){
-					//Keep value
+
+			} else {
+				// add value to this map
+				if (nList.item(i).getNodeName().contains("Id") || nList.item(i).getNodeName().contains("ID")) {
+					// Keep value
 					keyVal = nList.item(i).getTextContent();
 				}
 				ret.put(nList.item(i).getNodeName(), nList.item(i).getTextContent());
@@ -60,27 +61,23 @@ public class PaymentMethodsParser {
 		return aux;
 	}
 
-
-
-
-
-	class Pair{
+	class Pair {
 		private String key;
 		private Map<String, Object> map;
 
-		public Pair(String k, Map<String, Object> m){
+		public Pair(String k, Map<String, Object> m) {
 			key = k;
 			map = m;
 		}
-		public String getKey(){
+
+		public String getKey() {
 			return key;
 		}
-		public Map<String, Object> getMap(){
+
+		public Map<String, Object> getMap() {
 			return map;
 		}
 
 	}
-
-
 
 }

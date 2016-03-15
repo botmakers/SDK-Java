@@ -24,11 +24,7 @@ public interface AuthorizePortType {
 
 
     /**
-     * 
-     * 				Service definition of Operation SendAuthorizeRequest: Utilizada para enviar
-     * 				los datos que se utilizaran en el requerimiento de Autorizacion,
-     * 				para Clientes PCI
-     * 			
+     * Service definition of Operation SendAuthorizeRequest: Utilizada para enviar los datos que se utilizaran en el  requerimiento de Autorizacion, para Clientes PCI
      * 
      * @param parameters
      * @return
@@ -41,11 +37,7 @@ public interface AuthorizePortType {
         SendAuthorizeRequest parameters);
 
     /**
-     * 
-     * 				Service definition of Operation GetAuthorizeAnswer: Utilizada para recuerar
-     * 				los datos de la Respuesta de la Autorizacion en el Caso de Clientes
-     * 				no PCI
-     * 			
+     * Service definition of Operation GetAuthorizeAnswer: Utilizada para recuerar los datos de la Respuesta de la Autorizacion en el Caso de Clientes no PCI
      * 
      * @param parameters
      * @return
@@ -56,5 +48,31 @@ public interface AuthorizePortType {
     public GetAuthorizeAnswerResponse getAuthorizeAnswer(
         @WebParam(name = "GetAuthorizeAnswer", targetNamespace = "http://api.todopago.com.ar", partName = "parameters")
         GetAuthorizeAnswer parameters);
+
+    /**
+     * Service definition of Operation Void: Utilizada para Anular una Transaccion
+     * 
+     * @param parameters
+     * @return
+     *     returns ar.com.todopago.api.VoidResponse
+     */
+    @WebMethod(operationName = "VoidRequest")
+    @WebResult(name = "VoidResponse", targetNamespace = "http://api.todopago.com.ar", partName = "parameters")
+    public VoidResponse voidRequest(
+        @WebParam(name = "VoidRequest", targetNamespace = "http://api.todopago.com.ar", partName = "parameters")
+        VoidRequest parameters);
+
+    /**
+     * Service definition of Operation Return: Utilizada para Devolver total o parcialmente una Transaccion
+     * 
+     * @param parameters
+     * @return
+     *     returns ar.com.todopago.api.ReturnResponse
+     */
+    @WebMethod(operationName = "ReturnRequest")
+    @WebResult(name = "ReturnResponse", targetNamespace = "http://api.todopago.com.ar", partName = "parameters")
+    public ReturnResponse returnRequest(
+        @WebParam(name = "ReturnRequest", targetNamespace = "http://api.todopago.com.ar", partName = "parameters")
+        ReturnRequest parameters);
 
 }

@@ -1,6 +1,7 @@
 package ar.com.todopago.api;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
@@ -19,74 +20,112 @@ import ar.com.todopago.api.rest.RestConnector;
 import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
-	
-	final String versionTodoPago = "1.0.1";
+
+	public static final String versionTodoPago = "1.2.0";
 
 	final String soapAppend = "services/";
 	final String restAppend = "api/";
 	final String tenant = "t/1.1/";
 	final String authorizeSOAPAppend = "Authorize";
-	
-	Map<String, String>wsdl;
-	Map<String, String>endpoint;
+	final String authorizeWSDL = "/Authorize.wsdl";
+
+	// endpoints
+	final String endPointDev = "https://developers.todopago.com.ar/";
+	final String endPointPrd = "https://apis.todopago.com.ar/";
+
+	public final static int developerEndpoint = 0;
+	public final static int productionEndpoint = 1;
+
+	String ep;
+	Map<String, String> wsdl;
+	Map<String, String> endpoint;
 	TodoPagoConectorAuthorize authorize;
-	
 	RestConnector restConector;
-	
-	public TodoPagoConector(Map<String, String> wsdl, Map<String, String> endpoint, Map<String, List<String>>auth) throws MalformedURLException {
-		this(wsdl, endpoint, auth, false);
-			
+
+	public TodoPagoConector(int endpoint, Map<String, List<String>> auth) throws MalformedURLException {
+		this(endpoint, auth, false);
 	}
-	
-	public TodoPagoConector(Map<String, String> wsdl, Map<String, String> endpoint, Map<String, List<String>>auth, boolean security) throws MalformedURLException {
-		if(security){
+
+	public TodoPagoConector(int endpoint, Map<String, List<String>> auth, boolean security)
+			throws MalformedURLException {
+		if (security) {
 			this.disableSslVerification();
 		}
+		switch (endpoint) {
+		case developerEndpoint:
+			ep = endPointDev;
+			break;
+		case productionEndpoint:
+			ep = endPointPrd;
+			break;
+		default:
+			ep = endPointPrd;
+			break;
+		}
 
-		this.wsdl = wsdl;
-		this.endpoint = endpoint;
-		
-		String soapEndpoint = this.endpoint.get(ElementNames.Endpoint) + soapAppend + tenant + authorizeSOAPAppend;
-		authorize = new TodoPagoConectorAuthorize(wsdl.get(ElementNames.AuthorizeWSDL), soapEndpoint, auth);
-		
-		String restEndpoint = this.endpoint.get(ElementNames.Endpoint) + tenant + restAppend;
+		String soapEndpoint = ep + soapAppend + tenant + authorizeSOAPAppend;
+		try {
+			authorize = new TodoPagoConectorAuthorize(
+					TodoPagoConector.class.getResource(this.authorizeWSDL).toURI().toURL(), soapEndpoint, auth);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		String restEndpoint = ep + tenant + restAppend;
 		restConector = new RestConnector(restEndpoint, auth);
-		
 	}
-	
-	public Map<String, Object> sendAuthorizeRequest (Map<String, String> parameters, Map<String, String> fraudControl){
+
+	public Map<String, Object> sendAuthorizeRequest(Map<String, String> parameters, Map<String, String> fraudControl) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result = authorize.getpaymentValues(parameters, fraudControl);
 		return result;
 	}
-	
-	public Map<String, Object> getAuthorizeAnswer (Map<String, String> parameters){
+
+	// GetAuthorizeAnswer
+	public Map<String, Object> getAuthorizeAnswer(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		//GetAuthorizeAnswer
 		result = authorize.getPaymentValuesPCI(parameters);
 		return result;
 	}
-	
-	public Map<String, Object> getAllPaymentMethods (Map<String, String> parameters){
+
+	// Devoluciones -- devolucion total
+	public Map<String, Object> voidRequest(Map<String, String> parameters) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = authorize.voidRequest(parameters);
+		return result;
+	}
+
+	// Devoluciones -- devolucion pacial
+	public Map<String, Object> returnRequest(Map<String, String> parameters) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = authorize.returnRequest(parameters);
+		return result;
+	}
+
+	public Map<String, Object> getAllPaymentMethods(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result = restConector.getPaymentMethods(parameters);
 		return result;
 	}
-	
-	public Map<String, Object> getStatus (Map<String, String> parameters){
+
+	public Map<String, Object> discoverPaymentMethods() {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = restConector.discoverPaymentMethods();
+		return result;
+	}
+
+	public Map<String, Object> getStatus(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result = restConector.getByOperationId(parameters);
-		
 		return result;
 	}
 	
-		
-	
-	
-	
-	
-	
-	
+	public Map<String, Object> getByRangeDateTime(Map<String, String> parameters) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = restConector.getByRangeDateTime(parameters);
+		return result;
+	}
+
 	private void disableSslVerification() {
 		try {
 			// Create a trust manager that does not validate certificate chains
@@ -121,7 +160,4 @@ public class TodoPagoConector {
 			e.printStackTrace();
 		}
 	}
-
-	
-	
 }
