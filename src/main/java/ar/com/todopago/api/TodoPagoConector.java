@@ -16,31 +16,45 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import ar.com.todopago.api.exceptions.ConnectionException;
+import ar.com.todopago.api.exceptions.EmptyFieldException;
+import ar.com.todopago.api.exceptions.EmptyFieldPassException;
+import ar.com.todopago.api.exceptions.EmptyFieldUserException;
+import ar.com.todopago.api.exceptions.ResponseException;
+import ar.com.todopago.api.model.User;
 import ar.com.todopago.api.rest.RestConnector;
 import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
 
-	public static final String versionTodoPago = "1.2.0";
+	public static final String versionTodoPago = "1.3.0";
 
-	final String soapAppend = "services/";
-	final String restAppend = "api/";
-	final String tenant = "t/1.1/";
-	final String authorizeSOAPAppend = "Authorize";
-	final String authorizeWSDL = "/Authorize.wsdl";
+	private final String soapAppend = "services/";
+	private final String restAppend = "api/";
+	private final String tenant = "t/1.1/";
+	private final String authorizeSOAPAppend = "Authorize";
+	private final String authorizeWSDL = "/Authorize.wsdl";
 
 	// endpoints
-	final String endPointDev = "https://developers.todopago.com.ar/";
-	final String endPointPrd = "https://apis.todopago.com.ar/";
+	private final String endPointDev = "https://developers.todopago.com.ar/";
+	private final String endPointPrd = "https://apis.todopago.com.ar/";
 
 	public final static int developerEndpoint = 0;
 	public final static int productionEndpoint = 1;
 
-	String ep;
+	private String ep;
+	private TodoPagoConectorAuthorize authorize;
+	private RestConnector restConector;
+
 	Map<String, String> wsdl;
 	Map<String, String> endpoint;
-	TodoPagoConectorAuthorize authorize;
-	RestConnector restConector;
+
+	String soapEndpoint;
+	String restEndpoint;	
+	
+	public TodoPagoConector(int endpoint) throws MalformedURLException {
+		this(endpoint, null, false);
+	}
 
 	public TodoPagoConector(int endpoint, Map<String, List<String>> auth) throws MalformedURLException {
 		this(endpoint, auth, false);
@@ -63,15 +77,19 @@ public class TodoPagoConector {
 			break;
 		}
 
-		String soapEndpoint = ep + soapAppend + tenant + authorizeSOAPAppend;
-		try {
-			authorize = new TodoPagoConectorAuthorize(
-					TodoPagoConector.class.getResource(this.authorizeWSDL).toURI().toURL(), soapEndpoint, auth);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+		this.soapEndpoint = ep + soapAppend + tenant + authorizeSOAPAppend;
+		
+		if(auth != null){
+			try {
+				authorize = new TodoPagoConectorAuthorize(
+						TodoPagoConector.class.getResource(this.authorizeWSDL).toURI().toURL(), this.soapEndpoint, auth);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		}
-		String restEndpoint = ep + tenant + restAppend;
+		
+		this.restEndpoint = ep + tenant + restAppend;
 		restConector = new RestConnector(restEndpoint, auth);
 	}
 
@@ -91,14 +109,14 @@ public class TodoPagoConector {
 	// Devoluciones -- devolucion total
 	public Map<String, Object> voidRequest(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = authorize.voidRequest(parameters);
+		result = restConector.voidRequest(parameters);
 		return result;
 	}
 
 	// Devoluciones -- devolucion pacial
 	public Map<String, Object> returnRequest(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = authorize.returnRequest(parameters);
+		result = restConector.returnRequest(parameters);
 		return result;
 	}
 
@@ -125,7 +143,41 @@ public class TodoPagoConector {
 		result = restConector.getByRangeDateTime(parameters);
 		return result;
 	}
+	
+	public User getCredentials(User user) throws EmptyFieldException, ResponseException, ConnectionException {
+		
+		User result = user;		
+		if(user!=null){
+			if(user.getUser()== null  ||  user.getUser().isEmpty()){
+				throw new EmptyFieldUserException("User/Mail is empty");			
+			}
+			if(user.getPassword()== null  || user.getPassword().isEmpty()){
+				throw new EmptyFieldPassException("Pass is empty");			
+			}						 
+			result = restConector.getCredentials(user);			
+		}else{
+			throw new EmptyFieldPassException("User is null");				
+		}
+		return result;		
+	}
+	
+	public void setAuthorize(Map<String, List<String>> auth) throws MalformedURLException, ResponseException {
+			
+		if(auth != null && auth.get(ElementNames.Authorization)!= null && auth.get(ElementNames.Authorization).iterator().next()!= null ){			
+			try {
+				 this.authorize = new TodoPagoConectorAuthorize(
+						TodoPagoConector.class.getResource(this.authorizeWSDL).toURI().toURL(), this.soapEndpoint, auth);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			this.restConector = new RestConnector(restEndpoint, auth);
+		}else{		
+			throw new ResponseException("ApiKey is null");
+		}
 
+	}
+	
 	private void disableSslVerification() {
 		try {
 			// Create a trust manager that does not validate certificate chains
@@ -160,4 +212,10 @@ public class TodoPagoConector {
 			e.printStackTrace();
 		}
 	}
+
+	public static String getVersionTodoTago() {
+		return versionTodoPago;
+	}
+	
+	
 }

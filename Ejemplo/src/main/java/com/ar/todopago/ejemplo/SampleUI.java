@@ -2,6 +2,11 @@ package com.ar.todopago.ejemplo;
 
 import ar.com.todopago.api.ElementNames;
 import ar.com.todopago.api.TodoPagoConector;
+import ar.com.todopago.api.exceptions.ConnectionException;
+import ar.com.todopago.api.exceptions.EmptyFieldException;
+import ar.com.todopago.api.exceptions.ResponseException;
+import ar.com.todopago.api.model.User;
+
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -254,6 +259,21 @@ public class SampleUI extends javax.swing.JFrame {
     private javax.swing.JTextArea tpAnswer80;
     private javax.swing.JButton jbutton80;
     
+    //getCredentials
+    private javax.swing.JPanel jPanel90;
+    private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
+    private javax.swing.JScrollPane jScrollPane90; 
+    private javax.swing.JScrollPane jScrollPane91;
+    private javax.swing.JTextField tfUsuario90;
+    private javax.swing.JTextField tfClave90;
+    private javax.swing.JTextArea tpAnswer90;
+    private javax.swing.JButton jbutton90;
+    
     public SampleUI() {
     	setFont(new Font("Tahoma", Font.PLAIN, 11));
     	setTitle("TodoPago Ejemplo");
@@ -346,6 +366,22 @@ public class SampleUI extends javax.swing.JFrame {
         tpAnswer80 = new javax.swing.JTextArea();
         tpAnswer80.setFont(new Font("Tahoma", Font.PLAIN, 11));
         jbutton80 = new javax.swing.JButton();
+        
+      //getCredentials
+        jPanel90 = new javax.swing.JPanel();
+        jLabel90 = new javax.swing.JLabel();
+        jLabel91 = new javax.swing.JLabel();
+        jLabel92 = new javax.swing.JLabel();
+        jLabel93 = new javax.swing.JLabel();
+        jLabel94 = new javax.swing.JLabel();
+        jLabel95 = new javax.swing.JLabel();
+        jScrollPane90 = new javax.swing.JScrollPane();
+        jScrollPane91 = new javax.swing.JScrollPane();
+        tfUsuario90 = new javax.swing.JTextField();
+        tfClave90 = new javax.swing.JTextField();
+        tpAnswer90 = new javax.swing.JTextArea();
+        tpAnswer90.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        jbutton90 = new javax.swing.JButton();
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1909,6 +1945,74 @@ public class SampleUI extends javax.swing.JFrame {
         jPanel80.setLayout(jPane80Layout);
         jTabbedPane1.addTab("getByRangeDateTime", jPanel80);  
         
+ // ---------------------------------   getCredentals   ------------------------------------ 
+        
+        jLabel90.setText("USER");
+        tfUsuario90.setText("TEST");
+        
+        jLabel91.setText("PASS");
+        tfClave90.setText("TEST");
+        
+        jbutton90.setText("getCredentals");
+        jbutton90.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	jbutton90ActionPerformed(evt);
+            }
+        });
+            
+        jLabel92.setText("Answer");      
+        tpAnswer90.setColumns(20);
+        tpAnswer90.setRows(5);
+        
+        jScrollPane90.setViewportView(tpAnswer90);
+        jScrollPane91.setViewportView(jScrollPane90);
+        
+        javax.swing.GroupLayout jPane90Layout = new javax.swing.GroupLayout(jPanel90);
+        
+        jPane90Layout.setHorizontalGroup(
+        		jPane90Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane90Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane90Layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(jScrollPane90, Alignment.LEADING)
+        				.addGroup(Alignment.LEADING, jPane90Layout.createSequentialGroup()
+        					.addGroup(jPane90Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel90, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)	
+        						.addComponent(jLabel91, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(jPane90Layout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(tfUsuario90, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+        						.addComponent(tfClave90)))
+        				.addComponent(jbutton90, Alignment.LEADING)
+        				.addComponent(jScrollPane91, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel92, Alignment.LEADING))
+        			.addContainerGap(560, Short.MAX_VALUE))
+        );
+        jPane90Layout.setVerticalGroup(
+        		jPane90Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPane90Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPane90Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel90)
+        				.addComponent(tfUsuario90, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(jPane90Layout.createParallelGroup(Alignment.BASELINE)
+                			.addComponent(jLabel91)
+                			.addComponent(tfClave90, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                	.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jbutton90)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel92)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane90, GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jScrollPane91, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        );
+        
+        jPanel90.setLayout(jPane90Layout);
+        jTabbedPane1.addTab("getCredentals", jPanel90);  
+        
         
         pack();   
     }
@@ -1948,7 +2052,6 @@ public class SampleUI extends javax.swing.JFrame {
         	tpAnswerDiscoverPaymentMethods.setText("Run Config");
         }
     }
-    
     
     
     private void AAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AAActionPerformed
@@ -2011,11 +2114,18 @@ public class SampleUI extends javax.swing.JFrame {
         endpoints.put(ElementNames.Endpoint, tfOperationsEndpoiint.getText());
         
         Map<String, List<String>> auth = new HashMap<String, List<String>>();
-        auth.put("Authorization", Collections.singletonList(tfAuthorization.getText()));
+        
         try {
-            tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, auth);
+        
+        	if(!tfAuthorization.getText().isEmpty()){
+        		auth.put("Authorization", Collections.singletonList(tfAuthorization.getText()));
+        		tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, auth);	
+        	}else{
+        		tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint);	
+        	}	
+        
         } catch (MalformedURLException ex) {
-            Logger.getLogger(SampleUI.class.getName()).log(Level.SEVERE, null, ex);
+        	Logger.getLogger(SampleUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jBConfigureActionPerformed
@@ -2088,6 +2198,34 @@ public class SampleUI extends javax.swing.JFrame {
             tpAnswer80.setText(printMap(a, ""));
         }else{
         	tpAnswer80.setText("Run Config");
+        }
+    }
+    
+    //getCredentials    
+    private void jbutton90ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    	User user = new User(tfUsuario90.getText(),tfClave90.getText());    	       
+        if(tpc !=null){
+
+        	try {
+				user = tpc.getCredentials(user);			
+				Map<String, List<String>> parameters = new HashMap<String, List<String>>();
+				parameters.put(ElementNames.Authorization,Collections.singletonList(user.getApiKey()));				
+				tpc.setAuthorize(parameters);			
+				tpAnswer90.setText(user.toString());
+				
+			} catch (EmptyFieldException e) {
+				tpAnswer90.setText(e.getMessage());
+			} catch (MalformedURLException e) {	
+				tpAnswer90.setText(e.getMessage());
+			} catch (ResponseException e) {
+				tpAnswer90.setText(e.getMessage());
+			} catch (ConnectionException e) {
+				tpAnswer90.setText(e.getMessage());
+			}
+            
+        }else{
+        	tpAnswer90.setText("Run Config");
         }
     }
     

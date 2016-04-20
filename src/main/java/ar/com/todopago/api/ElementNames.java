@@ -86,5 +86,12 @@ public final class ElementNames {
 
 	// Headder
 	public static final String Authorization = "Authorization";
-
+	
+	public static final String RequestType = "RequestType";
+	public static final String VoidRequest = "VoidRequest";
+	public static final String ReturnRequest = "ReturnRequest";
+	
+	// getCredentials
+	public static final String USUARIO = "USUARIO";
+	public static final String CLAVE = "CLAVE";
 }

@@ -6,9 +6,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import ar.com.todopago.api.ElementNames;
 import ar.com.todopago.api.TodoPagoConector;
+import ar.com.todopago.api.exceptions.ConnectionException;
+import ar.com.todopago.api.exceptions.EmptyFieldException;
+import ar.com.todopago.api.exceptions.ResponseException;
+import ar.com.todopago.api.model.User;
+
 
 /**
  * @author juan.peregrina
@@ -17,20 +24,24 @@ import ar.com.todopago.api.TodoPagoConector;
 public class Test {
 
 	// Verticales para CS
-	public final static int RETAIL = 0;
-
+	public final static int RETAIL = 0;	
 	public static int vertical = RETAIL;// Configurar vertical a usar
-
+	private final static Logger logger = Logger.getLogger(Test.class.getName());
+	
 	public static void main(String[] args) throws MalformedURLException {
 
 		boolean overrideSSL = true;
+		
+		// Production
+		// TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.productionEndpoint, getAuthorization());
+
 		// Developer
 		TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, getAuthorization());
-
-		// Production
-		// TodoPagoConector tpc = new
-		// TodoPagoConector(TodoPagoConector.productionEndpoint,
-		// getAuthorization());
+		
+		//Developer without APYKey
+		//TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint);
+		
+		//getCredentials(tpc);
 
 		Map<String, Object> a = tpc.sendAuthorizeRequest(getSARParameters(), getFraudControlParameters());
 		printMap(a, "");
@@ -54,13 +65,12 @@ public class Test {
 		printMap(h, "");
 
 		Map<String, Object> i = tpc.returnRequest(getRRParameters());
-		System.out.println(i);
+    	System.out.println(i);
 		printMap(i, "");
 		
 		Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
 		System.out.println(j);
 		printMap(j, "");
-		
 	}
 
 	private static void printMap(Map<String, Object> pr, String tab) {
@@ -79,7 +89,6 @@ public class Test {
 
 			} else {
 				System.out.println(tab + "- " + keys.get(i) + " : " + pr.get(keys.get(i)));
-
 			}
 		}
 	}
@@ -170,9 +179,10 @@ public class Test {
 	}
 
 	private static Map<String, String> getAAParameters() {
-		Map<String, String> parameters = new HashMap<String, String>();
+		Map<String, String> parameters = new HashMap<String, String>();		
 		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
 		parameters.put(ElementNames.Merchant, "2153");
+		parameters.put(ElementNames.Session, null);
 		parameters.put(ElementNames.RequestKey, "710268a7-7688-c8bf-68c9-430107e6b9da");
 		parameters.put(ElementNames.AnswerKey, "693ca9cc-c940-06a4-8d96-1ab0d66f3ee6");
 		return parameters;
@@ -186,8 +196,8 @@ public class Test {
 
 	private static Map<String, String> getSParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Merchant, "2153");
-		parameters.put(ElementNames.OperationID, "02");
+		parameters.put(ElementNames.Merchant, "2658");
+		parameters.put(ElementNames.OperationID, "8000");
 		return parameters;
 	}
 
@@ -195,7 +205,7 @@ public class Test {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
 		parameters.put(ElementNames.Merchant, "2153");
-		parameters.put(ElementNames.AuthorizationKey, "e31d340c-690c-afe6-c478-fc1bef3fc157");
+		parameters.put(ElementNames.RequestKey, "710268a7-7688-c8bf-68c9-430107e6b9da");
 		return parameters;
 	}
 
@@ -203,7 +213,7 @@ public class Test {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
 		parameters.put(ElementNames.Merchant, "2153");
-		parameters.put(ElementNames.AuthorizationKey, "c7a2b859-e850-7460-4752-61951fed2195");
+		parameters.put(ElementNames.RequestKey, "710268a7-7688-c8bf-68c9-430107e6b9da");
 		parameters.put(ElementNames.Amount, "0.5");
 		return parameters;
 	}
@@ -216,17 +226,47 @@ public class Test {
 		parameters.put(ElementNames.PAGENUMBER, "1");	
 		return parameters;
 	}
+	
+	private static void getCredentials(TodoPagoConector tpc) {	
+		
+		User user = new User();			
+		try {
+			
+			user = tpc.getCredentials(getUser());
+			tpc.setAuthorize(getAuthorization(user));
+			
+		} catch (EmptyFieldException e) {
+			logger.log(Level.WARNING, e.getMessage());						
+		} catch (MalformedURLException e) {
+			logger.log(Level.WARNING, e.getMessage());		
+		} catch (ResponseException e) {
+			logger.log(Level.WARNING, e.getMessage());
+		} catch (ConnectionException e) {
+			logger.log(Level.WARNING, e.getMessage());
+		}
 
-	private static Map<String, String> getEndpoint() {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Endpoint, "https://developers.todopago.com.ar/");
-		return parameters;
+		System.out.println(user.toString());	
+	}
+	
+	private static User getUser() {	
+		String mail = "test@test.com.ar"; //The email is only as example
+		String pass = "test1234";         //The pass is only as example
+		User user = new User(mail,pass);		
+		return user;
 	}
 
 	private static Map<String, List<String>> getAuthorization() {
 		Map<String, List<String>> parameters = new HashMap<String, List<String>>();
 		parameters.put(ElementNames.Authorization,
 				Collections.singletonList("PRISMA f3d8b72c94ab4a06be2ef7c95490f7d3"));
+		// include all aditional Http headers to map, all of them will be used
+		return parameters;
+	}
+	
+	private static Map<String, List<String>> getAuthorization(User user) {
+		Map<String, List<String>> parameters = new HashMap<String, List<String>>();
+		parameters.put(ElementNames.Authorization,
+				Collections.singletonList(user.getApiKey()));
 		// include all aditional Http headers to map, all of them will be used
 		return parameters;
 	}
