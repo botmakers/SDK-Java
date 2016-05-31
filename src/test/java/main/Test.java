@@ -65,12 +65,13 @@ public class Test {
 		printMap(h, "");
 
 		Map<String, Object> i = tpc.returnRequest(getRRParameters());
-    	System.out.println(i);
+		System.out.println(i);
 		printMap(i, "");
 		
-		Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
-		System.out.println(j);
-		printMap(j, "");
+		//Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
+		//System.out.println(j);
+		//printMap(j, "");
+			
 	}
 
 	private static void printMap(Map<String, Object> pr, String tab) {
@@ -128,7 +129,7 @@ public class Test {
 		parameters.put("CSBTPOSTALCODE", "1010");// MANDATORIO.
 		parameters.put("CSBTSTATE", "B");// MANDATORIO
 		parameters.put("CSBTSTREET1", "Some Street 2153");// MANDATORIO.
-		parameters.put("CSBTSTREET2", "");// NO MANDATORIO
+		parameters.put("CSBTSTREET2", "Test");// NO MANDATORIO
 
 		parameters.put("CSBTCUSTOMERID", "453458"); // MANDATORIO.
 		parameters.put("CSBTIPADDRESS", "192.0.0.4"); // MANDATORIO.
@@ -147,7 +148,7 @@ public class Test {
 			setRetail(parameters);
 			break;
 		}
-
+	
 		return parameters;
 	}
 
@@ -161,7 +162,7 @@ public class Test {
 		parameters.put("CSSTPOSTALCODE", " 1010");// MANDATORIO.
 		parameters.put("CSSTSTATE", "B");// MANDATORIO
 		parameters.put("CSSTSTREET1", "Some Street 2153");// MANDATORIO.
-		parameters.put("CSSTSTREET2", "");// NO MANDATORIO.
+		parameters.put("CSSTSTREET2", "Test");// NO MANDATORIO.
 
 		parameters.put("CSITPRODUCTCODE", "electronic_good");// CONDICIONAL
 		parameters.put("CSITPRODUCTDESCRIPTION", "Test Prd Description");// CONDICIONAL.
@@ -183,11 +184,11 @@ public class Test {
 		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
 		parameters.put(ElementNames.Merchant, "2153");
 		parameters.put(ElementNames.Session, null);
-		parameters.put(ElementNames.RequestKey, "710268a7-7688-c8bf-68c9-430107e6b9da");
-		parameters.put(ElementNames.AnswerKey, "693ca9cc-c940-06a4-8d96-1ab0d66f3ee6");
+		parameters.put(ElementNames.RequestKey, "dcb82928-08e1-eb3f-6b89-1fec77a63092");
+		parameters.put(ElementNames.AnswerKey, "c923d2b4-47ec-4deb-ab6f-bb48c95d33df");
 		return parameters;
 	}
-
+	
 	private static Map<String, String> getPMParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(ElementNames.Merchant, "2153");
@@ -196,7 +197,7 @@ public class Test {
 
 	private static Map<String, String> getSParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Merchant, "2658");
+		parameters.put(ElementNames.Merchant, "2153");
 		parameters.put(ElementNames.OperationID, "8000");
 		return parameters;
 	}
@@ -270,5 +271,6 @@ public class Test {
 		// include all aditional Http headers to map, all of them will be used
 		return parameters;
 	}
+
 
 }

@@ -70,7 +70,7 @@ Luego, importar el proyecto normalmente en Eclipse.
 
 <a name="Versionesdejavasoportadas"></a>   
 ####1. Versiones de Java soportadas
-La versi&oacute;n implementada de la SDK, esta testeada para versiones desde Java 5 en adelante con JAX-WS.
+La versi&oacute;n implementada de la SDK, esta testeada para versiones desde Java 8 en adelante con JAX-WS.
 
 <a name="general"></a>
 ####2. Generalidades
@@ -248,7 +248,7 @@ private static Map<String, String> getFraudControlParameters() {
 	parameters.put(CSBTPOSTALCODE", "1010");//Código Postal de la dirección de facturación. MANDATORIO.	
 	parameters.put(CSBTSTATE", "B");//Provincia de la dirección de facturación. MANDATORIO. Ver tabla anexa de provincias.	
 	parameters.put(CSBTSTREET1", "Some Street 2153");//Domicilio de facturación (calle y nro). MANDATORIO.			
-	parameters.put("CSBTSTREET2", "Piso 8");//Complemento del domicilio. (piso, departamento). NO MANDATORIO.
+	parameters.put("CSBTSTREET2", "Piso 8");//Complemento del domicilio. (piso, departamento). MANDATORIO.
 	parameters.put(CSPTCURRENCY", "ARS");//Moneda. MANDATORIO.		
 	parameters.put(CSPTGRANDTOTALAMOUNT", "125.38");//Con decimales opcional usando el puntos como separador de decimales. No se permiten comas, ni como separador de miles ni como separador de decimales. MANDATORIO.(Ejemplos:$125,38-> 125.38 $12-> 12 o 12.00)		
 	parameters.put(CSMDD7", "");// Fecha registro comprador(num Dias). NO MANDATORIO.		
@@ -267,7 +267,7 @@ private static Map<String, String> getFraudControlParameters() {
 	parameters.put("CSSTPOSTALCODE", "1010");//Código postal del domicilio de envío. MANDATORIO.		
 	parameters.put("CSSTSTATE", "B");//Provincia de envío. MANDATORIO. Son de 1 caracter			
 	parameters.put("CSSTSTREET1", "Some Street 2153");//Domicilio de envío. MANDATORIO.		
-	parameters.put("CSSTSTREET2", "");//NO MANDATORIO.
+	parameters.put("CSSTSTREET2", "Piso 8");//Complemento del domicilio. (piso, departamento). MANDATORIO.
 	parameters.put("CSMDD12", "");//Shipping DeadLine (Num Dias). NO MADATORIO.		
 	parameters.put("CSMDD13", "");//Método de Despacho. NO MANDATORIO.		
 	parameters.put("CSMDD14", "");//Customer requires Tax Bill ? (Y/N). NO MANDATORIO.		

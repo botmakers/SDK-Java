@@ -23,11 +23,12 @@ import ar.com.todopago.api.exceptions.EmptyFieldUserException;
 import ar.com.todopago.api.exceptions.ResponseException;
 import ar.com.todopago.api.model.User;
 import ar.com.todopago.api.rest.RestConnector;
+import ar.com.todopago.utils.FraudControlValidate;
 import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
 
-	public static final String versionTodoPago = "1.3.0";
+	public static final String versionTodoPago = "1.4.0";
 
 	private final String soapAppend = "services/";
 	private final String restAppend = "api/";
@@ -94,8 +95,16 @@ public class TodoPagoConector {
 	}
 
 	public Map<String, Object> sendAuthorizeRequest(Map<String, String> parameters, Map<String, String> fraudControl) {
+		
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = authorize.getpaymentValues(parameters, fraudControl);
+		FraudControlValidate cf = new FraudControlValidate();
+		fraudControl = cf.validate(fraudControl);
+		
+		if(fraudControl.containsKey(ElementNames.ERROR)){
+			result.putAll(fraudControl);			
+		}else{
+			result = authorize.getpaymentValues(parameters, fraudControl);			
+		}
 		return result;
 	}
 

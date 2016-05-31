@@ -294,7 +294,7 @@ public class TodoPagoConectorAuthorize {
 			NodeList nodeList = node.getChildNodes();
 			for (int i = 0; nodeList.getLength() > i; i++) {
 				Node child = nodeList.item(i);
-				result.put(child.getNodeName(), child.getNodeValue());
+				result.put(child.getNodeName(), child.getNodeValue()==null?child.getTextContent():child.getNodeValue());
 			}
 		}
 	}

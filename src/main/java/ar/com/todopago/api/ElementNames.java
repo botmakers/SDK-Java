@@ -94,4 +94,6 @@ public final class ElementNames {
 	// getCredentials
 	public static final String USUARIO = "USUARIO";
 	public static final String CLAVE = "CLAVE";
+	
+	public static final String ERROR = "ERROR";
 }
