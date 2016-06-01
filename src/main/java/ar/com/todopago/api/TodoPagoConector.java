@@ -28,7 +28,7 @@ import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
 
-	public static final String versionTodoPago = "1.4.0";
+	public static final String versionTodoPago = "1.4.1";
 
 	private final String soapAppend = "services/";
 	private final String restAppend = "api/";

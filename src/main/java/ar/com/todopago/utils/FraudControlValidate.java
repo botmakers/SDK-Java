@@ -43,6 +43,7 @@ public class FraudControlValidate {
 	private Map<String, String> CSITMap;
 	private Map<String, String> stateCode;
 	private List<String> campError;
+	private Map<String, Integer> keyMap;
 
 	public FraudControlValidate() {
 
@@ -62,6 +63,7 @@ public class FraudControlValidate {
 			this.CSITMap = new HashMap<String, String>();
 			this.campError = new ArrayList<String>();
 			setState();
+			setKeyMap();
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -219,7 +221,7 @@ public class FraudControlValidate {
 
 		for (int i = 0; i < formatArray.length(); i++) {
 
-			String function = null;
+			int function = 0 ;
 			String message = null;
 			ArrayList<String> params = new ArrayList<String>();
 			json = formatArray.getJSONObject(i);
@@ -228,7 +230,8 @@ public class FraudControlValidate {
 			while (Itr.hasNext()) {
 				String name = Itr.next();
 				if (name.equals(FUNCTION)) {
-					function = json.getString(name);
+					String fun = json.getString(name);
+					function = keyMap.get(fun);				
 				}
 				if (name.equals(MESSAGE)) {
 					message = json.getString(name);
@@ -242,31 +245,31 @@ public class FraudControlValidate {
 			}
 
 			switch (function) {
-			case "clean":
+			case 1:
 				result = clean(value);
 				break;
 
-			case "truncate":
+			case 2:
 				result = truncate(value, Integer.valueOf(params.get(0)));
 				break;
 
-			case "hardcode":
+			case 3:
 				result = hardcode(value, params.get(0));
 				break;
 
-			case "upper":
+			case 4:
 				result = upper(value);
 				break;
 
-			case "regex":
+			case 5:
 				result = regexFormat(value, params.get(0));
 				break;
 
-			case "phone":
+			case 6:
 				result = phone(value);
 				break;
 
-			case "csitFormat":
+			case 7:
 				CSITMap.put(field, value);
 				break;
 
@@ -497,6 +500,18 @@ public class FraudControlValidate {
 		this.stateCode.put("Y", "4600");
 		this.stateCode.put("Z", "9400");	
 	}
+	
+	private void setKeyMap() {
+		this.keyMap = new HashMap<String, Integer>();
+		this.keyMap.put("clean",1);
+		this.keyMap.put("truncate",2); 
+		this.keyMap.put("hardcode",3);
+		this.keyMap.put("upper",4);
+		this.keyMap.put("regex",5);
+		this.keyMap.put("phone",6);
+		this.keyMap.put("csitFormat",7);
+	}
+
 
 	private String findState() {
 		String result = "C";

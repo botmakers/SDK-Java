@@ -167,21 +167,6 @@
 				]		
 	},
 	{
-		"field" : "CSBTSTREET2",
-		"validate":[
-					{ "function":"notEmpty",
-					  "message" : "El campo CSBTSTREET2 es requerido"		
-					}
-				],
-		"format":[  { "function":"clean" 
-					},
-					{ "function":"truncate",
-					  "params":["59"]	
-					}
-					
-				]		
-	},
-	{
 		"field" : "CSPTCURRENCY",
 		"format":[
 					{ "function":"hardcode",

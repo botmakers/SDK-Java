@@ -11,7 +11,7 @@ import ar.com.todopago.utils.FraudControlValidate;
 public class FraudControlValidateTest {
 
 	public static void main(String[] args) throws MalformedURLException {
-		Map<String, String> parameters = new HashMap<>();
+		Map<String, String> parameters = new HashMap<String, String> ();
 		FraudControlValidate FCV = new FraudControlValidate();
 		parameters = FCV.validate(getFraudControlParametersTestroto());
 		printMap(parameters, "");
