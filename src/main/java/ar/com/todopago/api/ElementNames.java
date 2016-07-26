@@ -79,6 +79,7 @@ public final class ElementNames {
 	public static final String UrlOK = "URL_OK";
 	public static final String PublicRequestKey = "PublicRequestKey";
 	public static final String EMAILCLIENTE = "EMAILCLIENTE";
+	public static final String MAXINSTALLMENTS = "MAXINSTALLMENTS";
 
 	// Authorize return
 	public static final String RequestChannel = "RequestChannel";

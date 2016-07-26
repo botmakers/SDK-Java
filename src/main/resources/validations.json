@@ -1,30 +1,31 @@
-[
-	{
-		"field" : "CSBTCITY",
-		"validate":[
-					{ "function":"notEmpty",
-					  "message": "El campo CSBTCITY es requerido"	
-					}
-				],
-		"format":[
-					{ "function":"clean" 
-					},
-					{ "function":"truncate",
-					  "params":["49"]	
-					}
-				]		
-	},
-	{
-		"field" : "CSBTCOUNTRY",		
+{
+    "CSBTCITY": {
+        "validate": [
+            {
+                "function": "notEmpty",
+                "message": "El campo CSBTCITY es requerido"
+            }
+        ],
+        "format": [
+            {
+                "function": "clean"
+            },
+            {
+                "function": "truncate",
+                "params": [ "49" ]
+            }
+        ]
+    },
+    "CSBTCOUNTRY": {
 		"format":[
 					{ 	"function":"hardcode",
 						"params":["AR"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSBTCUSTOMERID",
-		"validate":[
+				]
+
+    },
+    "CSBTCUSTOMERID": {
+       "validate":[
 					{ "function":"notEmpty",
 					  "default" : "random"		
 					}
@@ -34,10 +35,9 @@
 					{ 	"function":"truncate",
 						"params":["49"]	
 					}					
-				]	
-	},
-	{
-		"field" : "CSBTEMAIL",
+				]
+    },	
+    "CSBTEMAIL": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSBTEMAIL es requerido"		
@@ -48,16 +48,13 @@
 					  "message" : "El campo CSBTEMAIL es invalido"		
 					}
 				],
-		"format":[  { "function":"clean" 
-					},
-					{ 	"function":"truncate",
+		"format":[  
+					{ 	"function":"truncateLeft",
 						"params":["99"]	
 					}
-					
-				]		
-	},
-	{
-		"field" : "CSBTIPADDRESS",
+				]	
+    },	
+    "CSBTIPADDRESS": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSBTIPADDRESS es requerido"		
@@ -67,9 +64,8 @@
 					  "message" : "El campo CSBTIPADDRESS es invalido"		
 					}
 				]
-	},
-	{
-		"field" : "CSBTPOSTALCODE",
+    },		
+    "CSBTPOSTALCODE": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "default" : "findState"		
@@ -80,12 +76,9 @@
 					{ "function":"truncate",
 					  "params":["9"]	
 					}
-
-				]		
-	},
-
-	{
-		"field" : "CSBTSTATE",
+				]
+    },	
+    "CSBTSTATE": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "default" : "C"		
@@ -102,11 +95,9 @@
 					},
 					{ "function":"upper" 
 					}
-					
-				]		
-	},
-	{
-		"field" : "CSBTFIRSTNAME",
+				]	
+    },	
+	"CSBTFIRSTNAME": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSBTFIRSTNAME es requerido"		
@@ -117,10 +108,9 @@
 					{ "function":"truncate",
 					  "params":["59"]	
 					}					
-				]		
-	},
-	{
-		"field" : "CSBTLASTNAME",
+				]	
+    },
+	"CSBTLASTNAME": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSBTLASTNAME es requerido"		
@@ -131,11 +121,9 @@
 					{ "function":"truncate",
 					  "params":["59"]	
 					}
-					
-				]		
-	},
-	{
-		"field" : "CSBTPHONENUMBER",
+				]	
+    },	
+	"CSBTPHONENUMBER": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSBTPHONENUMBER es requerido"		
@@ -150,10 +138,9 @@
 					{ "function":"regex",
 					  "params": ["[^0-9]"]
 					}
-				]		
-	},
-	{
-		"field" : "CSBTSTREET1",
+				]	
+    },
+	"CSBTSTREET1": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSBTSTREET1 es requerido"		
@@ -164,18 +151,24 @@
 					{ "function":"truncate",
 					  "params":["59"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSPTCURRENCY",
+				]	
+    },	
+	"CSBTSTREET2": {
+		"format":[  { "function":"clean" 
+					},
+					{ "function":"truncate",
+					  "params":["59"]	
+					}
+				]	
+    },	
+	"CSPTCURRENCY": {
 		"format":[
 					{ "function":"hardcode",
 					  "params":["ARS"]	
 					}
 				]		
-	},
-	{
-		"field" : "CSPTGRANDTOTALAMOUNT",
+    },	
+	"CSPTGRANDTOTALAMOUNT": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSPTGRANDTOTALAMOUNT es requerido"		
@@ -186,9 +179,8 @@
 					   "params": ["/^([0-9]{0,12}).([0-9]{0,2})$/"]
 					}
 				]		
-	},
-	{
-		"field" : "CSMDD6",
+    },	
+	"CSMDD6": {
 		"format":[
 					{ "function":"clean" 
 					},
@@ -196,9 +188,8 @@
 					  "params":["254"]	
 					}
 				]		
-	},
-	{
-		"field" : "CSMDD7",
+    },		
+	"CSMDD7": {
 		"format":[
 					{ "function":"clean" 
 					},
@@ -206,28 +197,35 @@
 					  "params":["254"]	
 					}
 				]		
-	},
-	{
-		"field" : "CSMDD8",
+    },	
+	"CSMDD8": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "default" : "N"		
 					},
 					{ "function":"regex",
-					  "params":["^[YySsNn]$"],
+					  "params":["^[SsNn]$"],
 					  "default" : "N"
 					}
-
 				 ],
 		"format":[
 					{
 					  "function":"truncate",
 					  "params":["1"]
 					}
-				]		
-	},
-	{
-		"field" : "CSMDD9",
+				]
+    },	
+	"CSMDD9": {
+		"format":[
+					{ "function":"clean" 
+					},		
+					{
+					  "function":"truncate",
+					  "params":["254"]
+					}
+				]	
+    },	
+	"CSMDD10": {
 		"format":[
 					{ "function":"clean" 
 					},		
@@ -236,9 +234,8 @@
 					  "params":["254"]
 					}
 				]		
-	},
-	{
-		"field" : "CSMDD10",
+    },	
+	"CSMDD11": {
 		"format":[
 					{ "function":"clean" 
 					},		
@@ -246,10 +243,9 @@
 					  "function":"truncate",
 					  "params":["254"]
 					}
-				]		
-	},
-	{
-		"field" : "CSMDD11",
+				]	
+    },
+	"CSMDD44": {
 		"format":[
 					{ "function":"clean" 
 					},		
@@ -257,21 +253,9 @@
 					  "function":"truncate",
 					  "params":["254"]
 					}
-				]		
-	},
-	{
-		"field" : "CSMDD44",
-		"format":[
-					{ "function":"clean" 
-					},		
-					{
-					  "function":"truncate",
-					  "params":["254"]
-					}
-				]		
-	},
-	{
-		"field" : "CSSTCITY",
+				]	
+    },
+	"CSSTCITY": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message": "El campo CSSTCITY es requerido"	
@@ -284,38 +268,31 @@
 					  "params":["49"]	
 					}
 				]		
-	},
-	{
-		"field" : "CSSTCOUNTRY",
-		
+    },	
+	"CSSTCOUNTRY": {
 		"format":[
 					{ 	"function":"hardcode",
 						"params":["AR"]	
 					}
 				]		
-	},
-	{
-		"field" : "CSSTEMAIL",
+    },	
+	"CSSTEMAIL": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSSTEMAIL es requerido"		
 					},
-
 					{ "function":"regex",
 					  "params" : ["^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z])+$"],
 					  "message" : "El campo CSSTEMAIL es invalido"		
 					}
 				],
-		"format":[  { "function":"clean" 
-					},
-					{ 	"function":"truncate",
+		"format":[  
+					{ 	"function":"truncateLeft",
 						"params":["99"]	
 					}
-					
-				]	
-	},
-	{
-		"field" : "CSSTFIRSTNAME",
+				]		
+    },	
+	"CSSTFIRSTNAME": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSSTFIRSTNAME es requerido"		
@@ -327,10 +304,9 @@
 					{ "function":"truncate",
 					  "params":["59"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSSTLASTNAME",
+				]	
+    },	
+	"CSSTLASTNAME": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSSTLASTNAME es requerido"		
@@ -342,10 +318,9 @@
 					{ "function":"truncate",
 					  "params":["59"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSSTPHONENUMBER",
+				]	
+    },	
+	"CSSTPHONENUMBER": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSSTPHONENUMBER es requerido"		
@@ -362,9 +337,8 @@
 						"params": ["[^0-9]"]
 					}
 				]		
-	},
-	{
-		"field" : "CSSTPOSTALCODE",
+    },		
+	"CSSTPOSTALCODE": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "default" : "findState"		
@@ -376,15 +350,13 @@
 					{ "function":"truncate",
 					  "params":["9"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSSTSTATE",
+				]			
+    },
+	"CSSTSTATE": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "default" : "C"		
 					}
-					
 				],
 		"format":[
 					{ "function":"truncate",
@@ -396,11 +368,9 @@
 					},
 					{ "function":"upper" 
 					}
-					
-				]
-	},
-	{
-		"field" : "CSSTSTREET1",
+				]			
+    },
+	"CSSTSTREET1": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSSTSTREET1 es requerido"		
@@ -412,64 +382,53 @@
 					{ "function":"truncate",
 					  "params":["59"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSSTSTREET2",
-		"validate":[
-					{ "function":"notEmpty",
-					  "message" : "El campo CSSTSTREET2 es requerido"		
-					}
-				],
+				]			
+    },
+	"CSSTSTREET2": {
 		"format":[
 					{ "function":"clean" 
 					},
 					{ "function":"truncate",
 					  "params":["59"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSMDD12",
+				]				
+    },
+	"CSMDD12": {
 		"format":[
 					{ "function":"clean" 
 					},
 					{ "function":"truncate",
 					  "params":["254"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSMDD13",
+				]				
+    },
+	"CSMDD13": {
 		"format":[
 					{ "function":"clean" 
 					},
 					{ "function":"truncate",
 					  "params":["254"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSMDD14",
+				]				
+    },
+	"CSMDD14": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "default" : "N"		
 					},
 					{ "function":"regex",
-					  "params":["^[YySsNn]$"],
+					  "params":["^[SsNn]$"],
 					  "default" : "N"
 					}
-
 				 ],
 		"format":[
 					{
 					  "function":"truncate",
 					  "params":["1"]
 					}
-				]		
-	},
-	{
-		"field" : "CSMDD15",
+				]	
+    },	
+	"CSMDD15": {
 		"format":[
 					{ "function":"clean" 
 					},
@@ -477,9 +436,8 @@
 					  "params":["254"]	
 					}
 				]		
-	},
-	{
-		"field" : "CSMDD16",
+    },
+	"CSMDD16": {
 		"format":[
 					{ "function":"clean" 
 					},
@@ -487,11 +445,8 @@
 					  "params":["254"]	
 					}
 				]		
-	},
-
-
-	{
-		"field" : "CSITPRODUCTCODE",
+    },
+	"CSITPRODUCTCODE": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSITPRODUCTCODE es requerido"		
@@ -501,10 +456,9 @@
 					{ "function":"csitFormat",
 					  "params":["254"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSITPRODUCTDESCRIPTION",
+				]	
+    },
+	"CSITPRODUCTDESCRIPTION": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSITPRODUCTDESCRIPTION es requerido"		
@@ -514,10 +468,9 @@
 					{ "function":"csitFormat",
 					  "params":["254"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSITPRODUCTNAME",
+				]	
+    },
+	"CSITPRODUCTNAME": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSITPRODUCTNAME es requerido"		
@@ -527,10 +480,9 @@
 					{ "function":"csitFormat",
 					  "params":["254"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSITPRODUCTSKU",
+				]	
+    },
+	"CSITPRODUCTSKU": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSITPRODUCTSKU es requerido"		
@@ -540,10 +492,9 @@
 					{ "function":"csitFormat",
 					  "params":["254"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSITTOTALAMOUNT",
+				]	
+    },
+	"CSITTOTALAMOUNT": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSITTOTALAMOUNT es requerido"		
@@ -553,10 +504,9 @@
 					{ "function":"csitFormat",
 					  "params":["254"]	
 					}
-				]		
-	},
-		{
-		"field" : "CSITUNITPRICE",
+				]	
+    },
+	"CSITUNITPRICE": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSITUNITPRICE es requerido"		
@@ -566,10 +516,9 @@
 					{ "function":"csitFormat",
 					  "params":["254"]	
 					}
-				]		
-	},
-	{
-		"field" : "CSITQUANTITY",
+				]	
+    },
+	"CSITQUANTITY": {
 		"validate":[
 					{ "function":"notEmpty",
 					  "message" : "El campo CSITQUANTITY es requerido"		
@@ -579,12 +528,12 @@
 					{ "function":"csitFormat",
 					  "params":["254"]	
 					}
-				]		
-	}
+				]	
+    }	
+}
 
 
 
-]
 
 
 

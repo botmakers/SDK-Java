@@ -106,7 +106,7 @@ public class FraudControlValidateTest {
 		parameters.put("CSBTSTATE", "B");// MANDATORIO
 		parameters.put("CSBTSTREET1",
 				"Some Street 2153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!$%&/()?");// MANDATORIO.
-		parameters.put("CSBTSTREET2", "t");// NO MANDATORIO
+		parameters.put("CSBTSTREET2", "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");// NO MANDATORIO
 
 		parameters.put("CSBTCUSTOMERID", ""); // MANDATORIO.
 		parameters.put("CSBTIPADDRESS", "190.111.246.12"); // MANDATORIO.
@@ -135,7 +135,7 @@ public class FraudControlValidateTest {
 		parameters.put("CSSTSTATE", "B");// MANDATORIO
 		parameters.put("CSSTSTREET1",
 				"Some Street 2153PerezAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!$%&/()?");// MANDATORIO.
-		parameters.put("CSSTSTREET2", "t");// NO MANDATORIO.
+		// parameters.put("CSSTSTREET2", "t");// NO MANDATORIO.
 
 		parameters.put("CSITPRODUCTCODE",
 				"electronic_good#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb#ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");// CONDICIONAL
@@ -151,7 +151,7 @@ public class FraudControlValidateTest {
 
 		parameters.put("CSMDD12", "");// NO MADATORIO.
 		parameters.put("CSMDD13", "");// NO MANDATORIO.
-		parameters.put("CSMDD14", "");// NO MANDATORIO.
+		parameters.put("CSMDD14", "Car");// NO MANDATORIO.
 		parameters.put("CSMDD15", "");// NO MANDATORIO.
 		parameters.put("CSMDD16", "");// NO MANDATORIO.
 

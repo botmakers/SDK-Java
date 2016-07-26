@@ -11,10 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,17 +26,19 @@ public class FraudControlValidate {
 	private final String PHONE = "[^0-9]";
 	private final String CSIT_DESCRIPTION = "CSITPRODUCTDESCRIPTION";
 	private final String CSBTSTATE = "CSBTSTATE";
-	private final String NUMERAL = "#";	
-	private final String FIELD = "field";
+	private final String NUMERAL = "#";
 	private final String VALIDATE = "validate";
 	private final String FORMAT = "format";
 	private final String FUNCTION = "function";
 	private final String MESSAGE = "message";
 	private final String PARAMS = "params";
-	private final String DEFAULT = "default";	
+	private final String DEFAULT = "default";
+	private final String NOT_EMPTY = "notEmpty";
+	private final String REGEX = "regex";
+
 	private final String LOCATION_JSON = "/validations.json";
-	
-	private JSONArray jsonArray;
+
+	private JSONObject jsonObject;
 	private Map<String, String> resultMap;
 	private Map<String, String> CSITMap;
 	private Map<String, String> stateCode;
@@ -46,7 +46,7 @@ public class FraudControlValidate {
 	private Map<String, Integer> keyMap;
 
 	public FraudControlValidate() {
-
+		
 		String line;
 		StringBuilder text = new StringBuilder();
 
@@ -58,7 +58,7 @@ public class FraudControlValidate {
 			while ((line = reader.readLine()) != null) {
 				text.append(line).append(" ");
 			}
-			this.jsonArray = new JSONArray(text.toString());
+			this.jsonObject = new JSONObject(text.toString());
 			this.resultMap = new HashMap<String, String>();
 			this.CSITMap = new HashMap<String, String>();
 			this.campError = new ArrayList<String>();
@@ -74,65 +74,89 @@ public class FraudControlValidate {
 
 	public Map<String, String> validate(Map<String, String> parameters) {
 
-		Iterator<Entry<String, String>> it = parameters.entrySet().iterator();
-		Entry<String, String> entry = null;
-
-		try {
-
-			while (it.hasNext()) {
-				entry = it.next();
-				String key = entry.getKey();
-				String value = entry.getValue();
-
-				for (int i = 0; i < this.jsonArray.length(); i++) {
-					JSONObject json = jsonArray.getJSONObject(i);
-					String field = json.getString(FIELD);
-					if (key.equals(field)) {
-						JSONArray validateArray = null;
-						JSONArray formatArray = null;
-						Iterator<String> Itr = json.keys();
-						while (Itr.hasNext()) {
-							String name = Itr.next();
-							if (name.equals(VALIDATE)) {
-								validateArray = json.getJSONArray(VALIDATE);
-							}
-							if (name.equals(FORMAT)) {
-								formatArray = json.getJSONArray(FORMAT);
-							}
-						}
-						selector(validateArray, formatArray, value, field);
-					}
+		try {	
+			 for (Iterator<String> keys = this.jsonObject.keys(); keys.hasNext(); ){
+		
+				String key = (String) keys.next();
+				JSONObject json = (JSONObject) this.jsonObject.get(key);
+				
+				JSONArray jArrayValidate = getJsonArray(json, VALIDATE);
+				JSONArray jArrayFormat = getJsonArray(json, FORMAT);
+				
+				if (parameters.containsKey(key)) {
+					String value = parameters.get(key);
+					selector(jArrayValidate, jArrayFormat, value, key);
+				} else {
+						if (isRequired(jArrayValidate)) {
+							addError(key);
+							addField(key, "El campo " + key + " es requerido");
+						}				
 				}
-			}
-			
-			Map<String, String> csitMap = csitFormat(254);
-			resultMap.putAll(csitMap);
-			String error = "";
-			for (String field : this.campError) {
-				error = error + field + ", " ;
-			}			
-			if(this.campError.size()>0){
-				resultMap.put(ElementNames.ERROR, error);
-			}
-			
+			}	 
+			 
+			completeResultMap(parameters);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return resultMap;
-
 	}
+	
+	private JSONArray getJsonArray(JSONObject json, String field) throws JSONException{	
+		JSONArray jArrayResult = null;		
+		for (Iterator<String> Itr = json.keys(); Itr.hasNext(); ){		
+			String name = Itr.next();
+			if (name.equals(field)) {
+				jArrayResult = json.getJSONArray(field);
+			}
+		}	
+		return jArrayResult; 
+	}
+	
+	private boolean isRequired(JSONArray jArrayValidate) throws JSONException{	
+		boolean required = false;		
+		if (jArrayValidate != null) {
+			JSONObject json = (JSONObject) jArrayValidate.getJSONObject(0);
+			String function = (String) json.get(FUNCTION);
+			if (function.equals(NOT_EMPTY)) {
+				required = true ;
+			}
+		}
+		return required; 
+	}
+	
+	private void completeResultMap(Map<String, String> parameters) {	
+		
+		 Entry<String, String> entry = null;
+		 for (Iterator<Entry<String, String>> it = parameters.entrySet().iterator(); it.hasNext(); ){
+			entry = it.next();
+			String key = entry.getKey();
+			String value = entry.getValue();
+			addField(key, value);
+		 }	
+		 
+		 resultMap.putAll(csitFormat(254));
 
+		 String error = "";
+		 for (String field : this.campError) {
+			 error = error + field + " ";
+		 }
+		 if (this.campError.size() > 0) {
+			 resultMap.put(ElementNames.ERROR, error);
+		 }
+	}
+	
+	
 	private void selector(JSONArray validateArray, JSONArray formatArray, String value, String field)
 			throws JSONException {
 
 		boolean validationOK = false;
-
 		if (validateArray != null) {
 			validationOK = validation(validateArray, value, field);
 			if (validationOK) {
-				if(formatArray != null){
+				if (formatArray != null) {
 					value = format(formatArray, value, field);
-				}				
+				}
 			} else {
 				addError(field);
 			}
@@ -143,12 +167,12 @@ public class FraudControlValidate {
 				addError(field);
 			}
 
-		}else{		
-			if(formatArray != null){
+		} else {
+			if (formatArray != null) {
 				value = format(formatArray, value, field);
 				addField(field, value);
 			}
-			
+
 		}
 	}
 
@@ -166,8 +190,7 @@ public class FraudControlValidate {
 			String def = null;
 			json = validateArray.getJSONObject(i);
 
-			Iterator<String> Itr = json.keys();
-			while (Itr.hasNext()) {
+			for (Iterator<String> Itr = json.keys(); Itr.hasNext(); ){		
 				String name = Itr.next();
 				if (name.equals(FUNCTION)) {
 					function = json.getString(name);
@@ -186,7 +209,7 @@ public class FraudControlValidate {
 				}
 			}
 
-			if (function.equals("notEmpty")) {
+			if (function.equals(NOT_EMPTY)) {
 				valid = isNotEmpty(val);
 				if (!valid) {
 					if (def != null) {
@@ -199,11 +222,13 @@ public class FraudControlValidate {
 				}
 			}
 
-			if (function.equals("regex")) {
+			if (function.equals(REGEX)) {
 				valid = regexValidate(params.get(0), val);
 				if (!valid) {
 					if (def != null) {
 						addField(field, def);
+						val = def;
+						valid = true;
 					} else {
 						addField(field, message);
 					}
@@ -221,17 +246,16 @@ public class FraudControlValidate {
 
 		for (int i = 0; i < formatArray.length(); i++) {
 
-			int function = 0 ;
+			int function = 0;
 			String message = null;
 			ArrayList<String> params = new ArrayList<String>();
 			json = formatArray.getJSONObject(i);
 
-			Iterator<String> Itr = json.keys();
-			while (Itr.hasNext()) {
+			for (Iterator<String> Itr = json.keys(); Itr.hasNext(); ){		
 				String name = Itr.next();
 				if (name.equals(FUNCTION)) {
 					String fun = json.getString(name);
-					function = keyMap.get(fun);				
+					function = keyMap.get(fun);
 				}
 				if (name.equals(MESSAGE)) {
 					message = json.getString(name);
@@ -246,33 +270,36 @@ public class FraudControlValidate {
 
 			switch (function) {
 			case 1:
-				result = clean(value);
+				result = clean(result);
 				break;
 
 			case 2:
-				result = truncate(value, Integer.valueOf(params.get(0)));
+				result = truncate(result, Integer.valueOf(params.get(0)));
 				break;
 
 			case 3:
-				result = hardcode(value, params.get(0));
+				result = hardcode(result, params.get(0));
 				break;
 
 			case 4:
-				result = upper(value);
+				result = upper(result);
 				break;
 
 			case 5:
-				result = regexFormat(value, params.get(0));
+				result = regexFormat(result, params.get(0));
 				break;
 
 			case 6:
-				result = phone(value);
+				result = phone(result);
 				break;
 
 			case 7:
-				CSITMap.put(field, value);
+				CSITMap.put(field, result);
 				break;
 
+			case 8:
+				result = truncateLeft(result, Integer.valueOf(params.get(0)));
+				break;
 			}
 		}
 
@@ -298,6 +325,17 @@ public class FraudControlValidate {
 			value.trim();
 			if (value.length() > size) {
 				value = value.substring(0, size);
+			}
+		}
+		return value;
+	}
+
+	private String truncateLeft(String value, int size) {
+		if (value != null && !value.isEmpty()) {
+			value.trim();
+			if (value.length() > size) {
+				int i = value.length() - size;
+				value = value.substring(i, size);
 			}
 		}
 		return value;
@@ -362,7 +400,7 @@ public class FraudControlValidate {
 		return result;
 	}
 
-	private String regexFormat(String value,String pattern) {
+	private String regexFormat(String value, String pattern) {
 		if (value != null && !value.isEmpty()) {
 			Pattern pat = Pattern.compile(pattern);
 			Matcher mat = pat.matcher(value);
@@ -383,11 +421,9 @@ public class FraudControlValidate {
 
 			String[] aux = value.split(NUMERAL);
 			sizeDescription = aux.length;
-
-			Iterator<Entry<String, String>> it = CSITMap.entrySet().iterator();
+		
 			Entry<String, String> entry = null;
-
-			while (it.hasNext()) {
+			 for (Iterator<Entry<String, String>> it = CSITMap.entrySet().iterator(); it.hasNext(); ){
 				entry = it.next();
 				String key = entry.getKey();
 				String val = entry.getValue();
@@ -445,15 +481,15 @@ public class FraudControlValidate {
 		return result;
 	}
 
-	private void addError(String field) {		
-		if(!this.campError.contains(field)){
-			this.campError.add(field);		
-		}		
+	private void addError(String field) {
+		if (!this.campError.contains(field)) {
+			 this.campError.add(field);
+		}
 	}
 
 	private void addField(String field, String value) {
 		if (!resultMap.containsKey(field)) {
-			resultMap.put(field, value);
+			 resultMap.put(field, value);
 		}
 	}
 
@@ -461,7 +497,7 @@ public class FraudControlValidate {
 		String result = null;
 
 		if (value.equals("random")) {
-			int C = (int)(Math.random()*1000 + 1);
+			int C = (int) (Math.random() * 1000 + 1);
 			result = "ABC" + C;
 		} else {
 			if (value.equals("findState")) {
@@ -498,23 +534,23 @@ public class FraudControlValidate {
 		this.stateCode.put("W", "3400");
 		this.stateCode.put("X", "5000");
 		this.stateCode.put("Y", "4600");
-		this.stateCode.put("Z", "9400");	
+		this.stateCode.put("Z", "9400");
 	}
-	
+
 	private void setKeyMap() {
 		this.keyMap = new HashMap<String, Integer>();
-		this.keyMap.put("clean",1);
-		this.keyMap.put("truncate",2); 
-		this.keyMap.put("hardcode",3);
-		this.keyMap.put("upper",4);
-		this.keyMap.put("regex",5);
-		this.keyMap.put("phone",6);
-		this.keyMap.put("csitFormat",7);
+		this.keyMap.put("clean", 1);
+		this.keyMap.put("truncate", 2);
+		this.keyMap.put("hardcode", 3);
+		this.keyMap.put("upper", 4);
+		this.keyMap.put("regex", 5);
+		this.keyMap.put("phone", 6);
+		this.keyMap.put("csitFormat", 7);
+		this.keyMap.put("truncateLeft", 8);
 	}
 
-
 	private String findState() {
-		String result = "C";
+		String result = "1000";
 
 		if (resultMap.containsKey(CSBTSTATE)) {
 			if (stateCode.containsKey(resultMap.get(CSBTSTATE))) {

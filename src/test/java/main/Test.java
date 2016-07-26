@@ -9,13 +9,12 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ar.com.todopago.api.ElementNames;
+import ar.com.todopago.api.ElementNames; 
 import ar.com.todopago.api.TodoPagoConector;
 import ar.com.todopago.api.exceptions.ConnectionException;
 import ar.com.todopago.api.exceptions.EmptyFieldException;
 import ar.com.todopago.api.exceptions.ResponseException;
 import ar.com.todopago.api.model.User;
-
 
 /**
  * @author juan.peregrina
@@ -24,24 +23,31 @@ import ar.com.todopago.api.model.User;
 public class Test {
 
 	// Verticales para CS
-	public final static int RETAIL = 0;	
+	public final static int RETAIL = 0;
 	public static int vertical = RETAIL;// Configurar vertical a usar
 	private final static Logger logger = Logger.getLogger(Test.class.getName());
-	
+
+	public static final String APIKEY = "PRISMA f3d8b72c94ab4a06be2ef7c95490f7d3";
+	public static final String MERCHANT = "2153";
+	public static final String SECURITY = "f3d8b72c94ab4a06be2ef7c95490f7d3";
+
 	public static void main(String[] args) throws MalformedURLException {
 
 		boolean overrideSSL = true;
-		
+
 		// Production
-		// TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.productionEndpoint, getAuthorization());
+		// TodoPagoConector tpc = new
+		// TodoPagoConector(TodoPagoConector.productionEndpoint,
+		// getAuthorization());
 
 		// Developer
 		TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, getAuthorization());
-		
-		//Developer without APYKey
-		//TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint);
-		
-		//getCredentials(tpc);
+
+		// Developer without APYKey
+		// TodoPagoConector tpc = new
+		// TodoPagoConector(TodoPagoConector.developerEndpoint);
+
+		// getCredentials(tpc);
 
 		Map<String, Object> a = tpc.sendAuthorizeRequest(getSARParameters(), getFraudControlParameters());
 		printMap(a, "");
@@ -67,11 +73,11 @@ public class Test {
 		Map<String, Object> i = tpc.returnRequest(getRRParameters());
 		System.out.println(i);
 		printMap(i, "");
-		
-		//Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
-		//System.out.println(j);
-		//printMap(j, "");
-			
+
+//		 Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
+//		 System.out.println(j);
+//		 printMap(j, "");
+
 	}
 
 	private static void printMap(Map<String, Object> pr, String tab) {
@@ -97,21 +103,22 @@ public class Test {
 	private static Map<String, String> getSARParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put(ElementNames.Session, "ABCDEF-1234-12221-FDE1-00000200");
-		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
+		parameters.put(ElementNames.Security, SECURITY);
 		parameters.put(ElementNames.EncodingMethod, "XML");
-		parameters.put(ElementNames.Merchant, "2153");
-		parameters.put(ElementNames.OperationID, "8000");
+		parameters.put(ElementNames.Merchant, MERCHANT);
+		parameters.put(ElementNames.OperationID, "8001");
 		parameters.put(ElementNames.CurrencyCode, "032");
 		parameters.put(ElementNames.Amount, "1.00");
 		parameters.put(ElementNames.UrlOK, "http,//someurl.com/ok/");
 		parameters.put(ElementNames.UrlError, "http,//someurl/fail/");
 		parameters.put(ElementNames.EMAILCLIENTE, "some@someurl.com");
+		parameters.put(ElementNames.MAXINSTALLMENTS, "12");
 
 		// Datos Opcionales:
-		parameters.put("AVAILABLEPAYMENTMETHODSIDS", "1#194#43#45");
-		parameters.put("PUSHNOTIFYENDPOINT", "");
-		parameters.put("PUSHNOTIFYMETHOD", "");
-		parameters.put("PUSHNOTIFYSTATES", "");
+		// parameters.put("AVAILABLEPAYMENTMETHODSIDS", "1#194#43#45");
+		// parameters.put("PUSHNOTIFYENDPOINT", "");
+		// parameters.put("PUSHNOTIFYMETHOD", "");
+		// parameters.put("PUSHNOTIFYSTATES", "");
 
 		return parameters;
 	}
@@ -123,7 +130,7 @@ public class Test {
 		parameters.put("CSBTCITY", "Villa General Belgrano"); // MANDATORIO.
 		parameters.put("CSBTCOUNTRY", "AR");// MANDATORIO. Código ISO.
 		parameters.put("CSBTEMAIL", "some@someurl.com"); // MANDATORIO.
-		parameters.put("CSBTFIRSTNAME", "Juan");// MANDATORIO.
+		parameters.put("CSBTFIRSTNAME", "juan");// MANDATORIO.
 		parameters.put("CSBTLASTNAME", "Perez");// MANDATORIO.
 		parameters.put("CSBTPHONENUMBER", "541160913988");// MANDATORIO.
 		parameters.put("CSBTPOSTALCODE", "1010");// MANDATORIO.
@@ -138,7 +145,7 @@ public class Test {
 
 		parameters.put("CSMDD6", "");// NO MANDATORIO.
 		parameters.put("CSMDD7", "");// NO MANDATORIO.
-		parameters.put("CSMDD8", ""); // NO MANDATORIO.
+		parameters.put("CSMDD8", "");// NO MANDATORIO.
 		parameters.put("CSMDD9", "");// NO MANDATORIO.
 		parameters.put("CSMDD10", "");// NO MANDATORIO.
 		parameters.put("CSMDD11", "");// NO MANDATORIO.
@@ -148,7 +155,7 @@ public class Test {
 			setRetail(parameters);
 			break;
 		}
-	
+
 		return parameters;
 	}
 
@@ -180,97 +187,94 @@ public class Test {
 	}
 
 	private static Map<String, String> getAAParameters() {
-		Map<String, String> parameters = new HashMap<String, String>();		
-		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
-		parameters.put(ElementNames.Merchant, "2153");
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put(ElementNames.Security, SECURITY);
+		parameters.put(ElementNames.Merchant, MERCHANT);
 		parameters.put(ElementNames.Session, null);
-		parameters.put(ElementNames.RequestKey, "dcb82928-08e1-eb3f-6b89-1fec77a63092");
-		parameters.put(ElementNames.AnswerKey, "c923d2b4-47ec-4deb-ab6f-bb48c95d33df");
+		parameters.put(ElementNames.RequestKey, "710268a7-7688-c8bf-68c9-430107e6b9da");
+		parameters.put(ElementNames.AnswerKey, "693ca9cc-c940-06a4-8d96-1ab0d66f3ee6");
 		return parameters;
 	}
-	
+
 	private static Map<String, String> getPMParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Merchant, "2153");
+		parameters.put(ElementNames.Merchant, MERCHANT);
 		return parameters;
 	}
 
 	private static Map<String, String> getSParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Merchant, "2153");
-		parameters.put(ElementNames.OperationID, "8000");
+		parameters.put(ElementNames.Merchant, MERCHANT);
+		parameters.put(ElementNames.OperationID, "8001");
 		return parameters;
 	}
 
 	private static Map<String, String> getVRParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
-		parameters.put(ElementNames.Merchant, "2153");
-		parameters.put(ElementNames.RequestKey, "710268a7-7688-c8bf-68c9-430107e6b9da");
+		parameters.put(ElementNames.Security, SECURITY);
+		parameters.put(ElementNames.Merchant, MERCHANT);
+		parameters.put(ElementNames.RequestKey, "e81d4bbf-e9a4-72b3-95fc-d66e88a45012");
 		return parameters;
 	}
 
 	private static Map<String, String> getRRParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Security, "f3d8b72c94ab4a06be2ef7c95490f7d3");
-		parameters.put(ElementNames.Merchant, "2153");
-		parameters.put(ElementNames.RequestKey, "710268a7-7688-c8bf-68c9-430107e6b9da");
+		parameters.put(ElementNames.Security, SECURITY);
+		parameters.put(ElementNames.Merchant, MERCHANT);
+		parameters.put(ElementNames.RequestKey, "e81d4bbf-e9a4-72b3-95fc-d66e88a45012");
 		parameters.put(ElementNames.Amount, "0.5");
 		return parameters;
 	}
-	
+
 	private static Map<String, String> getBRYParameters() {
 		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put(ElementNames.Merchant, "2153");
+		parameters.put(ElementNames.Merchant, MERCHANT);
 		parameters.put(ElementNames.STARTDATE, "2016-01-01");
-		parameters.put(ElementNames.ENDDATE, "2016-03-03");
-		parameters.put(ElementNames.PAGENUMBER, "1");	
+		parameters.put(ElementNames.ENDDATE, "2017-03-03");
+		parameters.put(ElementNames.PAGENUMBER, "1");
 		return parameters;
 	}
-	
-	private static void getCredentials(TodoPagoConector tpc) {	
-		
-		User user = new User();			
+
+	private static void getCredentials(TodoPagoConector tpc) {
+
+		User user = new User();
 		try {
-			
+
 			user = tpc.getCredentials(getUser());
 			tpc.setAuthorize(getAuthorization(user));
-			
+
 		} catch (EmptyFieldException e) {
-			logger.log(Level.WARNING, e.getMessage());						
+			logger.log(Level.WARNING, e.getMessage());
 		} catch (MalformedURLException e) {
-			logger.log(Level.WARNING, e.getMessage());		
+			logger.log(Level.WARNING, e.getMessage());
 		} catch (ResponseException e) {
 			logger.log(Level.WARNING, e.getMessage());
 		} catch (ConnectionException e) {
 			logger.log(Level.WARNING, e.getMessage());
 		}
 
-		System.out.println(user.toString());	
+		System.out.println(user.toString());
 	}
-	
-	private static User getUser() {	
-		String mail = "test@test.com.ar"; //The email is only as example
-		String pass = "test1234";         //The pass is only as example
-		User user = new User(mail,pass);		
+
+	private static User getUser() {
+		String mail = "test@test.com.ar"; // The email is only as example
+		String pass = "test1234"; // The pass is only as example
+		User user = new User(mail, pass);
 		return user;
 	}
 
 	private static Map<String, List<String>> getAuthorization() {
 		Map<String, List<String>> parameters = new HashMap<String, List<String>>();
-		parameters.put(ElementNames.Authorization,
-				Collections.singletonList("PRISMA f3d8b72c94ab4a06be2ef7c95490f7d3"));
-		// include all aditional Http headers to map, all of them will be used
-		return parameters;
-	}
-	
-	private static Map<String, List<String>> getAuthorization(User user) {
-		Map<String, List<String>> parameters = new HashMap<String, List<String>>();
-		parameters.put(ElementNames.Authorization,
-				Collections.singletonList(user.getApiKey()));
+		parameters.put(ElementNames.Authorization, Collections.singletonList(APIKEY));
 		// include all aditional Http headers to map, all of them will be used
 		return parameters;
 	}
 
+	private static Map<String, List<String>> getAuthorization(User user) {
+		Map<String, List<String>> parameters = new HashMap<String, List<String>>();
+		parameters.put(ElementNames.Authorization, Collections.singletonList(user.getApiKey()));
+		// include all aditional Http headers to map, all of them will be used
+		return parameters;
+	}
 
 }

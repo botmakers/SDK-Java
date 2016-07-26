@@ -28,7 +28,7 @@ import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
 
-	public static final String versionTodoPago = "1.4.1";
+	public static final String versionTodoPago = "1.5.0";
 
 	private final String soapAppend = "services/";
 	private final String restAppend = "api/";
@@ -100,8 +100,8 @@ public class TodoPagoConector {
 		FraudControlValidate cf = new FraudControlValidate();
 		fraudControl = cf.validate(fraudControl);
 		
-		if(fraudControl.containsKey(ElementNames.ERROR)){
-			result.putAll(fraudControl);			
+		if(fraudControl.containsKey(ElementNames.ERROR)){			
+			result = setMapValidate(fraudControl);			
 		}else{
 			result = authorize.getpaymentValues(parameters, fraudControl);			
 		}
@@ -224,6 +224,17 @@ public class TodoPagoConector {
 
 	public static String getVersionTodoTago() {
 		return versionTodoPago;
+	}
+	
+	private Map<String, Object> setMapValidate(Map<String, String>  map) {
+		Map<String, Object> mapValidate = new HashMap <String, Object>() ;			
+		mapValidate.put("StatusCode", "9999");
+		mapValidate.put("PublicRequestKey", "");
+		mapValidate.put("URL_Request", "");
+		mapValidate.put("StatusMessage", "Campos invalidos " + map.get(ElementNames.ERROR));
+		mapValidate.put("RequestKey", "");
+		mapValidate.put("Error", map );		
+		return mapValidate;
 	}
 	
 	
