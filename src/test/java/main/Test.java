@@ -44,10 +44,9 @@ public class Test {
 		TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, getAuthorization());
 
 		// Developer without APYKey
-		// TodoPagoConector tpc = new
-		// TodoPagoConector(TodoPagoConector.developerEndpoint);
+		//TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint);
 
-		// getCredentials(tpc);
+		//getCredentials(tpc);
 
 		Map<String, Object> a = tpc.sendAuthorizeRequest(getSARParameters(), getFraudControlParameters());
 		printMap(a, "");

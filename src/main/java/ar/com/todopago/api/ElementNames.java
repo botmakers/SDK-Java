@@ -97,4 +97,50 @@ public final class ElementNames {
 	public static final String CLAVE = "CLAVE";
 	
 	public static final String ERROR = "ERROR";
+	
+	 // ------------------------ BSA -----------------------------------------
+
+    public static final String BSA_GENERAL_DATA = "generalData";
+    public static final String BSA_MERCHANT = "merchant";
+    public static final String BSA_SECURITY = "security";
+    public static final String BSA_OPERATION_DATE_TIME = "operationDatetime";
+    public static final String BSA_REMOTE_IP_ADDRESS = "remoteIpAddress";
+    public static final String BSA_CHANNEL = "channel";
+
+    public static final String BSA_OPERATION_DATA = "operationData";
+    public static final String BSA_OPERATION_TYPE = "operationType";
+    public static final String BSA_OPERATION_ID = "operationID";
+    public static final String BSA_CURRENCY_CODE = "currencyCode";
+    public static final String BSA_CONCEPT = "concept";
+    public static final String BSA_AMOUNT = "amount";
+    public static final String BSA_AVAILABLE_PAYMENT_METHODS = "availablePaymentMethods";
+    public static final String BSA_BUYER_PRESELECTION = "buyerPreselection";
+    public static final String BSA_PAYMENT_METHODS_ID = "paymentMethodId";
+    public static final String BSA_BANK_id = "bankId";
+
+    public static final String BSA_TECHNICAL_DATA = "technicalData";
+    public static final String BSA_SDK = "sdk";
+    public static final String BSA_SDK_VERSION = "sdkversion";
+    public static final String BSA_LANGUAGE_VERSION = "lenguageversion";
+    public static final String BSA_PLUGIN_VERSION = "pluginversion";
+    public static final String BSA_ECOMMERCE_NAME = "ecommercename";
+    public static final String BSA_ECOMMERCE_VERSION = "ecommerceversion";
+    public static final String BSA_CM_VERSION = "cmsversion";
+
+    public static final String BSA_ERROR_CODE = "errorCode";
+    public static final String BSA_ERROR_MESSAGE = "errorMessage";
+    public static final String BSA_TRANSACTION_ID = "transactionID";
+
+    public static final String BSA_URL_HIBRID_FROM_RESOURCES = "url_HibridFormResuorces";
+    public static final String BSA_PUBLIC_REQUEST_KEY = "publicRequestKey";
+    public static final String BSA_REQUEST_KEY = "requestKey";
+    public static final String BSA_TRANSACTION_ID_RESPONSE = "transactionid";
+
+    public static final String BSA_ID_MEDIO_PAGO = "idMedioPago";
+    public static final String BSA_NOMBRE = "nombre";
+    public static final String BSA_TIPO_MEDI_PAGO = "tipoMedioPago";
+    public static final String BSA_ID_BANCO = "idBanco";
+    public static final String BSA_NOMBRE_BANCO = "nombreBanco";
+	
+	
 }

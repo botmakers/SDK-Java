@@ -22,13 +22,15 @@ import ar.com.todopago.api.exceptions.EmptyFieldPassException;
 import ar.com.todopago.api.exceptions.EmptyFieldUserException;
 import ar.com.todopago.api.exceptions.ResponseException;
 import ar.com.todopago.api.model.User;
+import ar.com.todopago.api.rest.BSARest;
 import ar.com.todopago.api.rest.RestConnector;
+import ar.com.todopago.api.rest.TodoPagoRest;
 import ar.com.todopago.utils.FraudControlValidate;
 import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
 
-	public static final String versionTodoPago = "1.5.0";
+	public static final String versionTodoPago = "1.6.0";
 
 	private final String soapAppend = "services/";
 	private final String restAppend = "api/";
@@ -42,10 +44,14 @@ public class TodoPagoConector {
 
 	public final static int developerEndpoint = 0;
 	public final static int productionEndpoint = 1;
+		
+	private String t;
 
 	private String ep;
 	private TodoPagoConectorAuthorize authorize;
-	private RestConnector restConector;
+	
+    private TodoPagoRest todoPagoRest;
+    private BSARest bsaRest;
 
 	Map<String, String> wsdl;
 	Map<String, String> endpoint;
@@ -68,17 +74,20 @@ public class TodoPagoConector {
 		}
 		switch (endpoint) {
 		case developerEndpoint:
+			t = tenant;
 			ep = endPointDev;
 			break;
 		case productionEndpoint:
+			t = tenant;
 			ep = endPointPrd;
 			break;
 		default:
+			t = tenant;
 			ep = endPointPrd;
 			break;
 		}
 
-		this.soapEndpoint = ep + soapAppend + tenant + authorizeSOAPAppend;
+		this.soapEndpoint = ep + soapAppend + t + authorizeSOAPAppend;
 		
 		if(auth != null){
 			try {
@@ -89,22 +98,26 @@ public class TodoPagoConector {
 				throw new RuntimeException(e);
 			}
 		}
-		
-		this.restEndpoint = ep + tenant + restAppend;
-		restConector = new RestConnector(restEndpoint, auth);
+		this.restEndpoint = ep +  t + restAppend;	
+		creteClients(auth);			
 	}
+	
+	private void creteClients(Map<String, List<String>> auth){
+        this.todoPagoRest = new TodoPagoRest(this.restEndpoint, auth);
+        this.bsaRest = new BSARest(this.restEndpoint, auth);
+    }
 
 	public Map<String, Object> sendAuthorizeRequest(Map<String, String> parameters, Map<String, String> fraudControl) {
 		
 		Map<String, Object> result = new HashMap<String, Object>();
-		FraudControlValidate cf = new FraudControlValidate();
-		fraudControl = cf.validate(fraudControl);
+//		FraudControlValidate cf = new FraudControlValidate();
+//		fraudControl = cf.validate(fraudControl);
 		
-		if(fraudControl.containsKey(ElementNames.ERROR)){			
-			result = setMapValidate(fraudControl);			
-		}else{
+//		if(fraudControl.containsKey(ElementNames.ERROR)){			
+//			result = setMapValidate(fraudControl);			
+//		}else{
 			result = authorize.getpaymentValues(parameters, fraudControl);			
-		}
+//		}
 		return result;
 	}
 
@@ -118,38 +131,38 @@ public class TodoPagoConector {
 	// Devoluciones -- devolucion total
 	public Map<String, Object> voidRequest(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = restConector.voidRequest(parameters);
+		result = todoPagoRest.voidRequest(parameters);
 		return result;
 	}
 
 	// Devoluciones -- devolucion pacial
 	public Map<String, Object> returnRequest(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = restConector.returnRequest(parameters);
+		result = todoPagoRest.returnRequest(parameters);
 		return result;
 	}
 
 	public Map<String, Object> getAllPaymentMethods(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = restConector.getPaymentMethods(parameters);
+		result = todoPagoRest.getPaymentMethods(parameters);
 		return result;
 	}
 
 	public Map<String, Object> discoverPaymentMethods() {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = restConector.discoverPaymentMethods();
+		result = todoPagoRest.discoverPaymentMethods();
 		return result;
 	}
 
 	public Map<String, Object> getStatus(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = restConector.getByOperationId(parameters);
+		result = todoPagoRest.getByOperationId(parameters);
 		return result;
 	}
 	
 	public Map<String, Object> getByRangeDateTime(Map<String, String> parameters) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		result = restConector.getByRangeDateTime(parameters);
+		result = todoPagoRest.getByRangeDateTime(parameters);
 		return result;
 	}
 	
@@ -163,7 +176,7 @@ public class TodoPagoConector {
 			if(user.getPassword()== null  || user.getPassword().isEmpty()){
 				throw new EmptyFieldPassException("Pass is empty");			
 			}						 
-			result = restConector.getCredentials(user);			
+			result = todoPagoRest.getCredentials(user);			
 		}else{
 			throw new EmptyFieldPassException("User is null");				
 		}
@@ -180,7 +193,7 @@ public class TodoPagoConector {
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-			this.restConector = new RestConnector(restEndpoint, auth);
+			creteClients(auth);
 		}else{		
 			throw new ResponseException("ApiKey is null");
 		}
