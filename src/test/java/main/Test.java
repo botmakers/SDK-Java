@@ -112,6 +112,7 @@ public class Test {
 		parameters.put(ElementNames.UrlError, "http,//someurl/fail/");
 		parameters.put(ElementNames.EMAILCLIENTE, "some@someurl.com");
 		parameters.put(ElementNames.MAXINSTALLMENTS, "12");
+		parameters.put(ElementNames.MININSTALLMENTS, "6");
 
 		// Datos Opcionales:
 		// parameters.put("AVAILABLEPAYMENTMETHODSIDS", "1#194#43#45");

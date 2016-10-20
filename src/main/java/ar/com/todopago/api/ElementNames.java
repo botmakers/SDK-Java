@@ -80,6 +80,7 @@ public final class ElementNames {
 	public static final String PublicRequestKey = "PublicRequestKey";
 	public static final String EMAILCLIENTE = "EMAILCLIENTE";
 	public static final String MAXINSTALLMENTS = "MAXINSTALLMENTS";
+	public static final String MININSTALLMENTS = "MININSTALLMENTS";
 
 	// Authorize return
 	public static final String RequestChannel = "RequestChannel";

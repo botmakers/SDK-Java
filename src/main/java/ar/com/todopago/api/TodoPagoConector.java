@@ -30,13 +30,13 @@ import ar.com.todopago.utils.TodoPagoConectorAuthorize;
 
 public class TodoPagoConector {
 
-	public static final String versionTodoPago = "1.6.0";
+	public static final String versionTodoPago = "1.8.0";
 
 	private final String soapAppend = "services/";
 	private final String restAppend = "api/";
 	private final String tenant = "t/1.1/";
 	private final String authorizeSOAPAppend = "Authorize";
-	private final String authorizeWSDL = "/Authorize.wsdl";
+	private final String authorizeWSDL = "/todopago/Authorize.wsdl";
 
 	// endpoints
 	private final String endPointDev = "https://developers.todopago.com.ar/";
@@ -46,7 +46,6 @@ public class TodoPagoConector {
 	public final static int productionEndpoint = 1;
 		
 	private String t;
-
 	private String ep;
 	private TodoPagoConectorAuthorize authorize;
 	

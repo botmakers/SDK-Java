@@ -21,6 +21,7 @@ Todo Pago - módulo SDK-JAVA para conexión con gateway de pago
     + [Formulario hibrido](#formhidrido)
     + [Obtener Credenciales](#credenciales)
 	+ [Máximo de cuotas a mostrar en formulario](#maxcuotas)
+	+ [Minimo de cuotas a mostrar en formulario](#mincuotas)
  + [Diagrama de secuencia](#secuencia)
  + [Tablas de referencia](#tablareferencia)		
  + [Tabla de errores](#codigoerrores)
@@ -185,7 +186,8 @@ Map<String, Object>
 							 PAYMENTMETHODNAME = VISA,		
 							 TICKETNUMBER = 12,		
 							 CARDNUMBERVISIBLE = 450799******4905,		
-							 AUTHORIZATIONCODE = TEST38 },							 
+							 AUTHORIZATIONCODE = TEST38,
+							 INSTALLMENTPAYMENTS = 6 }, 
 				{ Request = { MERCHANT = 12345678,
 						      OPERATIONID = ABCDEF-1234-12221-FDE1-00000012,
 							  AMOUNT = 1.00,
@@ -582,6 +584,7 @@ El formulario implementado debe contar al menos con los siguientes campos.
 	<select id="tipoDocCbx"></select>
 	<input id="nroDocTxt"/>
 	<input id="emailTxt"/><br/>
+	<button id="MY_btnPagarConBilletera"/>
 	<button id="MY_btnConfirmarPago"/>
 </body>
 ```
@@ -596,13 +599,15 @@ Se sugiere agregar los parametros usuario, e-mail, tipo de documento y numero.
 ```js
 window.TPFORMAPI.hybridForm.initForm({
     callbackValidationErrorFunction: 'validationCollector',
-	callbackCustomSuccessFunction: 'customPaymentSuccessResponse',
-	callbackCustomErrorFunction: 'customPaymentErrorResponse',
-	botonPagarId: 'MY_btnConfirmarPago',
-	modalCssClass: 'modal-class',
-	modalContentCssClass: 'modal-content',
-	beforeRequest: 'initLoading',
-	afterRequest: 'stopLoading'
+    callbackBilleteraFunction: 'billeteraPaymentResponse',
+    callbackCustomSuccessFunction: 'customPaymentSuccessResponse',
+    callbackCustomErrorFunction: 'customPaymentErrorResponse',
+    botonPagarId: 'MY_btnConfirmarPago',
+    botonPagarConBilleteraId: 'MY_btnPagarConBilletera',
+    modalCssClass: 'modal-class',
+    modalContentCssClass: 'modal-content',
+    beforeRequest: 'initLoading',
+    afterRequest: 'stopLoading'
 });
 
 window.TPFORMAPI.hybridForm.setItem({
@@ -616,6 +621,8 @@ window.TPFORMAPI.hybridForm.setItem({
 //callbacks de respuesta del pago
 function validationCollector(parametros) {
 }
+function billeteraPaymentResponse(response) {
+}
 function customPaymentSuccessResponse(response) {
 }
 function customPaymentErrorResponse(response) {
@@ -628,6 +635,7 @@ function stopLoading() {
 
 **Callbacks**<br>
 El formulario define callbacks javascript, que son llamados según el estado y la informacion del pago realizado:
++ billeteraPaymentResponse: Devuelve response si el pago con billetera se realizó correctamente.
 + customPaymentSuccessResponse: Devuelve response si el pago se realizo correctamente.
 + customPaymentErrorResponse: Si hubo algun error durante el proceso de pago, este devuelve el response con el codigo y mensaje correspondiente.
 
@@ -686,6 +694,22 @@ Para hacer uso de esta funcionalidad debe agregarse en el **Map<String, String> 
 ```java		
 Map<String, String> parameters = new HashMap<String, String>();
 parameters.put(ElementNames.MAXINSTALLMENTS, "12");	
+```
+ 
+ [<sub>Volver a inicio</sub>](#inicio)
+ <br>
+ 
+ <a name="mincuotas"></a>
+####Minimo de cuotas a mostrar en formulario
+Mediante esta funcionalidad, se permite setear el número minimo de cuotas que se desplegará en el formulario de pago.
+ 
+Para hacer uso de esta funcionalidad debe agregarse en el **Map<String, String> parameters** del método **sendAuthorizeRequest** el campo **MININSTALLMENTS** con el valor minimo de cuotas a ofrecer (generalmente de 1 a 12)
+ 
+#####Ejemplo
+ 
+```java		
+Map<String, String> parameters = new HashMap<String, String>();
+parameters.put(ElementNames.MININSTALLMENTS, "1");	
 ```
  
  [<sub>Volver a inicio</sub>](#inicio)
