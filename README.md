@@ -640,7 +640,7 @@ El formulario define callbacks javascript, que son llamados según el estado y l
 + customPaymentErrorResponse: Si hubo algun error durante el proceso de pago, este devuelve el response con el codigo y mensaje correspondiente.
 
 **Ejemplo de Implementación**:
-<a href="/resources/form_hibrido-ejemplo/index.html" target="_blank">Formulario hibrido</a>
+<a href="Ejemplo/FormularioHibrido/formularioHibridoEjemplo.html" target="_blank">Formulario hibrido</a>
 <br>
 
 [<sub>Volver a inicio</sub>](#inicio)
