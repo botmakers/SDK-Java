@@ -171,8 +171,8 @@ Se deben guardar y recuperar los valores de los campos <strong>RequestKey</stron
 
 El parámetro <strong>RequestKey</strong> es siempre distinto y debe ser persistido de alguna forma cuando el comprador es redirigido al formulario de pagos.
 
-<ins><strong>Importante</strong></ins> El campo **AnswerKey** se adiciona  en la redirección que se realiza a alguna de las direcciones ( URL ) epecificadas en el  servicio **SendAurhorizationRequest**, esto sucede cuando la transacción ya fue resuelta y es necesario regresar al site para finalizar la transacción de pago, también se adiciona el campo Order, el cual tendrá el contenido enviado en el campo **OPERATIONID**. Para nuestro ejemplo: <strong>http://susitio.com/paydtodopago/ok?Order=27398173292187&Answer=1111-2222-3333-4444-5555-6666-7777</strong>		
-
+<ins><strong>Importante</strong></ins> El campo **AnswerKey** se adiciona  en la redirección que se realiza a alguna de las direcciones ( URL ) epecificadas en el  servicio **SendAurhorizationRequest**, esto sucede cuando la transacción ya fue resuelta y es necesario regresar al site para finalizar la transacción de pago, también se adiciona el campo Order, el cual tendrá el contenido enviado en el campo **OPERATIONID**. Para nuestro ejemplo: <strong>http://susitio.com/paydtodopago/ok?Order=27398173292187&Answer=1111-2222-3333-4444-5555-6666-7777</strong>	
+El campo **AMOUNTBUYER** de la respuesta del getAuthorizeAnswer indica el costo financiero total que pagó el comprador.
 ```java		
 Map<String, Object>		
 	{ StatusCode = -1, 		
@@ -191,7 +191,8 @@ Map<String, Object>
 				{ Request = { MERCHANT = 12345678,
 						      OPERATIONID = ABCDEF-1234-12221-FDE1-00000012,
 							  AMOUNT = 1.00,
-							  CURRENCYCODE = 032}
+							  CURRENCYCODE = 032,
+							  AMOUNTBUYER=1.20 }
 				}
 	}
 	  
