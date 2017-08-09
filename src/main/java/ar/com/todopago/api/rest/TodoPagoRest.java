@@ -95,9 +95,9 @@ public class TodoPagoRest extends RestConnector{
 		// Tets Amazon
 		// url =
 		// "http://localhost:8280/t/1.1/api/Operations/GetByRangeDateTime/MERCHANT/1/STARTDATE/2016-03-16/ENDDATE/2016-03-17/PAGENUMBER/1";
-		
+
 		StringBuilder sb = new StringBuilder(endpoint + OPERATIONS_GET_BY_RANGE_DATE_TIME);
-		sb.append(ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/");	
+		sb.append(ElementNames.Merchant.toUpperCase() + "/" + params.get(ElementNames.Merchant) + "/");
 		sb.append(ElementNames.STARTDATE.toUpperCase() + "/" + params.get(ElementNames.STARTDATE) + "/");
 		sb.append(ElementNames.ENDDATE.toUpperCase() + "/" + params.get(ElementNames.ENDDATE) + "/");
 		sb.append(ElementNames.PAGENUMBER.toUpperCase() + "/" + params.get(ElementNames.PAGENUMBER));

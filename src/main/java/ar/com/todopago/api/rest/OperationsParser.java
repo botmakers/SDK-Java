@@ -51,6 +51,8 @@ public class OperationsParser {
 					// logger.log(Level.WARNING,
 					// nList.item(i).getNodeName().toString() + i + " - "+
 					// nList.item(i).getChildNodes().toString() );
+				} else if (nList.item(i).getNodeName().equals("Operations")) {
+					ret.put(nList.item(i).getNodeName() + i, parseNodeListToMap(nList.item(i).getChildNodes()));
 				} else {
 					ret.put(nList.item(i).getNodeName(), parseNodeListToMap(nList.item(i).getChildNodes()));
 				}

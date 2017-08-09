@@ -16,12 +16,16 @@ Todo Pago - módulo SDK-JAVA para conexión con gateway de pago
  + [Características](#caracteristicas)
     + [Status de la operación](#status)
     + [Consulta de operaciones por rango de tiempo](#statusdate)
+    + [Descubrimiento de Medios de Pago](#discover)
     + [Devolucion](#devolucion)
     + [Devolucion parcial](#devolucionparcial)
     + [Formulario hibrido](#formhidrido)
     + [Obtener Credenciales](#credenciales)
-	+ [Máximo de cuotas a mostrar en formulario](#maxcuotas)
-	+ [Minimo de cuotas a mostrar en formulario](#mincuotas)
+    + [Estado del Servicio](#echo)
+    + [Máximo de cuotas a mostrar en formulario](#maxcuotas)
+    + [Minimo de cuotas a mostrar en formulario](#mincuotas)
+    + [Tiempo de vida del formulario](#timeout)    
+    + [Filtrado de medios de pago](#filtromp)    
  + [Diagrama de secuencia](#secuencia)
  + [Tablas de referencia](#tablareferencia)		
  + [Tabla de errores](#codigoerrores)
@@ -72,20 +76,20 @@ mvn eclipse:clean eclipse:eclipse -Dwtpversion=2.0
 Luego, importar el proyecto normalmente en Eclipse.
 
 <a name="Versionesdejavasoportadas"></a>   
-####1. Versiones de Java soportadas
+#### 1. Versiones de Java soportadas
 La versi&oacute;n implementada de la SDK, esta testeada para versiones desde Java 5 en adelante con JAX-WS.
 
 <a name="general"></a>
-####2. Generalidades
+#### 2. Generalidades
 Esta versión soporta únicamente pago en moneda nacional argentina (CURRENCYCODE = 32).
 
 [<sub>Volver a inicio</sub>](#inicio)	
-<br>
+
 <a name="uso"></a>		
 ## Uso	
 
 <a name="initconector"></a>
-####Inicializar la clase correspondiente al conector (TodoPago\Sdk).
+#### Inicializar la clase correspondiente al conector (TodoPago\Sdk).
 
 Si se cuenta con los http header suministrados por Todo Pago
 
@@ -108,13 +112,30 @@ TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint);
 ```	
 - Obtener las credenciales a traves  del m&eacute;todo getCredentials de TodoPago. Ver [Obtener Credenciales](#credenciales)
 
+<br/>
+<a name="agrupador"></a>
+### Operatoria Agrupador
+
+Mediante una única y simple adhesión, los vendedores acceden a todos los medios de pago que el Botón de pago ofrezca sin necesidad de contar con ningún tipo de contrato adicional con cada medio de pago. La funcionalidad “agrupador” de TodoPago, se ocupa de gestionar los acuerdos necesarios con todos los medios de pago a efectos de disponibilizarlos en el Botón.
+
+Para acceder al servicio, los vendedores podrán adherirse en el sitio exclusivo de TodoPago o a través de su ejecutivo comercial. En estos procesos se generará el usuario y clave para este servicio.
+
+Una vez adheridos se creará automáticamente una cuenta virtual, en la cual se acreditarán los fondos provenientes de los cobros realizados con la presente modalidad de pago.
+
+<br/>
+<a name="secuencia"></a>
+## Diagrama de secuencia
+
+![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-003.jpg)
+
+<br/>
 <a name="solicitudautorizacion"></a>
-####Solicitud de autorización	
+#### Solicitud de autorización	
 En este caso hay que llamar a sendAuthorizeRequest(). 		
 ```java		
 Map<String, Object> a = tpc.sendAuthorizeRequest(parameters, getFraudControlParameters());		
 ```	
-<ins><strong>datos propios del comercio</strong></ins>		
+<ins><strong>Datos propios del comercio</strong></ins>		
 El primer atributo parameters, debe ser un Map<String, String> con la siguiente estructura:		
 		
 ```java
@@ -131,7 +152,7 @@ Map<String, String> parameters = new HashMap<String, String>();
 	parameters.put(ElementNames.EMAILCLIENTE, "some@someurl.com");
 ```	
 
-<ins><strong>datos prevención de fraude</strong></ins>	
+<ins><strong>Datos prevención de fraude</strong></ins>	
 El segundo atributo getFraudControlParameters().  Ver [Datos adicionales para prevención de fraude](#datosadicionales)  
 
 <p><strong>Códigos de rechazo</strong></p>
@@ -154,7 +175,7 @@ Map<String, Object>
 ```
 
 <a name="confirmatransaccion"></a>
-####Confirmación de transacción.
+#### Confirmación de transacción.
 En este caso hay que llamar a **getAuthorizeAnswer()**, enviando como parámetro un Map<String, String> como se describe a continuación.
 
 ```java	
@@ -171,8 +192,8 @@ Se deben guardar y recuperar los valores de los campos <strong>RequestKey</stron
 
 El parámetro <strong>RequestKey</strong> es siempre distinto y debe ser persistido de alguna forma cuando el comprador es redirigido al formulario de pagos.
 
-<ins><strong>Importante</strong></ins> El campo **AnswerKey** se adiciona  en la redirección que se realiza a alguna de las direcciones ( URL ) epecificadas en el  servicio **SendAurhorizationRequest**, esto sucede cuando la transacción ya fue resuelta y es necesario regresar al site para finalizar la transacción de pago, también se adiciona el campo Order, el cual tendrá el contenido enviado en el campo **OPERATIONID**. Para nuestro ejemplo: <strong>http://susitio.com/paydtodopago/ok?Order=27398173292187&Answer=1111-2222-3333-4444-5555-6666-7777</strong>	
-El campo **AMOUNTBUYER** de la respuesta del getAuthorizeAnswer indica el costo financiero total que pagó el comprador.
+<ins><strong>Importante</strong></ins> El campo **AnswerKey** se adiciona  en la redirección que se realiza a alguna de las direcciones ( URL ) epecificadas en el  servicio **SendAurhorizationRequest**, esto sucede cuando la transacción ya fue resuelta y es necesario regresar al site para finalizar la transacción de pago, también se adiciona el campo Order, el cual tendrá el contenido enviado en el campo **OPERATIONID**. Para nuestro ejemplo: <strong>http://susitio.com/paydtodopago/ok?Order=27398173292187&Answer=1111-2222-3333-4444-5555-6666-7777</strong>		
+
 ```java		
 Map<String, Object>		
 	{ StatusCode = -1, 		
@@ -191,8 +212,7 @@ Map<String, Object>
 				{ Request = { MERCHANT = 12345678,
 						      OPERATIONID = ABCDEF-1234-12221-FDE1-00000012,
 							  AMOUNT = 1.00,
-							  CURRENCYCODE = 032,
-							  AMOUNTBUYER=1.20 }
+							  CURRENCYCODE = 032}
 				}
 	}
 	  
@@ -208,13 +228,13 @@ Map<String, Object>
 ```
 
 <a name="ejemplo"></a>      
-####Ejemplo
+#### Ejemplo
 Existe un ejemplo ejecutable en https://github.com/TodoPago/SDK-Java/blob/master/Ejemplo/src/main/java/com/ar/todopago/ejemplo/SampleUI.java que muestra los resultados de los métodos principales del SDK y su correcta implementacion.<br>
 
 Existe un ejemplo en la carpeta https://github.com/TodoPago/sdk-java/tree/master/src/test que muestra los resultados de los métodos principales del SDK.	
 
 <a name="test"></a>      
-####Modo Test
+#### Modo Test
 
 El SDK-JAVA permite trabajar con los ambiente de desarrollo y de produccion de Todo Pago.<br>
 El ambiente se debe instanciar como se indica a continuacion.
@@ -230,7 +250,6 @@ private static Map<String, List<String>> getAuthorization() {
 ```
 
 [<sub>Volver a inicio</sub>](#inicio)
-<br>
 
 <a name="datosadicionales"></a>		
 ## Datos adicionales para control de fraude		
@@ -290,23 +309,22 @@ private static Map<String, String> getFraudControlParameters() {
 }	
 ```
 
-
 <a name="datosreferencia"></a>    
 #### Datos de referencia   
 
 <table>
 <tr><th>Nombre del campo</th><th>Required/Optional</th><th>Data Type</th><th>Mínimo</th><th>Comentarios</th></tr>
-<tr><td>CSBTCITY</td><td>Required</td><td>String (50)</td><td>1</td><td>Ciudad / Debe comenzar con una letra</td></tr>
+<tr><td>CSBTCITY</td><td>Required</td><td>String (60)</td><td>6</td><td>Ciudad / Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td></tr>
 <tr><td>CSBTCOUNTRY</td><td>Required</td><td>String (2)</td><td>1</td><td>Código ISO</td></tr>
 <tr><td> CSBTCUSTOMERID</td><td>Required</td><td>String (50)</td><td>1</td><td>Identificador del usuario unico logueado al portal (No puede ser una direccion de email)</td></tr>
-<tr><td> CSBTEMAIL</td><td>Required</td><td>String (100)</td><td>1</td><td>Correo electrónico del comprador con formato válido (solo letras (a-z), números, puntos y sin espacios).</td></tr>
-<tr><td>CSBTFIRSTNAME</td><td>Required</td><td>String (60)</td><td>1</td><td>Nombre del tarjeta habiente / Sin caracteres especiales como acentos invertidos, sólo letras, números y espacios</td></tr>
+<tr><td> CSBTEMAIL</td><td>Required</td><td>String (100)</td><td>1</td><td>Correo electrónico del comprador con formato válido (solo letras (a-z,A-Z), números, puntos, guiones y sin espacios).</td></tr>
+<tr><td>CSBTFIRSTNAME</td><td>Required</td><td>String (60)</td><td>6</td><td>Nombre del tarjeta habiente / Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td></tr>
 <tr><td>CSBTIPADDRESS</td><td>Required</td><td>String (15)</td><td>1</td><td>"End Customer´s IP address, such as 10.1.27.63, reported by your Web server via socket information."</td></tr>
-<tr><td> CSBTLASTNAME</td><td>Required</td><td>String (60)</td><td>1</td><td>Apellido del tarjetahabiente / Sin caracteres especiales como acentos invertidos, sólo letras, números y espacios</td></tr> 
-<tr><td>CSBTPHONENUMBER</td><td>Required</td><td>String (15)</td><td>6</td><td>Número de telefono</td></tr>
+<tr><td> CSBTLASTNAME</td><td>Required</td><td>String (60)</td><td>6</td><td>Apellido del tarjeta habiente / Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td></tr> 
+<tr><td>CSBTPHONENUMBER</td><td>Required</td><td>String (30)</td><td>6</td><td>Número de telefono, acepta números, espacios y/o paréntesis. *Ejemplo *(011) 4567 8910</td></tr>
 <tr><td>CSBTPOSTALCODE</td><td>Required</td><td>String (10)</td><td>1</td><td>Codigo Postal</td></tr> 
 <tr><td>CSBTSTATE</td><td>Required</td><td>String (2)</td><td>1</td><td>Estado (Si el country = US, el campo se valida para un estado valido en USA)</td></tr>
-<tr><td>CSBTSTREET1</td><td>Required</td><td>String (60)</td><td>1</td><td>Calle Numero interior Numero Exterior</td></tr> 
+<tr><td>CSBTSTREET1</td><td>Required</td><td>String (60)</td><td>6</td><td>Calle Numero interior Numero Exterior / Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td></tr> 
 <tr><td>CSBTSTREET2</td><td>Optional</td><td>String (60)</td><td></td><td>Barrio</td></tr>
 <tr><td>CSITPRODUCTCODE</td><td>Conditional</td><td>String (255)</td><td></td><td></td> </tr>
 <tr><td>CSITPRODUCTDESCRIPTION</td><td>Conditional</td><td>String (255)</td><td></td><td>Descripción general del producto</td></tr> 
@@ -317,15 +335,15 @@ private static Map<String, String> getFraudControlParameters() {
 <tr><td>CSITUNITPRICE</td><td>Conditional</td><td>String (15)</td><td></td><td>"Precio Unitaro del producto / ""999999.CC"" Es mandatorio informar los decimales, usando el punto como separador de decimales. No se permiten comas, ni como separador de miles ni como separador de decimales."</td></tr> 
 <tr><td>CSPTCURRENCY</td><td>Required</td><td>String (5)</td><td>1</td><td>Currencies=>'032'(Peso Argentino)</td></tr> 
 <tr><td>CSPTGRANDTOTALAMOUNT</td><td>Required</td><td>Decimal (15)</td><td>1</td><td>"Cantidad total de la transaccion./""999999.CC"" Con decimales obligatorios, usando el puntos como separador de decimales. No se permiten comas, ni como separador de miles ni como separador de decimales."</td></tr> 
-<tr><td>CSSTCITY</td><td>Required</td><td>String (50)</td><td>1</td><td>Ciudad / Debe comenzar con una letra</td>
+<tr><td>CSSTCITY</td><td>Required</td><td>String (60)</td><td>6</td><td>Ciudad / Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td>
 <tr><td> CSSTCOUNTRY</td><td>Required</td><td>String (2)</td><td>1</td><td>Código ISO</td></tr>
-<tr><td>CSSTEMAIL</td><td>Required</td><td>String (100)</td><td>1</td><td>Correo electrónico del comprador con formato válido (solo letras (a-z), números, puntos y sin espacios).</td></tr> 
-<tr><td>CSSTFIRSTNAME</td><td>Required</td><td>String (60)</td><td>1</td><td>Nombre del tarjeta habiente / Sin caracteres especiales como acentos invertidos, sólo letras, números y espacios</td></tr> 
-<tr><td>CSSTLASTNAME</td><td>Required</td><td>String (60)</td><td>1</td><td>Apellido del tarjetahabiente / Sin caracteres especiales como acentos invertidos, sólo letras, números y espacios</td></tr> 
-<tr><td>CSSTPHONENUMBER</td><td>Required</td><td>String (15)</td><td>6</td><td>"Número de telefono. Cuidar el hecho que por default algunos comercios envían ""54"", contando entonces con 2 de los 6 caracteres requeridos."</td></tr> 
+<tr><td>CSSTEMAIL</td><td>Required</td><td>String (100)</td><td>1</td><td>Correo electrónico del comprador con formato válido (solo letras (a-z,A-Z), números, puntos, guiones y sin espacios).</td></tr> 
+<tr><td>CSSTFIRSTNAME</td><td>Required</td><td>String (60)</td><td>6</td><td>Nombre del tarjeta habiente / Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td></tr> 
+<tr><td>CSSTLASTNAME</td><td>Required</td><td>String (60)</td><td>6</td><td>Apellido del tarjetahabiente / Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td></tr> 
+<tr><td>CSSTPHONENUMBER</td><td>Required</td><td>String (30)</td><td>6</td><td>"Número de telefono. Cuidar el hecho que por default algunos comercios envían ""54"", contando entonces con 2 de los 6 caracteres requeridos. Acepta números, espacios y/o paréntesis. *Ejemplo *(011) 4567 8910"</td></tr> 
 <tr><td>CSSTPOSTALCODE</td><td>Required</td><td>String (10)</td><td>1</td><td>Código Postal</td></tr>
 <tr><td>CSSTSTATE</td><td>Required</td><td>String (2)</td><td>1</td><td>Estado (Si el country = US, el campo se valida para un estado v lido en USA)</td><tr> 
-<tr><td>CSSTSTREET1</td><td>Required</td><td>String (60)</td><td>1</td><td>Calle Numero interior Numero Exterior / Para los casos que no son de envío a domicilio, jam s enviar la dirección propia del comercio o correo donde se retire la mercadería, en ese caso replicar los datos de facturación.</td></tr>
+<tr><td>CSSTSTREET1</td><td>Required</td><td>String (60)</td><td>6</td><td>Calle Numero interior Numero Exterior / Para los casos que no son de envío a domicilio, jam s enviar la dirección propia del comercio o correo donde se retire la mercadería, en ese caso replicar los datos de facturación. Acepta acentos comunes, puntos, guion medio y alto, letras con acentos invertidos, ñ / No acepta guion bajo.</td></tr>
 <tr><td> CSSTSTREET2</td><td>Optional</td><td>String (60)</td><td></td><td>Barrio</td></tr> 
 <tr><td>CSMDD1 </td><td>Required</td><td>String (255)</td><td>1</td><td>Incluir numero de comercio proveniente del campo NROCOMERCIO del API DECIDIR</td></tr> 
 <tr><td>CSMDD2</td><td>Required</td><td>String (255)</td><td>1</td><td>Incluir el nombre del comercio, Decidir puede obtener este dato del portal de configuracion de comercios</td></tr>
@@ -363,15 +381,16 @@ private static Map<String, String> getFraudControlParameters() {
 <tr><td>CSMDD89</td><td>Requerido (para Billetera)</td><td>Integer (2)</td><td></td><td>Nivel de Riesgo asignado al Medio de Pago que Utiliza</td></tr>
 </table>
 
-
 [<sub>Volver a inicio</sub>](#inicio)
-<br>
 
 <a name="caracteristicas"></a>
-## Característica
+## Características
+
+![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-status.jpg)
+
 
 <a name="status"></a>
-####Status de la Operación
+#### Status de la Operación
 La SDK cuenta con un método para consultar el status de la transacción desde la misma SDK. El método se utiliza de la siguiente manera:
 
 ```java
@@ -439,7 +458,11 @@ Map<String, Object>
 Además, se puede conocer el estado de las transacciones a través del portal [www.todopago.com.ar](http://www.todopago.com.ar/). Desde el portal se verán los estados "Aprobada" y "Rechazada". Si el método de pago elegido por el comprador fue Pago Fácil o RapiPago, se podrán ver en estado "Pendiente" hasta que el mismo sea pagado.
 
 <a name="statusdate"></a>
-####Consulta de operaciones por rango de tiempo
+
+#### Consulta de operaciones por rango de tiempo
+
+![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-getoperations.jpg)
+
 En este caso hay que llamar a getByRangeDateTime() y devolvera todas las operaciones realizadas en el rango de fechas dado
 
 ```java
@@ -453,10 +476,34 @@ private static Map<String, String> getBRYParameters() {
 }
 	
 Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
-```	
+```
+
+####Descubrimiento de medios de pago
+
+![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-paymentmethods.jpg)
+
+La SDK cuenta con un método para obtener todos los medios de pago habilitados en TodoPago.
+```java
+	
+Map<String, Object> discoverPaymentMethods=tpc.discoverPaymentMethods();
+```
+
+<a name="discover"></a>
+#### Descubrimiento de Medios de Pago
+
+La SDK cuenta con un método para obtener todos los medios de pago habilitados en TodoPago.
+
+```java
+Map<String, Object> g = tpc.discoverPaymentMethods();
+```
+
+
 
 <a name="devolucion"></a>
-####Devolución
+#### Devolución
+
+![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-devolucion-total.jpg)
+
 
 La SDK dispone de métodos para realizar la devolución, de una transacción realizada a traves de TodoPago.
 
@@ -496,12 +543,16 @@ Map<String, Object>
 	{ StatusCode = 2011,
 	  StatusMessage = Operación realizada correctamente }
 ```
-<br>
 
 <a name="devolucionparcial"></a>
-####Devolución parcial
+#### Devolución parcial
+
+![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-devolucion-parcial.jpg)
+
 
 La SDK dispone de métodos para realizar la devolución parcial, de una transacción realizada a traves de TodoPago.
+
+_Nota: Para el caso de promociones con costo financiero, se deberá enviar el monto a devolver en base al valor original de la transacción y no del monto finalmente cobrado. TodoPago se encargará de devolver el porcentaje del costo financiero correspondiente a la devolución parcial._
 
 Se debe llamar al método ```returnRequest``` de la siguiente manera:
 
@@ -539,16 +590,15 @@ Map<String, Object>
 	{ StatusCode = 2011,
 	  StatusMessage = Operación realizada correctamente }
 ```
-<br>
 
 <a name="formhidrido"></a>
-####Formulario hibrido
+#### Formulario híbrido
 
-**Conceptos basicos**<br>
-El formulario hibrido, es una alternativa al medio de pago actual por redirección al formulario externo de TodoPago.<br> 
+**Conceptos básicos**
+El formulario híbrido, es una alternativa al medio de pago actual por redirección al formulario externo de TodoPago.<br> 
 Con el mismo, se busca que el comercio pueda adecuar el look and feel del formulario a su propio diseño.
 
-**Libreria**<br>
+**Libreria**
 El formulario requiere incluir en la pagina una libreria Javascript de TodoPago.<br>
 El endpoint depende del entorno:
 + Desarrollo: https://developers.todopago.com.ar/resources/TPHybridForm-v0.1.js
@@ -590,7 +640,7 @@ El formulario implementado debe contar al menos con los siguientes campos.
 </body>
 ```
 
-**Inizialización y parametros requeridos**<br>
+**Inizialización y parámetros requeridos**<br>
 Para inicializar el formulario se usa window.TPFORMAPI.hybridForm.initForm. El cual permite setear los elementos y ids requeridos.
 
 Para inicializar un ítem de pago, es necesario llamar a window.TPFORMAPI.hybridForm.setItem. Este requiere obligatoriamente el parametro publicKey que corresponde al PublicRequestKey (entregado por el SAR).
@@ -634,20 +684,22 @@ function stopLoading() {
 }
 ```
 
-**Callbacks**<br>
+**Callbacks**
 El formulario define callbacks javascript, que son llamados según el estado y la informacion del pago realizado:
 + billeteraPaymentResponse: Devuelve response si el pago con billetera se realizó correctamente.
 + customPaymentSuccessResponse: Devuelve response si el pago se realizo correctamente.
 + customPaymentErrorResponse: Si hubo algun error durante el proceso de pago, este devuelve el response con el codigo y mensaje correspondiente.
 
 **Ejemplo de Implementación**:
-<a href="Ejemplo/FormularioHibrido/formularioHibridoEjemplo.html" target="_blank">Formulario hibrido</a>
-<br>
+<a href="/Ejemplo/FormularioHibrido/formularioHibridoEjemplo.html" target="_blank">Formulario hibrido</a>
 
 [<sub>Volver a inicio</sub>](#inicio)
 
 <a name="credenciales"></a>
-####Obtener credenciales
+#### Obtener credenciales
+
+![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-credenciales.jpg)
+
 El SDK permite obtener las credenciales "Authentification", "MerchandId" y "Security" de la cuenta de Todo Pago, ingresando el usuario y contraseña.<br>
 Esta funcionalidad es util para obtener los parametros de configuracion dentro de la implementacion.
 
@@ -682,15 +734,26 @@ public void getCredentials(TodoPagoConector tpc) {
 }
 ```
 [<sub>Volver a inicio</sub>](#inicio)
-<br>
+
+<a name="echo"></a>
+#### Estado del servicio
+
+La SDK dispone de un método para verificar el estado de los servicios de TodoPago..<br>
+Se debe llamar al método ```healthCheck``` de la siguiente manera:
+
+```java
+	Boolean check = tpc.healthCheck();	
+```
+
+[<sub>Volver a inicio</sub>](#inicio)
 
 <a name="maxcuotas"></a>
-####Máximo de cuotas a mostrar en formulario
+#### Máximo de cuotas a mostrar en formulario
 Mediante esta funcionalidad, se permite setear el número máximo de cuotas que se desplegará en el formulario de pago.
  
 Para hacer uso de esta funcionalidad debe agregarse en el **Map<String, String> parameters** del método **sendAuthorizeRequest** el campo **MAXINSTALLMENTS** con el valor máximo de cuotas a ofrecer (generalmente de 1 a 12)
  
-#####Ejemplo
+##### Ejemplo
  
 ```java		
 Map<String, String> parameters = new HashMap<String, String>();
@@ -698,15 +761,14 @@ parameters.put(ElementNames.MAXINSTALLMENTS, "12");
 ```
  
  [<sub>Volver a inicio</sub>](#inicio)
- <br>
  
  <a name="mincuotas"></a>
-####Minimo de cuotas a mostrar en formulario
+#### Mínimo de cuotas a mostrar en formulario
 Mediante esta funcionalidad, se permite setear el número minimo de cuotas que se desplegará en el formulario de pago.
  
 Para hacer uso de esta funcionalidad debe agregarse en el **Map<String, String> parameters** del método **sendAuthorizeRequest** el campo **MININSTALLMENTS** con el valor minimo de cuotas a ofrecer (generalmente de 1 a 12)
  
-#####Ejemplo
+##### Ejemplo
  
 ```java		
 Map<String, String> parameters = new HashMap<String, String>();
@@ -714,19 +776,43 @@ parameters.put(ElementNames.MININSTALLMENTS, "1");
 ```
  
  [<sub>Volver a inicio</sub>](#inicio)
- <br>
- 
 
-<a name="secuencia"></a>
-##Diagrama de secuencia
-![imagen de configuracion](https://raw.githubusercontent.com/TodoPago/imagenes/master/README.img/secuencia-page-001.jpg)
+<a name="timeout"></a>
+## Tiempo de vida del formulario.
+
+Mediante esta funcionalidad se permite setear el tiempo maximo en el que se puede realizar el pago en el formulario en milisegundos. Por defecto si no se envia, 1800000 (30 minutos).
+Valor minimo: 300000 (5 minutos)
+Valor maximo: 21600000 (6hs) 
+
+Para hacer uso de esta funcionalidad debe agregarse en el **Map<String, String> parameters** del método **sendAuthorizeRequest** el campo **TIMEOUT** con el valor en milisegundos
+##### Ejemplo
+ 
+```java		
+Map<String, String> parameters = new HashMap<String, String>();
+parameters.put(ElementNames.TIMEOUT, "350000");	
+```
+ 
+ [<sub>Volver a inicio</sub>](#inicio)
+ <br>
+
+<a name="filtromp"></a>
+## Filtrado de Medios de Pago
+Mediante esta funcionalidad es posible filtrar los medios de pago habilitados en el formulario de pago. Se debe pasar en la llamada al servicio SendAuthorizeRequest un parámetro adicional con los ids de los medio de pago que se desean habilitar, los cuales pueden consultarse mediante el método de [Descubrimiento de Medios de Pago](#discover)
+
+Para hacer uso de esta funcionalidad debe agregarse en el **Map<String, String> parameters** del método **sendAuthorizeRequest** el campo **AVAILABLEPAYMENTMETHODSIDS** con el valor de los ids de los medios de pago habilitados, separados por #
+
+##### Ejemplo
+
+```java		
+Map<String, String> parameters = new HashMap<String, String>();
+parameters.put("AVAILABLEPAYMENTMETHODSIDS", "1#42#500");	
+```
 
 [<sub>Volver a inicio</sub>](#inicio)
-<br>
 
 <a name="tablareferencia"></a>    
 ## Tablas de Referencia   
-######[Provincias](#p)    
+###### [Provincias](#p)    
 				
 <p>Solo utilizado para incluir los datos de control de fraude</p>
 <table>		
@@ -759,12 +845,12 @@ parameters.put(ElementNames.MININSTALLMENTS, "1");
 
 [<sub>Volver a inicio</sub>](#inicio)
 
-<a name="codigoerrores"></a>    
-## Tabla de errores     
+<a name="codigoerrores"></a>
+## Tabla de errores operativos
 
-<table>		
-<tr><th>Id mensaje</th><th>Mensaje</th></tr>				
-<tr><td>-1</td><td>Aprobada.</td></tr>
+<table>
+<tr><th>Id mensaje</th><th>Mensaje</th></tr>
+<tr><td>-1</td><td>Tu compra fue exitosa.</td></tr>
 <tr><td>1081</td><td>Tu saldo es insuficiente para realizar la transacción.</td></tr>
 <tr><td>1100</td><td>El monto ingresado es menor al mínimo permitido</td></tr>
 <tr><td>1101</td><td>El monto ingresado supera el máximo permitido.</td></tr>
@@ -784,17 +870,21 @@ parameters.put(ElementNames.MININSTALLMENTS, "1");
 <tr><td>90000</td><td>La cuenta destino de los fondos es inválida. Verificá la información ingresada en Mi Perfil.</td></tr>
 <tr><td>90001</td><td>La cuenta ingresada no pertenece al CUIT/ CUIL registrado.</td></tr>
 <tr><td>90002</td><td>No pudimos validar tu CUIT/CUIL.  Comunicate con nosotros <a href="#contacto" target="_blank">acá</a> para más información.</td></tr>
+<tr><td>99005</td><td>Tu compra no pudo realizarse. Iniciala nuevamente.</td></tr>
 <tr><td>99900</td><td>El pago fue realizado exitosamente</td></tr>
 <tr><td>99901</td><td>No hemos encontrado tarjetas vinculadas a tu Billetera. Podés  adherir medios de pago desde www.todopago.com.ar</td></tr>
 <tr><td>99902</td><td>No se encontro el medio de pago seleccionado</td></tr>
 <tr><td>99903</td><td>Lo sentimos, hubo un error al procesar la operación. Por favor reintentá más tarde.</td></tr>
+<tr><td>99904</td><td>Tu compra no puede ser realizada. Comunicate con tu vendedor.</td></tr>
+<tr><td>99953</td><td>Tu compra no pudo realizarse. Iniciala nuevamente o utilizá otro medio de pago.</td></tr>
+<tr><td>99960</td><td>Esta compra requiere autorización de VISA. Comunicate al número que se encuentra al dorso de tu tarjeta.</td></tr>
+<tr><td>99961</td><td>Esta compra requiere autorización de AMEX. Comunicate al número que se encuentra al dorso de tu tarjeta.</td></tr>
 <tr><td>99970</td><td>Lo sentimos, no pudimos procesar la operación. Por favor reintentá más tarde.</td></tr>
 <tr><td>99971</td><td>Lo sentimos, no pudimos procesar la operación. Por favor reintentá más tarde.</td></tr>
-<tr><td>99977</td><td>Lo sentimos, no pudimos procesar la operación. Por favor reintentá más tarde.</td></tr>
 <tr><td>99978</td><td>Lo sentimos, no pudimos procesar la operación. Por favor reintentá más tarde.</td></tr>
 <tr><td>99979</td><td>Lo sentimos, el pago no pudo ser procesado.</td></tr>
 <tr><td>99980</td><td>Ya realizaste un pago en este sitio por el mismo importe. Si querés realizarlo nuevamente esperá 5 minutos.</td></tr>
-<tr><td>99982</td><td>En este momento la operación no puede ser realizada. Por favor intentá más tarde.</td></tr>
+<tr><td>99982</td><td>Tu compra no pudo ser procesada. Iniciala nuevamente utilizando otro medio de pago.</td></tr>
 <tr><td>99983</td><td>Lo sentimos, el medio de pago no permite la cantidad de cuotas ingresadas. Por favor intentá más tarde.</td></tr>
 <tr><td>99984</td><td>Lo sentimos, el medio de pago seleccionado no opera en cuotas.</td></tr>
 <tr><td>99985</td><td>Lo sentimos, el pago no pudo ser procesado.</td></tr>
@@ -806,12 +896,108 @@ parameters.put(ElementNames.MININSTALLMENTS, "1");
 <tr><td>99991</td><td>Los datos informados son incorrectos. Por favor ingresalos nuevamente.</td></tr>
 <tr><td>99992</td><td>La fecha de vencimiento es incorrecta. Por favor seleccioná otro medio de pago o actualizá los datos.</td></tr>
 <tr><td>99993</td><td>La tarjeta ingresada no está vigente. Por favor seleccioná otra tarjeta o actualizá los datos.</td></tr>
-<tr><td>99994</td><td>El saldo de tu tarjeta no te permite realizar esta operacion.</td></tr>
+<tr><td>99994</td><td>El saldo de tu tarjeta no te permite realizar esta compra. Iniciala nuevamente utilizando otro medio de pago.</td></tr>
 <tr><td>99995</td><td>La tarjeta ingresada es invalida. Seleccioná otra tarjeta para realizar el pago.</td></tr>
 <tr><td>99996</td><td>La operación fué rechazada por el medio de pago porque el monto ingresado es inválido.</td></tr>
 <tr><td>99997</td><td>Lo sentimos, en este momento la operación no puede ser realizada. Por favor intentá más tarde.</td></tr>
 <tr><td>99998</td><td>Lo sentimos, la operación fue rechazada. Comunicate con la entidad emisora de la tarjeta para verificar el incoveniente o seleccioná otro medio de pago.</td></tr>
 <tr><td>99999</td><td>Lo sentimos, la operación no pudo completarse. Comunicate con la entidad emisora de la tarjeta para verificar el incoveniente o seleccioná otro medio de pago.</td></tr>
+</table>
+
+[<sub>Volver a inicio</sub>](#inicio)
+
+<a name="interrores"></a>
+## Tabla de errores de integración
+
+<table>
+<tr><td>**Id mensaje**</td><td>**Descripción**</td></tr>
+<tr><td>98001 </td><td>ERROR: El campo CSBTCITY es requerido</td></tr>
+<tr><td>98002 </td><td>ERROR: El campo CSBTCOUNTRY es requerido</td></tr>
+<tr><td>98003 </td><td>ERROR: El campo CSBTCUSTOMERID es requerido</td></tr>
+<tr><td>98004 </td><td>ERROR: El campo CSBTIPADDRESS es requerido</td></tr>
+<tr><td>98005 </td><td>ERROR: El campo CSBTEMAIL es requerido</td></tr>
+<tr><td>98006 </td><td>ERROR: El campo CSBTFIRSTNAME es requerido</td></tr>
+<tr><td>98007 </td><td>ERROR: El campo CSBTLASTNAME es requerido</td></tr>
+<tr><td>98008 </td><td>ERROR: El campo CSBTPHONENUMBER es requerido</td></tr>
+<tr><td>98009 </td><td>ERROR: El campo CSBTPOSTALCODE es requerido</td></tr>
+<tr><td>98010 </td><td>ERROR: El campo CSBTSTATE es requerido</td></tr>
+<tr><td>98011 </td><td>ERROR: El campo CSBTSTREET1 es requerido</td></tr>
+<tr><td>98012 </td><td>ERROR: El campo CSBTSTREET2 es requerido</td></tr>
+<tr><td>98013 </td><td>ERROR: El campo CSPTCURRENCY es requerido</td></tr>
+<tr><td>98014 </td><td>ERROR: El campo CSPTGRANDTOTALAMOUNT es requerido</td></tr>
+<tr><td>98015 </td><td>ERROR: El campo CSMDD7 es requerido</td></tr>
+<tr><td>98016 </td><td>ERROR: El campo CSMDD8 es requerido</td></tr>
+<tr><td>98017 </td><td>ERROR: El campo CSMDD9 es requerido</td></tr>
+<tr><td>98018 </td><td>ERROR: El campo CSMDD10 es requerido</td></tr>
+<tr><td>98019 </td><td>ERROR: El campo CSMDD11 es requerido</td></tr>
+<tr><td>98020 </td><td>ERROR: El campo CSSTCITY es requerido</td></tr>
+<tr><td>98021 </td><td>ERROR: El campo CSSTCOUNTRY es requerido</td></tr>
+<tr><td>98022 </td><td>ERROR: El campo CSSTEMAIL es requerido</td></tr>
+<tr><td>98023 </td><td>ERROR: El campo CSSTFIRSTNAME es requerido</td></tr>
+<tr><td>98024 </td><td>ERROR: El campo CSSTLASTNAME es requerido</td></tr>
+<tr><td>98025 </td><td>ERROR: El campo CSSTPHONENUMBER es requerido</td></tr>
+<tr><td>98026 </td><td>ERROR: El campo CSSTPOSTALCODE es requerido</td></tr>
+<tr><td>98027 </td><td>ERROR: El campo CSSTSTATE es requerido</td></tr>
+<tr><td>98028 </td><td>ERROR: El campo CSSTSTREET1 es requerido</td></tr>
+<tr><td>98029 </td><td>ERROR: El campo CSMDD12 es requerido</td></tr>
+<tr><td>98030 </td><td>ERROR: El campo CSMDD13 es requerido</td></tr>
+<tr><td>98031 </td><td>ERROR: El campo CSMDD14 es requerido</td></tr>
+<tr><td>98032 </td><td>ERROR: El campo CSMDD15 es requerido</td></tr>
+<tr><td>98033 </td><td>ERROR: El campo CSMDD16 es requerido</td></tr>
+<tr><td>98034 </td><td>ERROR: El campo CSITPRODUCTCODE es requerido</td></tr>
+<tr><td>98035 </td><td>ERROR: El campo CSITPRODUCTDESCRIPTION es requerido</td></tr>
+<tr><td>98036 </td><td>ERROR: El campo CSITPRODUCTNAME es requerido</td></tr>
+<tr><td>98037 </td><td>ERROR: El campo CSITPRODUCTSKU es requerido</td></tr>
+<tr><td>98038 </td><td>ERROR: El campo CSITTOTALAMOUNT es requerido</td></tr>
+<tr><td>98039 </td><td>ERROR: El campo CSITQUANTITY es requerido</td></tr>
+<tr><td>98040 </td><td>ERROR: El campo CSITUNITPRICE es requerido</td></tr>
+<tr><td>98101 </td><td>ERROR: El formato del campo CSBTCITY es incorrecto</td></tr>
+<tr><td>98102 </td><td>ERROR: El formato del campo CSBTCOUNTRY es incorrecto</td></tr>
+<tr><td>98103 </td><td>ERROR: El formato del campo CSBTCUSTOMERID es incorrecto</td></tr>
+<tr><td>98104 </td><td>ERROR: El formato del campo CSBTIPADDRESS es incorrecto</td></tr>
+<tr><td>98105 </td><td>ERROR: El formato del campo CSBTEMAIL es incorrecto</td></tr>
+<tr><td>98106 </td><td>ERROR: El formato del campo CSBTFIRSTNAME es incorrecto</td></tr>
+<tr><td>98107 </td><td>ERROR: El formato del campo CSBTLASTNAME es incorrecto</td></tr>
+<tr><td>98108 </td><td>ERROR: El formato del campo CSBTPHONENUMBER es incorrecto</td></tr>
+<tr><td>98109 </td><td>ERROR: El formato del campo CSBTPOSTALCODE es incorrecto</td></tr>
+<tr><td>98110 </td><td>ERROR: El formato del campo CSBTSTATE es incorrecto</td></tr>
+<tr><td>98111 </td><td>ERROR: El formato del campo CSBTSTREET1 es incorrecto</td></tr>
+<tr><td>98112 </td><td>ERROR: El formato del campo CSBTSTREET2 es incorrecto</td></tr>
+<tr><td>98113 </td><td>ERROR: El formato del campo CSPTCURRENCY es incorrecto</td></tr>
+<tr><td>98114 </td><td>ERROR: El formato del campo CSPTGRANDTOTALAMOUNT es incorrecto</td></tr>
+<tr><td>98115 </td><td>ERROR: El formato del campo CSMDD7 es incorrecto</td></tr>
+<tr><td>98116 </td><td>ERROR: El formato del campo CSMDD8 es incorrecto</td></tr>
+<tr><td>98117 </td><td>ERROR: El formato del campo CSMDD9 es incorrecto</td></tr>
+<tr><td>98118 </td><td>ERROR: El formato del campo CSMDD10 es incorrecto</td></tr>
+<tr><td>98119 </td><td>ERROR: El formato del campo CSMDD11 es incorrecto</td></tr>
+<tr><td>98120 </td><td>ERROR: El formato del campo CSSTCITY es incorrecto</td></tr>
+<tr><td>98121 </td><td>ERROR: El formato del campo CSSTCOUNTRY es incorrecto</td></tr>
+<tr><td>98122 </td><td>ERROR: El formato del campo CSSTEMAIL es incorrecto</td></tr>
+<tr><td>98123 </td><td>ERROR: El formato del campo CSSTFIRSTNAME es incorrecto</td></tr>
+<tr><td>98124 </td><td>ERROR: El formato del campo CSSTLASTNAME es incorrecto</td></tr>
+<tr><td>98125 </td><td>ERROR: El formato del campo CSSTPHONENUMBER es incorrecto</td></tr>
+<tr><td>98126 </td><td>ERROR: El formato del campo CSSTPOSTALCODE es incorrecto</td></tr>
+<tr><td>98127 </td><td>ERROR: El formato del campo CSSTSTATE es incorrecto</td></tr>
+<tr><td>98128 </td><td>ERROR: El formato del campo CSSTSTREET1 es incorrecto</td></tr>
+<tr><td>98129 </td><td>ERROR: El formato del campo CSMDD12 es incorrecto</td></tr>
+<tr><td>98130 </td><td>ERROR: El formato del campo CSMDD13 es incorrecto</td></tr>
+<tr><td>98131 </td><td>ERROR: El formato del campo CSMDD14 es incorrecto</td></tr>
+<tr><td>98132 </td><td>ERROR: El formato del campo CSMDD15 es incorrecto</td></tr>
+<tr><td>98133 </td><td>ERROR: El formato del campo CSMDD16 es incorrecto</td></tr>
+<tr><td>98134 </td><td>ERROR: El formato del campo CSITPRODUCTCODE es incorrecto</td></tr>
+<tr><td>98135 </td><td>ERROR: El formato del campo CSITPRODUCTDESCRIPTION es incorrecto</td></tr>
+<tr><td>98136 </td><td>ERROR: El formato del campo CSITPRODUCTNAME es incorrecto</td></tr>
+<tr><td>98137 </td><td>ERROR: El formato del campo CSITPRODUCTSKU es incorrecto</td></tr>
+<tr><td>98138 </td><td>ERROR: El formato del campo CSITTOTALAMOUNT es incorrecto</td></tr>
+<tr><td>98139 </td><td>ERROR: El formato del campo CSITQUANTITY es incorrecto</td></tr>
+<tr><td>98140 </td><td>ERROR: El formato del campo CSITUNITPRICE es incorrecto</td></tr>
+<tr><td>98201 </td><td>ERROR: Existen errores en la información de los productos</td></tr>
+<tr><td>98202 </td><td>ERROR: Existen errores en la información de CSITPRODUCTDESCRIPTION los productos</td></tr>
+<tr><td>98203 </td><td>ERROR: Existen errores en la información de CSITPRODUCTNAME los productos</td></tr>
+<tr><td>98204 </td><td>ERROR: Existen errores en la información de CSITPRODUCTSKU los productos</td></tr>
+<tr><td>98205 </td><td>ERROR: Existen errores en la información de CSITTOTALAMOUNT los productos</td></tr>
+<tr><td>98206 </td><td>ERROR: Existen errores en la información de CSITQUANTITY los productos</td></tr>
+<tr><td>98207 </td><td>ERROR: Existen errores en la información de CSITUNITPRICE de los productos</td></tr>
 </table>
 
 [<sub>Volver a inicio</sub>](#inicio)
@@ -828,5 +1014,4 @@ parameters.put(ElementNames.MININSTALLMENTS, "1");
 	- mvn eclipse:clean eclipse:eclipse -Dwtpversion=2.0
 - Ir a Eclipse e importar el Proyecto normalmente: File - Import - Existing Projects into Workspace
 
-<br />		
 [<sub>Volver a inicio</sub>](#inicio)

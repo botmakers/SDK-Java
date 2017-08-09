@@ -16,6 +16,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import ar.com.todopago.api.echoservice.DataServiceFault_Exception;
 import ar.com.todopago.api.exceptions.ConnectionException;
 import ar.com.todopago.api.exceptions.EmptyFieldException;
 import ar.com.todopago.api.exceptions.EmptyFieldPassException;
@@ -27,16 +28,22 @@ import ar.com.todopago.api.rest.RestConnector;
 import ar.com.todopago.api.rest.TodoPagoRest;
 import ar.com.todopago.utils.FraudControlValidate;
 import ar.com.todopago.utils.TodoPagoConectorAuthorize;
+import ar.com.todopago.utils.TodoPagoConectorEchoService;
 
 public class TodoPagoConector {
 
-	public static final String versionTodoPago = "1.8.0";
+	public static final String versionTodoPago = "1.9.0";
 
 	private final String soapAppend = "services/";
 	private final String restAppend = "api/";
 	private final String tenant = "t/1.1/";
 	private final String authorizeSOAPAppend = "Authorize";
 	private final String authorizeWSDL = "/todopago/Authorize.wsdl";
+	
+	private final String echoServiceDSSSOAPAppend = "EchoServiceDSS";
+	private final String echoServiceESBSOAPAppend = "EchoServiceESB";
+	
+	private final String echoServiceDSSWSDL = "/todopago/EchoServiceDSS.wsdl";
 
 	// endpoints
 	private final String endPointDev = "https://developers.todopago.com.ar/";
@@ -48,6 +55,8 @@ public class TodoPagoConector {
 	private String t;
 	private String ep;
 	private TodoPagoConectorAuthorize authorize;
+	private TodoPagoConectorEchoService echoServiceDSS;
+	private TodoPagoConectorEchoService echoServiceESB;
 	
     private TodoPagoRest todoPagoRest;
     private BSARest bsaRest;
@@ -56,6 +65,8 @@ public class TodoPagoConector {
 	Map<String, String> endpoint;
 
 	String soapEndpoint;
+	String echoSoapEndpointDSS;
+	String echoSoapEndpointESB;
 	String restEndpoint;	
 	
 	public TodoPagoConector(int endpoint) throws MalformedURLException {
@@ -71,6 +82,7 @@ public class TodoPagoConector {
 		if (security) {
 			this.disableSslVerification();
 		}
+		this.disableSslVerification();
 		switch (endpoint) {
 		case developerEndpoint:
 			t = tenant;
@@ -87,11 +99,14 @@ public class TodoPagoConector {
 		}
 
 		this.soapEndpoint = ep + soapAppend + t + authorizeSOAPAppend;
+		this.echoSoapEndpointDSS = ep + soapAppend + t + echoServiceDSSSOAPAppend;
+		this.echoSoapEndpointESB = ep + soapAppend + t + echoServiceESBSOAPAppend;
 		
 		if(auth != null){
 			try {
-				authorize = new TodoPagoConectorAuthorize(
-						TodoPagoConector.class.getResource(this.authorizeWSDL).toURI().toURL(), this.soapEndpoint, auth);
+				this.authorize = new TodoPagoConectorAuthorize(TodoPagoConector.class.getResource(this.authorizeWSDL).toURI().toURL(), this.soapEndpoint, auth);
+				this.echoServiceDSS = new TodoPagoConectorEchoService(TodoPagoConector.class.getResource(this.echoServiceDSSWSDL).toURI().toURL(), this.echoSoapEndpointDSS, auth);
+				this.echoServiceESB = new TodoPagoConectorEchoService(TodoPagoConector.class.getResource(this.echoServiceDSSWSDL).toURI().toURL(), this.echoSoapEndpointESB, auth);
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
@@ -181,6 +196,45 @@ public class TodoPagoConector {
 		}
 		return result;		
 	}
+	
+	public Boolean healthCheck(){
+	
+		Boolean result = false;		
+		Boolean auxDSS = false;	
+		Boolean auxESB = false;	
+		
+		StringBuilder sb = new StringBuilder ();
+		double randNumber = Math.random();
+		sb.append(randNumber * 1000);
+						 
+		try {			
+			Map<String, Object> mapDSS = echoServiceDSS.echoOperation(sb.toString());		
+			if (mapDSS.containsKey(ElementNames.MESSAGE)){				
+				String res = (String)mapDSS.get(ElementNames.MESSAGE);
+				if (res.contains(sb.toString())){		
+					auxDSS = true;
+				}
+			}			
+			
+			Map<String, Object> mapESB = echoServiceESB.echoOperation(sb.toString());
+			if (mapESB.containsKey(ElementNames.MESSAGE)){				
+				String res = (String)mapESB.get(ElementNames.MESSAGE);
+				if (res.contains(sb.toString())){		
+					auxESB = true;
+				}
+			}
+			
+			if(auxDSS && auxESB){
+				result = true;
+			}
+			
+		} catch (DataServiceFault_Exception e) {
+			e.printStackTrace();
+		}			
+		
+		return result;		
+	}
+	
 	
 	public void setAuthorize(Map<String, List<String>> auth) throws MalformedURLException, ResponseException {
 			

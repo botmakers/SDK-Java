@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ar.com.todopago.api.ElementNames; 
+import ar.com.todopago.api.ElementNames;
 import ar.com.todopago.api.TodoPagoConector;
 import ar.com.todopago.api.exceptions.ConnectionException;
 import ar.com.todopago.api.exceptions.EmptyFieldException;
@@ -27,9 +27,10 @@ public class Test {
 	public static int vertical = RETAIL;// Configurar vertical a usar
 	private final static Logger logger = Logger.getLogger(Test.class.getName());
 
-	public static final String APIKEY = "PRISMA f3d8b72c94ab4a06be2ef7c95490f7d3";
-	public static final String MERCHANT = "2153";
-	public static final String SECURITY = "f3d8b72c94ab4a06be2ef7c95490f7d3";
+	public static final String APIKEY = "TODOPAGO 0b27699db496431a8391096be5ffc";
+	public static final String MERCHANT = "157";
+	public static final String SECURITY = "0b27699db496431a8391096be5ffc";
+	
 
 	public static void main(String[] args) throws MalformedURLException {
 
@@ -41,12 +42,12 @@ public class Test {
 		// getAuthorization());
 
 		// Developer
-		TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, getAuthorization());
+		 TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint, getAuthorization());
 
 		// Developer without APYKey
-		//TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.developerEndpoint);
+		//TodoPagoConector tpc = new TodoPagoConector(TodoPagoConector.productionEndpoint);
 
-		//getCredentials(tpc);
+		getCredentials(tpc);
 
 		Map<String, Object> a = tpc.sendAuthorizeRequest(getSARParameters(), getFraudControlParameters());
 		printMap(a, "");
@@ -54,8 +55,8 @@ public class Test {
 		Map<String, Object> b = tpc.getAuthorizeAnswer(getAAParameters());
 		printMap(b, "");
 
-		Map<String, Object> e = tpc.getStatus(getSParameters());
-		printMap(e, "");
+//		Map<String, Object> e = tpc.getStatus(getSParameters());
+//		printMap(e, "");
 
 		Map<String, Object> f = tpc.getAllPaymentMethods(getPMParameters());
 		System.out.println(f);
@@ -73,9 +74,9 @@ public class Test {
 		System.out.println(i);
 		printMap(i, "");
 
-//		 Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
-//		 System.out.println(j);
-//		 printMap(j, "");
+		 Map<String, Object> j = tpc.getByRangeDateTime(getBRYParameters());
+		 System.out.println(j);
+		 printMap(j, "");
 
 	}
 
@@ -112,7 +113,8 @@ public class Test {
 		parameters.put(ElementNames.UrlError, "http,//someurl/fail/");
 		parameters.put(ElementNames.EMAILCLIENTE, "some@someurl.com");
 		parameters.put(ElementNames.MAXINSTALLMENTS, "12");
-		parameters.put(ElementNames.MININSTALLMENTS, "6");
+		parameters.put(ElementNames.MININSTALLMENTS, "1");
+		parameters.put(ElementNames.TIMEOUT, "1800000");
 
 		// Datos Opcionales:
 		// parameters.put("AVAILABLEPAYMENTMETHODSIDS", "1#194#43#45");
@@ -128,7 +130,7 @@ public class Test {
 		// Example
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("CSBTCITY", "Villa General Belgrano"); // MANDATORIO.
-		parameters.put("CSBTCOUNTRY", "AR");// MANDATORIO. Código ISO.
+		parameters.put("CSBTCOUNTRY", "AR");// MANDATORIO. Cï¿½digo ISO.
 		parameters.put("CSBTEMAIL", "some@someurl.com"); // MANDATORIO.
 		parameters.put("CSBTFIRSTNAME", "juan");// MANDATORIO.
 		parameters.put("CSBTLASTNAME", "Perez");// MANDATORIO.
@@ -161,7 +163,7 @@ public class Test {
 
 	private static void setRetail(Map<String, String> parameters) {
 		parameters.put("CSSTCITY", "Villa General Belgrano"); // MANDATORIO.
-		parameters.put("CSSTCOUNTRY", "AR");// MANDATORIO. Código ISO.
+		parameters.put("CSSTCOUNTRY", "AR");// MANDATORIO. Cï¿½digo ISO.
 		parameters.put("CSSTEMAIL", "some@someurl.com"); // MANDATORIO.
 		parameters.put("CSSTFIRSTNAME", "Juan");// MANDATORIO.
 		parameters.put("CSSTLASTNAME", "Perez");// MANDATORIO.
@@ -235,6 +237,25 @@ public class Test {
 		return parameters;
 	}
 
+	private static void healthCheck(TodoPagoConector tpc) {
+
+		Boolean check = tpc.healthCheck();
+		
+		if(check){
+			System.out.println("Service available");			
+		}else{
+			System.out.println("Service not available");
+		}
+
+	}
+
+	private static User getUser() {
+		String mail = "test@test.com.ar"; // The email is only as example
+		String pass = "test1234"; // The pass is only as example
+		User user = new User(mail, pass);
+		return user;
+	}
+	
 	private static void getCredentials(TodoPagoConector tpc) {
 
 		User user = new User();
@@ -254,13 +275,6 @@ public class Test {
 		}
 
 		System.out.println(user.toString());
-	}
-
-	private static User getUser() {
-		String mail = "test@test.com.ar"; // The email is only as example
-		String pass = "test1234"; // The pass is only as example
-		User user = new User(mail, pass);
-		return user;
 	}
 
 	private static Map<String, List<String>> getAuthorization() {

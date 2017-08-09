@@ -81,6 +81,7 @@ public final class ElementNames {
 	public static final String EMAILCLIENTE = "EMAILCLIENTE";
 	public static final String MAXINSTALLMENTS = "MAXINSTALLMENTS";
 	public static final String MININSTALLMENTS = "MININSTALLMENTS";
+	public static final String TIMEOUT = "TIMEOUT";
 
 	// Authorize return
 	public static final String RequestChannel = "RequestChannel";
@@ -97,7 +98,8 @@ public final class ElementNames {
 	public static final String USUARIO = "USUARIO";
 	public static final String CLAVE = "CLAVE";
 	
-	public static final String ERROR = "ERROR";
+	public static final String ERROR = "ERROR";	
+	public static final String MESSAGE = "MESSAGE";
 	
 	 // ------------------------ BSA -----------------------------------------
 
