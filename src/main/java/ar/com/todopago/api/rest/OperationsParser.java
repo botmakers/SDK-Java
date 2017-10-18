@@ -89,8 +89,11 @@ public class OperationsParser {
 			if (a instanceof String && ((String) a).startsWith("{")) {
 				auxMap.put(name, null);
 				generateMap(new JSONObject(a), auxMap, name);
-			} else {
+			} else if (a instanceof String) {
 				auxMap.put(name, a);
+			} else if (a instanceof JSONObject) {
+				auxMap.put(name, null);
+				generateMap((JSONObject) a, auxMap, name);
 			}
 		}
 		if (key != null) {
