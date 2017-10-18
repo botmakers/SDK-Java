@@ -85,13 +85,12 @@ public class OperationsParser {
 
 		while (Itr.hasNext()) {
 			String name = Itr.next();
-			String a = jsonObject.getString(name);
-			if (a.contains("{")) {
-				JSONObject jsonObject2 = (JSONObject) jsonObject.get(name);
+			Object a = jsonObject.get(name);
+			if (a instanceof String && ((String) a).startsWith("{")) {
 				auxMap.put(name, null);
-				generateMap(jsonObject2, auxMap, name);
+				generateMap(new JSONObject(a), auxMap, name);
 			} else {
-				auxMap.put(name, jsonObject.getString(name));
+				auxMap.put(name, a);
 			}
 		}
 		if (key != null) {
